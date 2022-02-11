@@ -1,11 +1,12 @@
 .App {
   text-align: center;
+  background-image: url("../public/homePage-backgroundImage.webp");
+  height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
