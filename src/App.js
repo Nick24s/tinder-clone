@@ -1,25 +1,25 @@
-import './App.css';
-import { BrowserRouter , Link } from 'react-router-dom';
+import { BrowserRouter, Link, Routes , Route } from 'react-router-dom';
+import AboutPage from './pages/AboutPage';
+import DownloadPage from './pages/DownloadPage';
+import HomePage from './pages/HomePage';
+import ProductsPage from './pages/ProductsPage';
+import SafetyPage from './pages/SafetyPage';
+import SupportPage from './pages/SupportPage';
 
 function App() {
   return (
-    <div className="App" >
-      <BrowserRouter>
-      <nav>
-        <Link to='/'>Tinder</Link>
-        {/* probably will be ul with few li(s) */}
-        <Link to='/feature/swipe'>Products</Link>
-        <Link to='/about-tinder'>Learn</Link>
-        <Link to='/safety'>Safety</Link>
-        <Link to='/support'>Support</Link>
-        <Link to='/download'>Download</Link>
-
-        <button>ENGLISH</button>
-        <button>Log in</button>
-     </nav>
-      </BrowserRouter>
-     
-    </div>
+   <>
+   <BrowserRouter>
+   <Routes>
+     <Route path='/' element={<HomePage></HomePage>}></Route>
+     <Route path='/products' element={<ProductsPage></ProductsPage>}></Route>
+     <Route path='/about' element={<AboutPage></AboutPage>}></Route>
+     <Route path='/safety' element={<SafetyPage></SafetyPage>}></Route>
+     <Route path='/support' element={<SupportPage></SupportPage>}></Route>
+     <Route path='/download' element={<DownloadPage></DownloadPage>}></Route>
+   </Routes>
+   </BrowserRouter>
+   </>
   );
 }
 

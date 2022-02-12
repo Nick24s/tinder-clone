@@ -1,0 +1,89 @@
+.HomePageStyle {
+  text-align: center;
+  /* background-image: url("../public/homePage-backgroundImage.webp"); */
+  background-image: url("../../public/homePage-backgroundImage.webp");
+  width: 100%;
+  height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow:inset 100px 100px 100px  100px rgba(0, 0, 0 , 0.5 )  ;
+}
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.logo {
+  width: 200px;
+  margin-top: -10px;
+  margin-left: 23px;
+}
+.links {
+  text-decoration: none;
+  color: white;
+  margin: 30px 25px;
+  font-size: 25px;
+}
+
+.links:hover {
+  text-decoration: underline;
+}
+
+.buttonHolder {
+  /* margin-right: 5px; */
+  margin-top: -30px;
+}
+
+.centeredDiv {
+  font-size: 50px;
+  color: white;
+  text-align:center; 
+ 
+  align-items: center;
+  
+}
+.centeredDiv h1 {
+  margin-top: 220px;
+  letter-spacing: 8px;
+  margin-bottom: 10px;
+}
+
+
+  
+  .btn-grad {background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)}
+  .btn-grad {
+     padding: 15px 45px;
+     text-align: center;
+     text-transform: uppercase;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     border-radius: 50px;
+     border-style: hidden;
+     font-size: 20px;
+     size: 50px;
+     
+   }
+
+   .btn-grad:hover {
+     /* background-position: right center; change the direction of the change here */
+     color: #fff;
+     text-decoration: none;
+   }
+  
