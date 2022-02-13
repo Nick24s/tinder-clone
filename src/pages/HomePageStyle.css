@@ -87,3 +87,12 @@
      text-decoration: none;
    }
   
+   .SignForms {
+     background-color: white;
+     width: 30%;
+     border-radius: 36px;
+     position: relative;
+     margin: auto;
+     top: -30%;
+     
+   }

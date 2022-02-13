@@ -1,10 +1,17 @@
 import './HomePageStyle.css';
-import { BrowserRouter, Link, Routes , Route } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import logo from "./logo-homeButton.png"
 import Button from '@mui/material/Button';
+import SignUpForm from '../components/SignUpForm';
+import SignInForm from '../SignInForm';
+import { useState } from 'react';
+import CancelSharpIcon from '@mui/icons-material/CancelSharp';
 
 
 export default function HomePage(){
+
+    const [show , setShow] = useState(false);
+
     return (
         <>
          <div className="HomePageStyle">
@@ -24,16 +31,22 @@ export default function HomePage(){
             <Link to='/download' className='links'>Download</Link>
           </div>
           <div className='buttonHolder' style={{alignItems: 'center'  ,  display: 'flex' }}>
-            <Button  size="large" sx={{ color: 'rgb(214,1,46) ', backgroundColor: 'white' ,  fontSize: '19px'  , margin : "30px" , width : "120px"}}>Log in</Button>
+            <Button  onClick={() => setShow(!show)}  size="large" sx={{ color: 'rgb(214,1,46) ', backgroundColor: 'white' ,  fontSize: '19px'  , margin : "30px" , width : "120px"}}>Log in</Button>
+       
           </div>
         </nav>
 
       <div className='centeredDiv'>
         <h1>Swipe Right®</h1>
-        <button className='btn-grad'>Create account</button>
+        <button className='btn-grad' >Create account</button>
+      
       </div>
-
+      {
+          show?<div className='SignForms'>{<SignUpForm></SignUpForm>}</div>:null
+        }
     </div>
+   
+  
         </>
     )
 }
