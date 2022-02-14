@@ -2,11 +2,8 @@ import './HomePageStyle.css';
 import {  Link } from 'react-router-dom';
 import logo from "./logo-homeButton.png"
 import Button from '@mui/material/Button';
-import SignUpForm from '../components/SignUpForm';
-import SignInForm from '../SignInForm';
 import { useState } from 'react';
-import CancelSharpIcon from '@mui/icons-material/CancelSharp';
-
+import BasicTabs from '../components/LogAndReg/LogAndRegController';
 
 export default function HomePage(){
 
@@ -42,7 +39,7 @@ export default function HomePage(){
       
       </div>
       {
-          show?<div className='SignForms'>{<SignUpForm></SignUpForm>}</div>:null
+          show?<div className='SignForms'><BasicTabs></BasicTabs></div>:null
         }
     </div>
    

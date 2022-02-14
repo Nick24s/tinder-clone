@@ -1,6 +1,5 @@
 .HomePageStyle {
   text-align: center;
-  /* background-image: url("../public/homePage-backgroundImage.webp"); */
   background-image: url("../../public/homePage-backgroundImage.webp");
   width: 100%;
   height: 100vh;
@@ -8,6 +7,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow:inset 100px 100px 100px  100px rgba(0, 0, 0 , 0.5 )  ;
+  /* filter: grayscale(40%); */
 }
 
 
@@ -89,10 +89,10 @@
   
    .SignForms {
      background-color: white;
-     width: 30%;
+     width: 26%;
      border-radius: 36px;
      position: relative;
      margin: auto;
-     top: -30%;
+     top: -45%;
      
    }
