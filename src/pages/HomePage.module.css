@@ -38,7 +38,7 @@
   text-decoration: none;
   color: white;
   margin: 30px 25px;
-  font-size: 25px;
+  font-size: 25px !important;
 }
 
 .links:hover {
@@ -46,8 +46,9 @@
 }
 
 .buttonHolder {
-  /* margin-right: 5px; */
   margin-top: -30px;
+  align-items: center;
+  display: flex;
 }
 
 .centeredDiv {
@@ -66,8 +67,8 @@
 
 
   
-  .btn-grad {background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)}
-  .btn-grad {
+  .btnGrad {background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)}
+  .btnGrad {
      padding: 15px 45px;
      text-align: center;
      text-transform: uppercase;
@@ -81,7 +82,7 @@
      
    }
 
-   .btn-grad:hover {
+   .btnGrad:hover {
      /* background-position: right center; change the direction of the change here */
      color: #fff;
      text-decoration: none;
