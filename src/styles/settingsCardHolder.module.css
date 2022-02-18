@@ -1,0 +1,64 @@
+.settingsCardHolder {
+    border-radius: 30px;
+    border-left: 1px solid rgb(233,234,239);
+    border-right: 1px solid rgb(233,234,239);
+    border-bottom: 1px solid rgb(233,234,239);
+}
+.inside {
+    border: 1px solid rgb(233,234,239);
+}
+.info {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    
+}
+.p {
+    margin-left: 10px;
+    font-size: 25px;
+    line-height: 21px;
+    font-weight: bolder;
+}
+.p2 {
+    margin-left: 10px;
+    font-size: 25px;
+    line-height: 21px;
+}
+.secondLine {
+    margin-left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+}
+.secondlineP{
+    margin-top: -1px;
+    margin-left: 4px;
+}
+.btnGrad {background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%)}
+  .btnGrad {
+     padding: 15px 45px;
+     text-align: center;
+     text-transform: uppercase;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     border-radius: 50px;
+     border-style: hidden;
+     font-size: 15px;
+     
+   }
+
+   .btnGrad:hover {
+     /* background-position: right center; change the direction of the change here */
+     color: #fff;
+     text-decoration: none;
+   }
+   .buttonHolder {
+    text-align:center; 
+    align-items: center;
+    padding-top: 30px;
+    border-end-end-radius: 30px;
+    border-end-start-radius: 30px;
+    padding-bottom: 15px;
+    background-color: white;
+   }

@@ -11,6 +11,7 @@ export default function HomePage(){
 
     return (
         <>
+       
          <div className={styles.HomePageStyle}>
         <nav style={{ display: 'flex' , justifyContent: 'space-between'}}>
           <div style={{ alignItems: 'flex-start' , display: 'flex' }}>
@@ -32,11 +33,10 @@ export default function HomePage(){
        
           </div>
         </nav>
-
+        <testComp></testComp>
       <div className={styles.centeredDiv}>
         <h1>Swipe Right®</h1>
         <button className={styles.btnGrad} >Create account</button>
-      
       </div>
       {
           show?<div className={styles.SignForms}><BasicTabs></BasicTabs></div>:null
