@@ -7,7 +7,10 @@ export default function SingleMatch({name, id, profilImg}){
 
     return (
         <div className={styles.matches}>
+            <>
             <h4 className={styles.name}>{name}</h4>
+
+            </>
             <Avatar 
                 variant="rounded"
                 alt={name + id}

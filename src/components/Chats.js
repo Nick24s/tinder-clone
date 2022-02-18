@@ -1,4 +1,4 @@
-import { Chat } from '@material-ui/icons'
+// import { Chat } from '@material-ui/icons'
 import ChatRow from './ChatRow'
 import styles from './Chats.module.css'
 
