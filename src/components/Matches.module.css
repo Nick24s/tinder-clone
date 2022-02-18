@@ -1,0 +1,7 @@
+.matches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0px 16px;
+    align-items: center;
+    padding-left: 4px;
+}
