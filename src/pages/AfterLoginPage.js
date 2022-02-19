@@ -23,8 +23,12 @@ export default function AfterLoginPage() {
                             <IconButton  onClick={() => setShow(!show)}><PersonIcon sx={{ color: pink[50], fontSize: 30 }}/></IconButton>
                             <h4>Username</h4>
                         <div className={styles.icons}>
-                            <IconButton fontSize="large"><LocalFireDepartmentIcon  sx={{color: pink[50], fontSize: 30 }}></LocalFireDepartmentIcon></IconButton>
-                            <IconButton><BusinessCenterSvgIcon  sx={{color: pink[50], fontSize: 30 }}></BusinessCenterSvgIcon></IconButton>
+                            <div className={styles.ButtonBackground}>
+                                <IconButton fontSize="large"><LocalFireDepartmentIcon  sx={{color: pink[50], fontSize: 26 }}></LocalFireDepartmentIcon></IconButton>
+                            </div>
+                            <div className={styles.ButtonBackground}>
+                                <IconButton><BusinessCenterSvgIcon  sx={{color: pink[50], fontSize: 26 }}></BusinessCenterSvgIcon></IconButton>
+                            </div>
                         </div>
                     </div>
                     <div className={styles.Functionalities}>
