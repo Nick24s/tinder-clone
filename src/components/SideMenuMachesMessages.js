@@ -53,29 +53,32 @@ export default function SideMenuMachesMessages() {
   
 
   return (
-    <div style={{width:"23rem", marginTop:"8vh"}}>
-        <Box>
-        <Box sx={{position: "fixed", zIndex: "100"}}>
-            <Tabs
+    <div style={{}}>
+        <Box> 
+         <Box>
+             <Tabs
+                sx={{background:"white", overflow:"hidden", position:"fixed", zIndex:"100", width:"24rem"}}
                 TabIndicatorProps={{style: {background:'rgb(255,68,88)', height:"8%"}}}  
                 value={value} onChange={handleChange} aria-label="Messages and maches menu">
 
-                <Tab label={<span style={{ color: 'black', textTransform: "none", fontWeight: "800", position:"fixed", zIndex:"100"}}>
+                <Tab label={<span style={{ color: 'black', textTransform: "none", fontWeight: "800"}}>
                     Matches
                     </span>}{...a11yProps(0)} />
-                <Tab label={<span style={{ color: 'black', textTransform: "none", fontWeight: "800", position:"fixed", zIndex:"100"}}>
+                <Tab label={<span style={{ color: 'black', textTransform: "none", fontWeight: "800"}}>
                     Messages
-                    </span>} {...a11yProps(1)} />
+                </span>} {...a11yProps(1)} />
             </Tabs>
         </Box>
-            <TabPanel value={value} index={0}>
-                <Matches/>
+            <div className={styles.TabPanelContainer}>
+                <TabPanel  value={value} index={0}>
+                    <Matches/>
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <Chats/>
             </TabPanel>
-            <TabPanel value={value} index={1}>
-                <Chats/>
-            </TabPanel>
+            </div> 
         </Box>
 
-    </div>
+     </div>
   );
 }
