@@ -2,9 +2,12 @@ import ImageSlider from "./ImageSlider";
 import styles from '../styles/settingsCardHolder.module.css'
 import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineSharp';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
+import EditInfoPage from '../pages/EditInfoPage';
+import { useState } from "react";
 
 export default function SettingsCard() {
 
+    const [show, setShow] = useState(false);
 
     return (
         <div className={styles.settingsCardHolder}>
@@ -21,7 +24,13 @@ export default function SettingsCard() {
                 </div>
             </div>
             <div className={styles.buttonHolder}>
-            <button className={styles.btnGrad} >Edit info</button>
+            <button className={styles.btnGrad}  >Edit info</button>
+
+
+
+            {/* <EditInfoPage></EditInfoPage> */}
+            
+           
             </div>
         </div>
     )

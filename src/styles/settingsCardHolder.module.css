@@ -3,6 +3,7 @@
     border-left: 1px solid rgb(233,234,239);
     border-right: 1px solid rgb(233,234,239);
     border-bottom: 1px solid rgb(233,234,239);
+    margin-top: 50px;
 }
 .inside {
     border: 1px solid rgb(233,234,239);

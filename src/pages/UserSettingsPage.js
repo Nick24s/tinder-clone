@@ -9,7 +9,7 @@ function UserSettingsPage() {
 
   return (
     // border-right: 1px solid rgb(233,234,239);
-    <div style={{ width: '25em' , borderRight : "1px solid rgb(233,234,239) " }}>
+    <div style={{ width: '24em' , borderRight : "1px solid rgb(233,234,239) " }}>
       <h3 className='h3'>Account settings</h3>
         <ListDividers primary='Email' secondary='example@gmail.com'></ListDividers>
         <ListDividers primary='Phone' secondary='359897791227'></ListDividers>

@@ -7,16 +7,15 @@
     justify-content: space-between  ;
     align-items: center;
     padding-left: 15px;
-    position: fixed;
-    z-index: 100;
+    /* position: fixed; */
+    /* z-index: 100; */
     
 }
 
 .Functionalities{
     background-color: rgb(240,242,244)  ;
     /* box-shadow: 10px 10px  rgb(240,242,244); */
-    width: 25em;
-    height: 90vh;
+    width: 24em;
     overflow: auto ;
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -36,7 +35,7 @@
 
 .MatchesOrMessages {
     border-right: 1px solid rgb(233,234,239) ;
-    height: 92vh;
+    /* height: 92vh;   */
     margin: 0px;
     border: 0px;
 }
@@ -48,7 +47,7 @@
 
 .Main{
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     gap: 26em;
 }
 
