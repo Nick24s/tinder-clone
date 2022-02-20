@@ -14,8 +14,6 @@
 .Functionalities{
   
     /* box-shadow: 10px 10px  rgb(240,242,244); */
-    width: 23em;
-    height: 90vh;
     overflow: auto ;
 
 }
@@ -36,7 +34,7 @@
     border-right: 1px solid rgb(233,234,239) ;
     height: 92vh;
     border: 0px;
-    width: 23rem;
+    width: 24rem;
 }
 
 .Container{
@@ -83,7 +81,10 @@
   }
 
   .ButtonBackground {
-  
     background-color: #DF4B3B;
     border-radius: 50%;
+  }
+
+  .css-19midj6{
+    padding-left: 16px;
   }

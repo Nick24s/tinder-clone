@@ -27,7 +27,6 @@ export default function SwipeButtons(){
                 <IconButton className='swipeButt_bolt'>
                     <BoltIcon fontSize='large'></BoltIcon>
                 </IconButton>
-                
             </div>
         </>
     )
