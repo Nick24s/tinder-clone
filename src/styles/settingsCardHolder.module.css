@@ -63,3 +63,120 @@
     padding-bottom: 15px;
     background-color: white;
    }
+
+   .description{
+    text-align:center; 
+    align-items: center;
+    padding-top: 30px;
+    /* border-end-end-radius: 30px; */
+    /* border-end-start-radius: 30px; */
+    border-bottom: 1px solid rgb(233,234,239);
+    padding-bottom: 15px;
+    background-color: white;
+    padding-top: 10px;
+   }
+
+   .EditInfoPage {
+    text-align: center;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border: 1px solid rgb(233,234,239);
+    border-bottom: none;
+    width : 375px;
+    background-color: rgb(240,242,244);
+    z-index: 0;
+    padding-bottom: 80px;
+    border-radius: 30px;
+
+  }
+  .holder1 {
+    border-right: 1px solid rgb(233,234,239);
+    padding: auto;
+    margin: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    flex-basis: 50%;
+    border-bottom:1px solid rgb(233,234,239) ;
+  }
+  .holder {
+    border-bottom:1px solid rgb(233,234,239) ;
+    padding: auto;
+    margin: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    flex-basis: 50%;
+    
+  }
+  .imageHolderHolder {
+    display: flex;
+    
+  }
+  
+  .imageHolder{
+    background-color: grey;
+    border-radius: 30px;
+    min-width: 110px;
+    width: 110px;
+    min-height: 150px;
+    height: 150px;
+    margin: 7px;
+  }
+  
+  .icon {
+    margin-top: 130px;
+    margin-left: 80px;
+  }
+  .firstline {
+    display: flex;
+  }
+  
+  .myPicsHolder {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /* background-color: rgb(240,242,244); */
+  }
+
+  .buttonStyle{
+    background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%);
+    padding: 15px 100px;
+    text-align: center;
+     text-transform: uppercase;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     border-radius: 50px;
+     border-style: hidden;
+     font-size: 15px; 
+    margin-top: 20px;
+  }
+
+.button2Style {
+  background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%);
+    padding: 15px 50px;
+    text-align: center;
+     text-transform: uppercase;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     border-radius: 50px;
+     border-style: hidden;
+     font-size: 15px; 
+    margin-top: 20px;
+    position: fixed;
+    bottom: 15px;
+    right: 462px;
+}
+
+  .aboutP {
+    /* font-size: 14px; */
+    color: rgb(81,89,100);
+    text-align: left;
+    margin-left: 15px;
+  }
+  .clickableHolder {
+    background-color: white;
+  }
+  .EditInfoPage nav {
+    padding: 0;
+  }

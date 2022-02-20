@@ -73,8 +73,8 @@ export default function SideMenuMachesMessages() {
                 <TabPanel  value={value} index={0}>
                     <Matches/>
                 </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <Chats/>
+                <TabPanel  value={value} index={1}>
+                    <Chats />
             </TabPanel>
             </div> 
         </Box>

@@ -6,8 +6,15 @@ import AfterLoginPage from './pages/AfterLoginPage';
 import ProductsPage from './pages/ProductsPage';
 import SafetyPage from './pages/SafetyPage';
 import SupportPage from './pages/SupportPage';
+import EditInfoPage from './pages/EditInfoPage';
+import ChatPage from './pages/ChatPage';
+import SideMenuMachesMessages from './components/SideMenuMachesMessages';
+import Chats from './components/Chats';
 
 function App() {
+
+  // const logged =  useSelector(state => state.userData.logged)
+
   return (
    <>
    <BrowserRouter>
@@ -19,6 +26,15 @@ function App() {
      <Route path='/support' element={<SupportPage></SupportPage>}></Route>
      <Route path='/download' element={<DownloadPage></DownloadPage>}></Route>
      <Route path='/main' element={<AfterLoginPage></AfterLoginPage>}></Route>
+     <Route path='/editinfo' element={<EditInfoPage></EditInfoPage>}></Route>
+     <Route path='/ChatPage' element={<ChatPage></ChatPage>}></Route>
+     {/* <Route path='/main/chat' element={
+     <div style={{display : 'flex'}}>
+     
+     <SideMenuMachesMessages/>
+     <ChatPage></ChatPage>
+     </div>
+     }/> */}
    </Routes>
    </BrowserRouter>
    </>

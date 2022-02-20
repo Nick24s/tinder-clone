@@ -6,8 +6,10 @@
     border-bottom: none;
     width : 375px;
     background-color: rgb(240,242,244);
-   
-  
+    z-index: 0;
+    padding-bottom: 80px;
+    border-radius: 30px;
+
   }
   .holder1 {
     border-right: 1px solid rgb(233,234,239);
@@ -59,7 +61,7 @@
 
   .buttonStyle{
     background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%);
-    padding: 15px 45px;
+    padding: 15px 100px;
     text-align: center;
      text-transform: uppercase;
      transition: 0.5s;
@@ -69,5 +71,34 @@
      border-style: hidden;
      font-size: 15px; 
     margin-top: 20px;
+  }
 
+.button2Style {
+  background-image: linear-gradient(to right, #FF512F 0%, #DD2476  51%, #FF512F  100%);
+    padding: 15px 50px;
+    text-align: center;
+     text-transform: uppercase;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     border-radius: 50px;
+     border-style: hidden;
+     font-size: 15px; 
+    margin-top: 20px;
+    position: fixed;
+    bottom: 15px;
+    left: 100px;
+}
+
+  .aboutP {
+    /* font-size: 14px; */
+    color: rgb(81,89,100);
+    text-align: left;
+    margin-left: 15px;
+  }
+  .clickableHolder {
+    background-color: white;
+  }
+  .EditInfoPage nav {
+    padding: 0;
   }

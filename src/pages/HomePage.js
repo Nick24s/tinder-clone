@@ -33,7 +33,7 @@ export default function HomePage(){
        
           </div>
         </nav>
-        <testComp></testComp>
+   
       <div className={styles.centeredDiv}>
         <h1>Swipe Right®</h1>
         <button className={styles.btnGrad} >Create account</button>
