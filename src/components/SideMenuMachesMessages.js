@@ -22,7 +22,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 2 }}>
+        <Box>
           <Typography component={'span'}>{children}</Typography>
         </Box>
       )}
@@ -57,7 +57,7 @@ export default function SideMenuMachesMessages() {
         <Box> 
          <Box>
              <Tabs
-                sx={{background:"white", overflow:"hidden", position:"fixed", zIndex:"100", width:"24rem"}}
+                sx={{background:"white", overflow:"hidden", position:"fixed", zIndex:"100", width:"24rem", padding:"0px"}}
                 TabIndicatorProps={{style: {background:'rgb(255,68,88)', height:"8%"}}}  
                 value={value} onChange={handleChange} aria-label="Messages and maches menu">
 

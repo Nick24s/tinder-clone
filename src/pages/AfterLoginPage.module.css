@@ -40,7 +40,7 @@
     margin: 0px;
     height: 92vh;
     border: 0px;
-    width: 23rem;
+    width: 24rem;
 }
 
 .Container{
@@ -87,7 +87,10 @@
   }
 
   .ButtonBackground {
-  
     background-color: #DF4B3B;
     border-radius: 50%;
+  }
+
+  .css-19midj6{
+    padding-left: 16px;
   }

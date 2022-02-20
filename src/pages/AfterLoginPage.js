@@ -24,7 +24,11 @@ export default function AfterLoginPage() {
                             <h4>Username</h4>
                         <div className={styles.icons}>
                             <div className={styles.ButtonBackground}>
-                                <IconButton fontSize="large"><LocalFireDepartmentIcon  sx={{color: pink[50], fontSize: 26 }}></LocalFireDepartmentIcon></IconButton>
+                                {show && 
+                                <IconButton onClick={() => setShow(false)} fontSize="large">
+                                    <LocalFireDepartmentIcon  sx={{color: pink[50], fontSize: 26 }}></LocalFireDepartmentIcon>
+                                </IconButton>
+                                }
                             </div>
                             <div className={styles.ButtonBackground}>
                                 <IconButton><BusinessCenterSvgIcon  sx={{color: pink[50], fontSize: 26 }}></BusinessCenterSvgIcon></IconButton>
@@ -40,7 +44,7 @@ export default function AfterLoginPage() {
                     </div>
                 </div>
                 {
-                    show ? <div><SettingsCard/></div> : <><TinderCards/><SwipeButtons/></>
+                    show ? <div><SettingsCard/></div> : <><TinderCards/></>
                 }   
               
                 <div>

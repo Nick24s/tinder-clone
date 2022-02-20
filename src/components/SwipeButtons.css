@@ -1,20 +1,20 @@
 .swipeButts {
-    position: fixed;
-    bottom: 10vh;
-    width: 100%;
+    background-color: rgba(0, 0, 0);
+    position: relative;
+    width: 370px;
     display: flex;
-    gap: 8rem;
-    padding-left: 47rem;
-
+    justify-content: space-between;
+    padding: 10px 5px 10px 5px;
 }
 
 .swipeButts .MuiIconButton-root {
-    background-color: transparent;
-    box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.6);
+    background-color: black;
+    box-shadow: 0px 10px 53px 0px rgba(0, 55, 0, 0.6);
 }
 
 .swipeButt_rep{
-    color: #FCC64A !important;
+    color: rgb(252, 198, 74) !important;
+    box-shadow: 20px rgba(252, 198, 74, 0.6);
 }
 
 .swipeButt_close{
