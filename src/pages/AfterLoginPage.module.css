@@ -51,7 +51,12 @@
 .Main{
     display: flex;
     /* align-items: center; */
-    gap: 26em;
+   
+    
+    
+}
+.ChatPage_firstParent {
+  gap: 0px;
 }
 
 .icons{

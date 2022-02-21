@@ -3,16 +3,24 @@ import PersonIcon from '@mui/icons-material/Person';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import BusinessCenterSvgIcon from '@mui/icons-material/BusinessCenter';
 import { IconButton } from '@mui/material';
-import TinderCards from '../components/TinderCards';
-import SwipeButtons from '../components/SwipeButttons';
+import BodyWrapper from '../components/BodyWrapper';
 import UserSettingsPage from './UserSettingsPage';
 import { useState } from 'react';
 import SettingsCard from '../components/SettingsCard';
 import SideMenuMachesMessages from '../components/SideMenuMachesMessages';
 import { pink } from '@mui/material/colors';
+import { useDispatch } from 'react-redux';
+import setView from '../redux/actions/mainPageActions';
+import { swipeViewName } from '../GlobalConst';
 
 export default function AfterLoginPage() {
 
+
+    const dispatch = useDispatch();
+
+        const renderSwipe = () => {
+            dispatch(setView(swipeViewName));
+        }
 
     const [show, setShow] = useState(false);
     return (
@@ -25,8 +33,8 @@ export default function AfterLoginPage() {
                         <div className={styles.icons}>
                             <div className={styles.ButtonBackground}>
                                 {show && 
-                                <IconButton onClick={() => setShow(false)} fontSize="large">
-                                    <LocalFireDepartmentIcon  sx={{color: pink[50], fontSize: 26 }}></LocalFireDepartmentIcon>
+                                <IconButton onClick={() => {setShow(false);  renderSwipe()}} fontSize="large">
+                                    <LocalFireDepartmentIcon o sx={{color: pink[50], fontSize: 26 }}></LocalFireDepartmentIcon>
                                 </IconButton>
                                 }
                             </div>
@@ -40,11 +48,10 @@ export default function AfterLoginPage() {
                             show ? <div >  <UserSettingsPage></UserSettingsPage> </div> : <div className={styles.MatchesOrMessages}><SideMenuMachesMessages></SideMenuMachesMessages>   </div>
                         }
 
-                        {/* <div className='Container'>  </div> */}
                     </div>
                 </div>
                 {
-                    show ? <div><SettingsCard/></div> : <><TinderCards/></>
+                    show ? <div><SettingsCard/></div> : <><BodyWrapper className='main'/></>
                 }   
               
                 <div>

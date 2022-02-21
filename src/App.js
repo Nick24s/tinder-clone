@@ -1,4 +1,4 @@
-import { BrowserRouter,  Routes , Route } from 'react-router-dom';
+import { Routes , Route, useNavigate } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import DownloadPage from './pages/DownloadPage';
 import HomePage from './pages/HomePage';
@@ -8,16 +8,25 @@ import SafetyPage from './pages/SafetyPage';
 import SupportPage from './pages/SupportPage';
 import EditInfoPage from './pages/EditInfoPage';
 import ChatPage from './pages/ChatPage';
-import SideMenuMachesMessages from './components/SideMenuMachesMessages';
-import Chats from './components/Chats';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 function App() {
 
-  // const logged =  useSelector(state => state.userData.logged)
+ 
+  const navigate = useNavigate();
+  const logged = useSelector(state => state.userData.logged)
+
+  
+    useEffect(() => {
+      logged ? navigate('/main') : navigate('/')
+    }, [logged])
+   
 
   return (
+    
    <>
-   <BrowserRouter>
+      
    <Routes>
      <Route path='/' element={<HomePage></HomePage>}></Route>
      <Route path='/products' element={<ProductsPage></ProductsPage>}></Route>
@@ -28,6 +37,9 @@ function App() {
      <Route path='/main' element={<AfterLoginPage></AfterLoginPage>}></Route>
      <Route path='/editinfo' element={<EditInfoPage></EditInfoPage>}></Route>
      <Route path='/ChatPage' element={<ChatPage></ChatPage>}></Route>
+
+
+    
      {/* <Route path='/main/chat' element={
      <div style={{display : 'flex'}}>
      
@@ -36,7 +48,6 @@ function App() {
      </div>
      }/> */}
    </Routes>
-   </BrowserRouter>
    </>
   );
 }

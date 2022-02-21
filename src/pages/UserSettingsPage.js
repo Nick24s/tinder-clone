@@ -4,8 +4,15 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 import CustomizedSlider from '../components/Slider';
 import ColorSwitches from '../components/Switch';
 import RangeSlider from '../components/RangeSlider';
-
+import { useDispatch } from "react-redux"
 function UserSettingsPage() {
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch({type : 'LOGOUT'})
+   
+  }
 
   return (
     // border-right: 1px solid rgb(233,234,239);
@@ -42,7 +49,7 @@ function UserSettingsPage() {
       <ListDividers primary='Email' secondary={<ArrowForwardIosRoundedIcon></ArrowForwardIosRoundedIcon>}></ListDividers>
       <ListDividers primary='Push notifications' secondary={<ArrowForwardIosRoundedIcon></ArrowForwardIosRoundedIcon>}></ListDividers>
       <div className='logout'>
-        <p>Logout</p>
+        <p onClick={handleLogout}>Logout</p>
       </div>
 
 

@@ -32,31 +32,31 @@ export default function Chats(){
                 profilImg="https://r5h9d2x3.stackpathcdn.com/wp-content/uploads/2017/07/Madison-Beer-1.jpg"
                 />
                 <ChatRow 
-                id={4}
+                id={5}
                 name="Nina"
                 message="I would like to tell you smth"
                 profilImg="https://www.nowrunning.com/content/Artist/NinaDobrev/banner.jpg"
                 />
                 <ChatRow 
-                id={4}
+                id={6}
                 name="Nina"
                 message="I would like to tell you smth"
                 profilImg="https://www.nowrunning.com/content/Artist/NinaDobrev/banner.jpg"
                 />
                 <ChatRow 
-                id={4}
+                id={7}
                 name="Nina"
                 message="I would like to tell you smth"
                 profilImg="https://www.nowrunning.com/content/Artist/NinaDobrev/banner.jpg"
                 />
                 <ChatRow 
-                id={4}
+                id={8}
                 name="Nina"
                 message="I would like to tell you smth"
                 profilImg="https://www.nowrunning.com/content/Artist/NinaDobrev/banner.jpg"
                 />
                 <ChatRow 
-                id={4}
+                id={9}
                 name="Nina"
                 message="I would like to tell you smth"
                 profilImg="https://www.nowrunning.com/content/Artist/NinaDobrev/banner.jpg"

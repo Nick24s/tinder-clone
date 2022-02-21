@@ -4,6 +4,7 @@ display: flex;
 align-items: flex-start;
 justify-content: end;
 
+
 }
 
 .ChatHolder {
@@ -12,7 +13,7 @@ justify-content: end;
 }
 .upperDiv{
     border: 1px solid rgb(212,216,222);
-    height: 99px;
+    /* height: 99px; */
     padding-left: 24px;
     padding-right: 24px;
     justify-content: flex-start;
@@ -33,15 +34,20 @@ justify-content: end;
     }
 .actualChat{
     border: 1px solid rgb(212,216,222);
-    height: 70vh;
+    height: 78vh;
 }
 .sentMessageDiv{
     border: 1px solid rgb(212,216,222);
-    height: 50px;
+    height: 30px;
     padding-top: 12px;
     padding-bottom: 19px;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-around;  
+    padding: 18px;
+    /* position: fixed; */
+    bottom: 0;
+    width: 95%
+    /* border-top: 1px solid lightgray; */
 }
 
 .sendButtonHolder {
@@ -64,7 +70,7 @@ border-width: 0;
 }
 
 .side {
-    margin-top: -50px;
+    margin-top: -82px;
 }
 .buttonsWrapper{
     border: 1px solid rgb(212,216,222);
@@ -84,4 +90,82 @@ border-width: 0;
 .buttons:hover {
     background: linear-gradient(90deg, rgba(253,46,111,1) 8%, rgba(255,92,57,1) 100%);
 
+}
+
+.ChatScreen_text{
+    margin-left: 10px;
+    text-align: left ;
+    background-color: lightgray;
+    padding: 15px;
+    border-radius: 20px;
+    margin: 8px;
+}
+
+.ChatScreen_message{
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+chatScreen_time {
+    padding: 20px;
+    color: gray;
+    margin-left: 50px;
+}
+
+.ChatScreen_textUser{
+    margin-left: auto;
+    text-align: right;
+    background-color: #29b3cd;
+    padding: 15px;
+    border-radius: 20px;
+    color: white;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.chatScreen_input {
+    display: flex;
+    /* padding: 5px; */
+    justify-content:  flex-end;
+    align-items: center;
+    /* position: fixed; */
+    /* bottom: 0; */
+    width: 100%;
+    /* border-top: 1px solid lightgray; */
+    margin-top: 5px;
+}
+
+    
+.chatScreen_inputField{
+    /* flex: 1; */
+    padding: 10px;
+    border: none;
+    margin-right: 70px;
+    width: 400px;
+    font-size: 1.2rem;
+}
+.chatScreen_inputField:focus {
+    outline: none;
+}
+
+.chatScreen_inputButton {
+    border: none;
+    margin-right: 20px;
+    background-color: white;
+    font-weight: bolder;
+    color: #fe3d71 ;
+    
+    background-color: rgb(212,216,222) ;
+    border-radius: 30px;
+    width: 100px;
+    height: 50px;
+    /* display: flex; */
+/* align-items: center; */
+/* justify-content: center; */
+/* border-width: 0; */
 }

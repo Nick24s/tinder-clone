@@ -1,5 +1,5 @@
 .swipeButts {
-    background-color: rgba(0, 0, 0);
+    /* background-color: rgba(0, 0, 0); */
     position: relative;
     width: 370px;
     display: flex;
@@ -8,7 +8,7 @@
 }
 
 .swipeButts .MuiIconButton-root {
-    background-color: black;
+    /* background-color: black; */
     box-shadow: 0px 10px 53px 0px rgba(0, 55, 0, 0.6);
 }
 
