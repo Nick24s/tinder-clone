@@ -15,25 +15,29 @@ export default function TinderCards(){
 
     const [people, setPeople] = useState([
         {
-            name: "Nina Dobrev",
+            Fname: "Nina",
+            Lname: "Dobrev",
             age: 22,
-            url: "https://cdn.marica.bg/images/marica.bg/759/1610452955.jpeg"
+            url: ["https://filmitena.com/img/Actor/Original/255_or.jpg", 'https://webnews.bg/uploads/images/73/2673/122673/orig.jpg?_=1446789235']
         },
         {
-            name: "Madison Beer",
+            Fname: "Madison",
+            Lname: "Beer",
             age: 23,
-            url: "https://i.insider.com/5f21bd5d2618b9656e20ac64?width=700"
+            url: ['https://www.the-sun.com/wp-content/uploads/sites/6/2021/09/bf929516-4c5e-4370-b521-985cdea63cdc.jpg',
+                    'https://pbs.twimg.com/media/E4VsNriXwAIiMfO.jpg',
+                    'https://mfiles.alphacoders.com/849/849341.jpg']
         }
     ]);
 
     return (
         <div className="main">
                 {people.map(user =>(
-                    <TinderCard className="swipe" key={user.name} preventSwipe={['up', 'down']}>
-                        <ImageSlider></ImageSlider>
+                    <TinderCard className="swipe" key={user.Lname + user.age} preventSwipe={['up', 'down']}>
+                        <ImageSlider name={user.url} images={user.url}></ImageSlider>
                             <div className="UserInfo">
                                 <div className="Name__AgeBox">
-                                    <h3 className="CardName">{user.name}</h3>
+                                    <h3 className="CardName">{user.Fname}</h3>
                                     <h3 className="AgeInfo">{user.age}</h3>
                                 </div>
                                 <div className="RecentlyActiveBox">
@@ -49,12 +53,12 @@ export default function TinderCards(){
                                         width: "65px",
                                         fontWeight: "500"}}/>
 
-                                    <Chip label="Netflix" size="small" sx={{
+                                    <Chip label="Football" size="small" sx={{
                                         backgroundColor: grey['900'] ,
                                         color: grey['A100'],
                                         opacity: '0.8',
                                         height:"30px",
-                                        width: "65px",
+                                        width: "72px",
                                         fontWeight: "500"}}/>
                                 </div>
                                 <div className="InfoIcon">

@@ -18,7 +18,7 @@ export default function SettingsCard() {
   const renderReadOnlyMode = () => {
       return (
           <>
-        <ImageSlider></ImageSlider>
+        <ImageSlider images={['https://www.the-sun.com/wp-content/uploads/sites/6/2021/09/bf929516-4c5e-4370-b521-985cdea63cdc.jpg', 'https://mfiles.alphacoders.com/849/849341.jpg']}></ImageSlider>
         <div className={styles.inside}>
             <div className={styles.info}>
                 <p className={styles.p}>Nick</p>
