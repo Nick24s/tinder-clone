@@ -89,10 +89,68 @@
     position: absolute;
     right: 16px;
     bottom: 0px;
-
 }
+
+.InfoIcon:hover {
+    position: absolute;
+    right: 16px;
+    bottom: 0px;
+    cursor: pointer;
+}
+
 
 .SwipeButtons {
     position: fixed;
     bottom: 20vh;
+    z-index: 100;
+}
+
+.CardInfo{ 
+    position: absolute;
+}
+
+.Inside {
+    border: 1px solid rgb(233,234,239);
+}
+
+.Info {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+}
+
+.p {
+    margin-left: 10px;
+    font-size: 25px;
+    line-height: 21px;
+    font-weight: bolder;
+}
+
+.p2 {
+    margin-left: 10px;
+    font-size: 25px;
+    line-height: 21px;
+}
+
+.secondLine {
+    margin-left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+}
+.secondlineP{
+    margin-top: -1px;
+    margin-left: 4px;
+}
+
+.BackBtn {
+    position: absolute;
+    right: 15px;
+    bottom: 75px;
+}
+.BackBtn:hover {
+    position: absolute;
+    right: 15px;
+    bottom: 75px;
+    cursor: pointer;
 }

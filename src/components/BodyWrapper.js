@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from "react";
 import SwipeButtons from "./SwipeButttons";
 import './TinderCards.css';
 import { green, grey } from '@mui/material/colors';
@@ -51,13 +51,15 @@ export default function BodyWrapper(props) {
             <SwipeButtons></SwipeButtons>
         </div>;
         
-        return <div className={props.className}>
-            {people.map(user => (
-                <CommonTinderCard images={user.url} user={user} footer={buttonComponent}></CommonTinderCard>
-
-            ))}
-
-        </div>
+        return <>
+            <div className={props.className}>
+                {people.map(user => (
+                        <CommonTinderCard key={user.name} images={user.url} user={user} footer={buttonComponent}>
+                        </CommonTinderCard>
+                ))}
+                
+            </div>
+        </>
     }
 
 

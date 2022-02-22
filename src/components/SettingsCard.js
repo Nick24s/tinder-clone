@@ -15,6 +15,7 @@ export default function SettingsCard() {
     const [show, setShow] = useState(false);
 
      const [ReadOnlyOrEdit , isReadyOnly] = useState(true);
+
   const renderReadOnlyMode = () => {
       return (
           <>
@@ -31,8 +32,7 @@ export default function SettingsCard() {
             </div>
         </div>
         <div className={styles.buttonHolder}>
-        <button className={styles.btnGrad} onClick={() => isReadyOnly(!ReadOnlyOrEdit)}  >Edit info</button>
-
+          <button className={styles.btnGrad} onClick={() => isReadyOnly(!ReadOnlyOrEdit)}>Edit info</button>
         </div>
         </>
       )
@@ -86,8 +86,7 @@ export default function SettingsCard() {
 
     return (
         <div className={styles.settingsCardHolder}>
-
    {       ReadOnlyOrEdit ?  renderReadOnlyMode() : renderEditMode()  }
-      </div>
+        </div>
     )
 }
