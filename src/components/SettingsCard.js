@@ -2,7 +2,6 @@ import ImageSlider from "./ImageSlider";
 import styles from '../styles/settingsCardHolder.module.css'
 import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineSharp';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
-import EditInfoPage from '../pages/EditInfoPage';
 import { useState } from "react";
 // import styles from '../styles/EditInfoPage.module.css';
 import EditInfoPictures  from '../components/EditInfoPictures';
@@ -12,9 +11,9 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 
 export default function SettingsCard() {
 
-    const [show, setShow] = useState(false);
 
      const [ReadOnlyOrEdit , isReadyOnly] = useState(true);
+
   const renderReadOnlyMode = () => {
       return (
           <>
@@ -31,8 +30,7 @@ export default function SettingsCard() {
             </div>
         </div>
         <div className={styles.buttonHolder}>
-        <button className={styles.btnGrad} onClick={() => isReadyOnly(!ReadOnlyOrEdit)}  >Edit info</button>
-
+          <button className={styles.btnGrad} onClick={() => isReadyOnly(!ReadOnlyOrEdit)}>Edit info</button>
         </div>
         </>
       )

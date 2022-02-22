@@ -1,7 +1,6 @@
 const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
-   userName: null,
    usersData: []
 };
 
