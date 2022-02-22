@@ -86,8 +86,10 @@ export default function SettingsCard() {
 
     return (
         <div className={styles.settingsCardHolder}>
-
-   {       ReadOnlyOrEdit ?  renderReadOnlyMode() : renderEditMode()  }
+                <div className={styles.wrapper}>
+                {       ReadOnlyOrEdit ?  renderReadOnlyMode() : renderEditMode()  }
+                </div>
+  
       </div>
     )
 }

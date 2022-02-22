@@ -12,7 +12,8 @@ export default  function CommonTinderCard(props) {
     const renderBody = (user) => {
             return (
                 <TinderCard className="swipe" key={user.name} preventSwipe={['up', 'down']}>
-                <ImageSlider  images={user.url}></ImageSlider>
+                     {/* images={user.url} */}
+                <ImageSlider ></ImageSlider>
                 <div className="UserInfo">
                     <div className="Name__AgeBox">
                         <h3 className="CardName">{user.name}</h3>

@@ -8,27 +8,44 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAction } from '../../redux/actions/usersActions';
 
 const theme = createTheme();
 
 
-export default function Login() {
+export default function LoginForm() {
   const dispatch = useDispatch();
+  const users = useSelector(state => state.usersData.usersData);
+  
+  console.log('users' + users)
+
+  const login = (userId) => {
+    dispatch(loginAction(userId));
+  }
+
+  const matchUserParams = (email, pass) => {
+    let hasValidUser = false;
+    let userId = '';
+    users.forEach(element => {
+      if (element.email === email && element.pass === pass) {
+        hasValidUser = true;
+        userId = element.ID;
+      }
+    })
+    hasValidUser ? login(userId) : alert('wrong pass')
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-      dispatch({type : 'LOGIN'})
-    
+    matchUserParams(data.get('email'), data.get('password'));
+
+
   };
 
-  
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -47,7 +64,7 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1  }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
@@ -68,12 +85,12 @@ export default function Login() {
               id="password"
               autoComplete="current-password"
             />
-           
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              sx={{  mb: 2 , background : 'linear-gradient(90deg, rgba(253,46,111,1) 8%, rgba(255,92,57,1) 100%)'}}
+              sx={{ mb: 2, background: 'linear-gradient(90deg, rgba(253,46,111,1) 8%, rgba(255,92,57,1) 100%)' }}
             >
               Sign In
             </Button>

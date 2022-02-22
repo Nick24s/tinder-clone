@@ -1,10 +1,6 @@
 import { useState } from "react"
 import SwipeButtons from "./SwipeButttons";
 import './TinderCards.css';
-import { green, grey } from '@mui/material/colors';
-import CircleIcon from '@mui/icons-material/Circle';
-import Chip from '@mui/material/Chip';
-import InfoIcon from '@mui/icons-material/Info';
 import ChatPage from "../pages/ChatPage";
 import { useSelector } from 'react-redux';
 import { swipeViewName, chatViewName } from '../GlobalConst'
@@ -59,8 +55,6 @@ export default function BodyWrapper(props) {
 
         </div>
     }
-
-
 
     return (
 

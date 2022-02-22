@@ -6,8 +6,9 @@ import {mainPageReducer} from './reducers/mainPageReducer';
 
 const rootReducer = combineReducers({
 
-    userData: userReducer,
-    mainPage : mainPageReducer
+    usersData: userReducer,
+    mainPage : mainPageReducer,
+
 
 });
 const store = createStore(rootReducer ,

@@ -5,12 +5,12 @@ import pic2 from '../AvatarPicturesExp/2.jpg'
 import pic3 from '../AvatarPicturesExp/3.jpg'
 import pic4 from '../AvatarPicturesExp/4.jpg'
 
-// const images = [
-//   { url: pic1 },
-//   { url: pic2 },
-//   { url: pic3 },
-//   { url: pic4 },
-// ];
+const images = [
+  { url: pic1 },
+  { url: pic2 },
+  { url: pic3 },
+  { url: pic4 },
+];
 
 const ImageSlider = (props) => {
 
@@ -28,8 +28,8 @@ const ImageSlider = (props) => {
       <SimpleImageSlider
         width={380}
         height={550}
-        images={mapImages(props.images)}
-        // images={images}
+        // images={mapImages(props.images)}
+        images={images}
         showBullets={false}
         showNavs={true}
         loop={false}

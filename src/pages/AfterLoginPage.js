@@ -3,13 +3,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import BusinessCenterSvgIcon from '@mui/icons-material/BusinessCenter';
 import { IconButton } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 import BodyWrapper from '../components/BodyWrapper';
 import UserSettingsPage from './UserSettingsPage';
 import { useState } from 'react';
 import SettingsCard from '../components/SettingsCard';
 import SideMenuMachesMessages from '../components/SideMenuMachesMessages';
 import { pink } from '@mui/material/colors';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import setView from '../redux/actions/mainPageActions';
 import { swipeViewName } from '../GlobalConst';
 
@@ -17,6 +18,21 @@ export default function AfterLoginPage() {
 
 
     const dispatch = useDispatch();
+
+    const loggedUser = useSelector(state => state.usersData.loggedUser);
+
+    const users = useSelector(state => state.usersData.usersData);
+    let avatar = '';
+    let name = ''
+    users.forEach(element => {
+        if (element.ID === loggedUser) {
+                avatar = element.photos[0]
+                name = element.name;
+        
+        }
+      })
+  
+   
 
         const renderSwipe = () => {
             dispatch(setView(swipeViewName));
@@ -28,8 +44,9 @@ export default function AfterLoginPage() {
             <div className={styles.Main}>
                 <div>
                     <div className={styles.ProfileSide}>
-                            <IconButton  onClick={() => setShow(!show)}><PersonIcon sx={{ color: pink[50], fontSize: 30 }}/></IconButton>
-                            <h4>Username</h4>
+                            {/* <IconButton  onClick={() => setShow(!show)}><PersonIcon  sx={{ color: pink[50], fontSize: 30 }}/></IconButton> */}
+                            <Avatar alt="Remy Sharp" src={avatar} onClick={() => setShow(!show)} />
+                            <h4>{name}</h4>
                         <div className={styles.icons}>
                             <div className={styles.ButtonBackground}>
                                 {show && 

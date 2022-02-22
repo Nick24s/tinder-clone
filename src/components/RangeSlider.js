@@ -4,7 +4,7 @@ import Slider from '@mui/material/Slider';
 import { styled } from '@mui/material/styles';
 
 function valuetext(value) {
-  return `${value}°C`;
+  return `${value}`;
 }
 
 const minDistance = 10;
