@@ -9,20 +9,42 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { registerAction } from '../../redux/actions/usersActions';
+import { ValidateRegistrationFields } from '../../utils';
 
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const dispatch = useDispatch();
+  const hardCodedUsers = useSelector(state => state.usersData.usersData);
+
+  const register = (email, pass, firstName, lastName) => {
+    dispatch(registerAction(email, pass, firstName, lastName))
+    alert('registration success , now you can log in')
+  }
+
+  const CheckIfUserExist = (email, pass, firstName, lastName) => {
+    let userExist = false;
+    hardCodedUsers.map(user => {
+      if (user.email === email && user.pass === pass) {
+        userExist = true;
+      }
+    })
+
+    userExist ? alert('user already exists') : register(email, pass, firstName, lastName)
+  }
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    if(ValidateRegistrationFields(data.get('email') , data.get('firstName'), data.get('lastName') , data.get('password'))){
+      CheckIfUserExist(data.get('email'), data.get('password'), data.get('firstName'), data.get('lastName'));
+    }
+
   };
 
   return (
@@ -93,7 +115,7 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{  mb: 2 , background : 'linear-gradient(90deg, rgba(253,46,111,1) 8%, rgba(255,92,57,1) 100%)'}}
+              sx={{ mb: 2, background: 'linear-gradient(90deg, rgba(253,46,111,1) 8%, rgba(255,92,57,1) 100%)' }}
             >
               Sign Up
             </Button>

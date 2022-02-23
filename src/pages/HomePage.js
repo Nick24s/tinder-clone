@@ -16,6 +16,7 @@ export default function HomePage() {
 
   let usersData = require('../server/users.json')
 
+
    useEffect(() => {
     console.log(usersData);
     dispatch(loadInitialData(usersData))

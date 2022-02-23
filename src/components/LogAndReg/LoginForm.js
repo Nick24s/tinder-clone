@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../redux/actions/usersActions';
+import { ValidateLoginFields } from '../../utils';
 
 const theme = createTheme();
 
@@ -17,7 +18,8 @@ const theme = createTheme();
 export default function LoginForm() {
   const dispatch = useDispatch();
   const users = useSelector(state => state.usersData.usersData);
-  
+  // const registeredUsers = useSelector(state => state.usersData.registeredUsers);
+
   console.log('users' + users)
 
   const login = (userId) => {
@@ -33,14 +35,15 @@ export default function LoginForm() {
         userId = element.ID;
       }
     })
-    hasValidUser ? login(userId) : alert('wrong pass')
+    hasValidUser ? login(userId) : alert('wrong username or password!')
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    matchUserParams(data.get('email'), data.get('password'));
+    if(ValidateLoginFields(data.get('email'), data.get('password'))){
+      matchUserParams(data.get('email'), data.get('password'));
+    }
 
 
   };
@@ -74,6 +77,7 @@ export default function LoginForm() {
               name="email"
               autoComplete="email"
               autoFocus
+              type="email"
             />
             <TextField
               margin="normal"

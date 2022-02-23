@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
-   usersData: []
+   usersData: [],
+   // registeredUsers : []
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -18,6 +19,11 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             logged: false,
             loggedUser: '',
          };
+         case 'REGISTER':
+            return {
+               ...state,
+               usersData :    [...state.usersData ,   action.payload]
+            };
       case 'LOAD_INITIAL_DATA':
 
          return {

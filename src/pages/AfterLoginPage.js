@@ -1,5 +1,4 @@
 import styles from './AfterLoginPage.module.css';
-import PersonIcon from '@mui/icons-material/Person';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import BusinessCenterSvgIcon from '@mui/icons-material/BusinessCenter';
 import { IconButton } from '@mui/material';
@@ -23,16 +22,24 @@ export default function AfterLoginPage() {
 
     const users = useSelector(state => state.usersData.usersData);
     let avatar = '';
-    let name = ''
+    let name = '';
     users.forEach(element => {
         if (element.ID === loggedUser) {
-                avatar = element.photos[0]
-                name = element.name;
+            if(element.photos !== undefined ){
+                avatar = element.photos[0];
+                name = (element.name);
+            } else {
+                name = element.firstName;
+
+            } 
+         
+
+            
+            
         
         }
       })
   
-   
 
         const renderSwipe = () => {
             dispatch(setView(swipeViewName));
@@ -44,9 +51,8 @@ export default function AfterLoginPage() {
             <div className={styles.Main}>
                 <div>
                     <div className={styles.ProfileSide}>
-                            {/* <IconButton  onClick={() => setShow(!show)}><PersonIcon  sx={{ color: pink[50], fontSize: 30 }}/></IconButton> */}
                             <Avatar alt="Remy Sharp" src={avatar} onClick={() => setShow(!show)} />
-                            <h4>{name}</h4>
+                            <h4 className={styles.userName}>{name}</h4>
                         <div className={styles.icons}>
                             <div className={styles.ButtonBackground}>
                                 {show && 
