@@ -30,14 +30,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          return {
             ...state, usersData: action.payload.data,
          };
-      case 'UPDATE_LOCATION':
-         return {
-            ...state,
-            usersData: state.contents.map(
-               (content, i) => content.ID === action.id ? { ...content, location: action.payload }
-                  : content
-            )
-         }
       case 'UPLOAD_IMAGE':
          return {
             ...state,
@@ -49,14 +41,61 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       case 'ADD_MATCH':
          const { loggedUserID, matchedUserID } = action.payload;
          let newUsersData = [...state.usersData];
-      
-
          return {
             ...state,
            usersData : [...UpdateUserData(loggedUserID, matchedUserID, newUsersData)]
+         }
 
+      case 'UPDATE_DESCRIPTION':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, description: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_LOCATION':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, location: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_SCHOOL':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, school: action.payload }
+                  : user
+            )
+         }
 
-         };
+      case 'UPDATE_COMPANY':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, company: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_JOB_TITLE':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, jobTitle: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_GENDER':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, gender: action.payload }
+                  : user
+            )
+         }
+     
 
       default: return state;
    }

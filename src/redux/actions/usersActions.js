@@ -21,7 +21,7 @@ export function registerAction(ID, email , pass , firstName , lastName ) {
 }
 
 
-export function updateLocation(id , text) {
+export function updateLocation(text , id) {
     return {
         type : 'UPDATE_LOCATION',
         payload: text,
@@ -38,10 +38,52 @@ export function uploadImage(text, id, index) {
     }
 }
 
+export function ChangeDescription(text, id) {
+    return {
+        type : 'UPDATE_DESCRIPTION',
+        payload: text,
+        id : id,
+    }
+}
+
 export function addMatchAction(loggedUserID , matchedUserID){
     return {
         type : 'ADD_MATCH',
         payload : {loggedUserID , matchedUserID}
     }
+<<<<<<< HEAD
     
+=======
+}
+
+export function UpdateSchool(text, id){
+    return {
+        type : 'UPDATE_SCHOOL',
+        payload: text,
+        id : id,
+    }
+}
+
+export function UpdateCompany(text, id){
+    return {
+        type : 'UPDATE_COMPANY',
+        payload: text,
+        id : id,
+    }
+}
+export function UpdateJobTitle(text, id){
+    return {
+        type : 'UPDATE_JOB_TITLE',
+        payload: text,
+        id : id,
+    }
+}
+
+export function UpdateGender(text, id){
+    return {
+        type : 'UPDATE_GENDER',
+        payload: text,
+        id : id,
+    }
+>>>>>>> e73769945b28598e4273040bc589b00f432bfa22
 }
