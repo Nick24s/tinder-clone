@@ -19,3 +19,10 @@ export function registerAction(ID, email , pass , firstName , lastName ) {
         payload: {ID, email , pass , firstName , lastName}
     }
 }
+
+export function addMatchAction(loggedUserID , matchedUserID){
+    return {
+        type : 'ADD_MATCH',
+        payload : {loggedUserID , matchedUserID}
+    }
+}

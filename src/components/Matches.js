@@ -22,6 +22,7 @@ export default function Matches() {
             result = [
                 ...result,
                 <SingleMatch
+                    key={userData.ID}
                     id={userData.ID}
                     name={userData.username}
                     profilImg={userData.photos[0]}

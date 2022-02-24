@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
@@ -25,10 +27,21 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                usersData :    [...state.usersData ,   action.payload]
             };
       case 'LOAD_INITIAL_DATA':
-
          return {
             ...state, usersData: action.payload.data,
          };
+         case 'ADD_MATCH':
+            return {
+               ...state,
+                  // usersData : [console.log(action.payload)]
+                  // usersData : [[...state.usersData.map(user => {
+                     // if(user.ID === action.payload.loggedUserID)
+                  // })]
+               // usersData : [...state.usersData.map(user =>{ if( user.ID === action.payload.loggedUserID)) ]   
+               // return {...state, products: state.products.map(p => p.id === productId ? {...p, quantity:p.quantity+1} : p)}
+       
+            };
+
       default: return state;
    }
 };
