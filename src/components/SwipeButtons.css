@@ -5,7 +5,9 @@
     display: flex;
     justify-content: space-between;
     padding: 10px 5px 10px 5px;
+    transition: unset;
 }
+   
 
 .swipeButts .MuiIconButton-root {
     /* background-color: black; */

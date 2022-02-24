@@ -103,6 +103,7 @@
 
 
 .SwipeButtons {
+    
     position: fixed;
     bottom: 20vh;
     z-index: 100;

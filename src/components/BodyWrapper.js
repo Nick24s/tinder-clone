@@ -1,5 +1,3 @@
-import { useState } from "react";
-import SwipeButtons from "./SwipeButttons";
 import './TinderCards.css';
 import ChatPage from "../pages/ChatPage";
 import { useSelector } from 'react-redux';

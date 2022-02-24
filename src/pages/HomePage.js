@@ -18,7 +18,6 @@ export default function HomePage() {
 
 
    useEffect(() => {
-    console.log(usersData);
     dispatch(loadInitialData(usersData))
   }, [usersData])
 

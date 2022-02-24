@@ -8,8 +8,10 @@ export default function SingleMatch({name, id, profilImg}){
 
     const dispatch = useDispatch();
 
-    const handleChoosenChat = () => {
-        dispatch(setView(chatViewName));
+    const handleChoosenChat = (e) => {
+        const ChoosenChatID = e.target.alt;
+        console.log(ChoosenChatID)
+        dispatch(setView(chatViewName , ChoosenChatID));
 }
 
     return (
@@ -17,7 +19,8 @@ export default function SingleMatch({name, id, profilImg}){
             <h4 className={styles.name}>{name}</h4>
             <Avatar 
                 variant="rounded"
-                alt={name + id}
+                key={id}
+                alt={ id}
                 src={profilImg}
                 sx={{ width: 100, height: 120}}
             >

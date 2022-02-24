@@ -17,18 +17,20 @@ import { ValidateRegistrationFields } from '../../utils';
 const theme = createTheme();
 
 export default function SignUp() {
+ 
+
   const dispatch = useDispatch();
   const hardCodedUsers = useSelector(state => state.usersData.usersData);
 
   const register = (email, pass, firstName, lastName) => {
     let UUID = CreateUUID();
     console.log(UUID);
-    dispatch(registerAction(UUID , email, pass, firstName, lastName))
+    dispatch(registerAction(UUID, email, pass, firstName, lastName))
     alert('registration success , now you can log in')
   }
 
   const CreateUUID = () => {
-    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
       // eslint-disable-next-line no-mixed-operators
       (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
@@ -39,22 +41,18 @@ export default function SignUp() {
     hardCodedUsers.map(user => {
       if (user.email === email && user.pass === pass) {
         userExist = true;
-       
+
       }
     })
 
-   
-    
-
-    userExist ? alert('user already exists') : register(email, pass, firstName, lastName )
+    userExist ? alert('user already exists') : register(email, pass, firstName, lastName)
   }
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget );
+    const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    if(ValidateRegistrationFields(data.get('email') , data.get('firstName'), data.get('lastName') , data.get('password'))){
+    if (ValidateRegistrationFields(data.get('email'), data.get('firstName'), data.get('lastName'), data.get('password'))) {
       CheckIfUserExist(data.get('email'), data.get('password'), data.get('firstName'), data.get('lastName'));
     }
 

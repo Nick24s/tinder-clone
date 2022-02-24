@@ -37,3 +37,10 @@ export function uploadImage(text, id, index) {
         index : index,
     }
 }
+
+export function addMatchAction(loggedUserID , matchedUserID){
+    return {
+        type : 'ADD_MATCH',
+        payload : {loggedUserID , matchedUserID}
+    }
+}
