@@ -43,15 +43,7 @@ export default function SettingsCard() {
     return resultArr;
   }
 
-//   const handleLivingInChange = e => {
-//     setLivingIn(e.target.value);
-//     console.log(e.target.value);
-// }
 
-  // const locationUpdater = (e ,id) => {
-  //   setLivingIn(e.target.value);
-  //   dispatch(updateLocation(id, text));
-  // }
 
 
   const [ReadOnlyOrEdit, isReadyOnly] = useState(true);

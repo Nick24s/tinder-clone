@@ -9,8 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function UserSettingsPage() {
 
-  const userId = useSelector(state => state.usersData.loggedUser);
-  const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
+ 
 
   const dispatch = useDispatch();
 
@@ -18,6 +17,8 @@ function UserSettingsPage() {
     dispatch({type : 'LOGOUT'})
    
   }
+  const userId = useSelector(state => state.usersData.loggedUser);
+  const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
 
   return (
     // border-right: 1px solid rgb(233,234,239);

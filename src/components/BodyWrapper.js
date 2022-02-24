@@ -8,6 +8,7 @@ export default function BodyWrapper(props) {
 
     const viewName = useSelector(state => state.mainPage.viewName);
     const allUsers = useSelector(state => state.usersData.usersData);
+  
 
     const choosenView = () => {
 
@@ -23,7 +24,7 @@ export default function BodyWrapper(props) {
 
     const renderChatView = () => {
         return (
-            <ChatPage></ChatPage>
+            <ChatPage ></ChatPage>
         )
     }
         
