@@ -49,7 +49,7 @@ export default function AfterLoginPage() {
     return (
         <>
             <div className={styles.Main}>
-                <div>
+                <div className={styles.FuncTab}>
                     <div className={styles.ProfileSide}>
                             <Avatar alt="Remy Sharp" src={avatar} onClick={() => setShow(!show)} />
                             <h4 className={styles.userName}>{name}</h4>
@@ -57,7 +57,7 @@ export default function AfterLoginPage() {
                             <div className={styles.ButtonBackground}>
                                 {show && 
                                 <IconButton onClick={() => {setShow(false);  renderSwipe()}} fontSize="large">
-                                    <LocalFireDepartmentIcon o sx={{color: pink[50], fontSize: 26 }}></LocalFireDepartmentIcon>
+                                    <LocalFireDepartmentIcon sx={{color: pink[50], fontSize: 26 }}></LocalFireDepartmentIcon>
                                 </IconButton>
                                 }
                             </div>

@@ -20,7 +20,6 @@ export default function LoginForm() {
   const users = useSelector(state => state.usersData.usersData);
   // const registeredUsers = useSelector(state => state.usersData.registeredUsers);
 
-  console.log('users' + users)
 
   const login = (userId) => {
     dispatch(loginAction(userId));

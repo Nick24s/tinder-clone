@@ -4,7 +4,7 @@
     border-right: 1px solid rgb(233,234,239);
     border-bottom: 1px solid rgb(233,234,239);
     margin-top: 2px;
-    /* padding-left: 26rem; */
+    padding-left: 26rem;
 }
 .inside {
     border: 1px solid rgb(233,234,239);
@@ -166,7 +166,7 @@
     margin-top: 20px;
     position: fixed;
     bottom: 15px;
-    right: 462px;
+    right: 50rem;
 }
 
   .aboutP {
@@ -184,4 +184,19 @@
 
   .wrapper {
     padding-left: 26rem;
+  }
+
+  .inputBox{ 
+    width: 365px;
+    border: 0px;
+    height: 40px;
+  }
+
+  .AboutInputBox {
+    max-width: 365px;
+    min-width: 365px;
+    width: 365px;
+    height: auto;
+    overflow: auto;
+    min-height: 150px;
   }

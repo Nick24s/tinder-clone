@@ -4,8 +4,13 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 import CustomizedSlider from '../components/Slider';
 import ColorSwitches from '../components/Switch';
 import RangeSlider from '../components/RangeSlider';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux";
+
+
 function UserSettingsPage() {
+
+  const userId = useSelector(state => state.usersData.loggedUser);
+  const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
 
   const dispatch = useDispatch();
 
@@ -18,13 +23,13 @@ function UserSettingsPage() {
     // border-right: 1px solid rgb(233,234,239);
     <div style={{ width: '24em' , borderRight : "1px solid rgb(233,234,239) " }}>
       <h3 className='h3'>Account settings</h3>
-        <ListDividers primary='Email' secondary='example@gmail.com'></ListDividers>
+        <ListDividers primary='Email' secondary={user.email}></ListDividers>
         <ListDividers primary='Phone' secondary='359897791227'></ListDividers>
         <ListDividers primary='Promo code'></ListDividers>
 
       <h3 className='h3'>Discovery settings</h3>
       {/* add arrow here */}
-      <ListDividers primary='Location' secondary='Sofia,Bulgaria'></ListDividers>
+      <ListDividers primary='Location' secondary={user.location}></ListDividers>
       <CustomizedSlider></CustomizedSlider>
       <div className='switchHolder'>
         <p>Only show people in this range</p>

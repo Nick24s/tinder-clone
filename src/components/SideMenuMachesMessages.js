@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState} from 'react';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -45,7 +45,7 @@ function a11yProps(index) {
 
 export default function SideMenuMachesMessages() {
 
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -53,7 +53,7 @@ export default function SideMenuMachesMessages() {
   
 
   return (
-    <div style={{}}>
+    <div>
         <Box> 
          <Box>
              <Tabs

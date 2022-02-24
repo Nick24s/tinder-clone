@@ -9,7 +9,7 @@ export function loadInitialData(data) {
 export function loginAction(id) {
     return {
         type: 'LOGIN',
-        payload: { id  }
+        payload: { id }
     }
 }
 
@@ -17,5 +17,23 @@ export function registerAction(email , pass , firstName , lastName) {
     return {
         type : 'REGISTER',
         payload: {email , pass , firstName , lastName}
+    }
+}
+
+
+export function updateLocation(id , text) {
+    return {
+        type : 'UPDATE_LOCATION',
+        payload: text,
+        id : id,
+    }
+}
+
+export function uploadImage(text, id, index) {
+    return {
+        type : 'UPLOAD_IMAGE',
+        payload: text,
+        id : id,
+        index : index,
     }
 }

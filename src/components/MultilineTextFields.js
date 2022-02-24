@@ -22,12 +22,13 @@ export default function MultilineTextFields(props) {
       <div>
       
         <TextField
+          // onChange={props.onChange}
           id="standard-multiline-static"
           multiline={true}
           minRows={props.minRows}
           maxRows={props.maxRows}
           inputProps={{ maxLength:props.maxLength }}
-          defaultValue=""
+          defaultValue={props.defaultValue}
           variant={props.variant}
           color='error'
           placeholder={props.placeholder}
