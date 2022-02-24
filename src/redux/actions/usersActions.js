@@ -13,9 +13,9 @@ export function loginAction(id) {
     }
 }
 
-export function registerAction(email , pass , firstName , lastName) {
+export function registerAction(ID, email , pass , firstName , lastName ) {
     return {
         type : 'REGISTER',
-        payload: {email , pass , firstName , lastName}
+        payload: {ID, email , pass , firstName , lastName}
     }
 }

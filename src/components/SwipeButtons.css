@@ -9,7 +9,8 @@
 
 .swipeButts .MuiIconButton-root {
     /* background-color: black; */
-    box-shadow: 0px 10px 53px 0px rgba(0, 55, 0, 0.6);
+    /* box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.6); */
+  
 }
 
 .swipeButt_rep{
@@ -19,10 +20,12 @@
 
 .swipeButt_close{
     color: #FE4556 !important;
+    
 }
 
 .swipeButt_star{
     color: #47d1f0 !important;
+
 }
 
 .swipeButt_fav{
