@@ -28,6 +28,9 @@
     border-radius: 20px;
 }
 
+
+
+
 .main {
     height: 640px;
     margin-top: 50px;
@@ -104,6 +107,9 @@
     bottom: 20vh;
     z-index: 100;
 }
+
+
+
 
 .CardInfo{ 
     position: absolute;

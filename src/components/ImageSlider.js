@@ -1,16 +1,5 @@
 import SimpleImageSlider from "react-simple-image-slider";
 import { propTypes } from "react-tinder-card";
-import pic1 from '../AvatarPicturesExp/1.jpg'
-import pic2 from '../AvatarPicturesExp/2.jpg'
-import pic3 from '../AvatarPicturesExp/3.jpg'
-import pic4 from '../AvatarPicturesExp/4.jpg'
-
-// const images = [
-//   { url: pic1 },
-//   { url: pic2 },
-//   { url: pic3 },
-//   { url: pic4 },
-// ];
 
 const ImageSlider = (props) => {
 

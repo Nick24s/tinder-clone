@@ -12,38 +12,27 @@ import { pink } from '@mui/material/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import setView from '../redux/actions/mainPageActions';
 import { swipeViewName } from '../GlobalConst';
+import { getUserDataByID } from '../utils';
 
 export default function AfterLoginPage() {
 
 
     const dispatch = useDispatch();
 
-    const loggedUser = useSelector(state => state.usersData.loggedUser);
-
+    const loggedUserID = useSelector(state => state.usersData.loggedUser);
     const users = useSelector(state => state.usersData.usersData);
-    let avatar = '';
-    let name = '';
-    users.forEach(element => {
-        if (element.ID === loggedUser) {
-            if(element.photos !== undefined ){
-                avatar = element.photos[0];
-                name = (element.name);
-            } else {
-                name = element.firstName;
 
-            } 
-         
+    let loggedUserData = getUserDataByID(loggedUserID, users);
+    const { photos: avatars, name } = loggedUserData;
+    const avatar = (avatars || [])[0];
 
-            
-            
-        
-        }
-      })
-  
 
-        const renderSwipe = () => {
-            dispatch(setView(swipeViewName));
-        }
+
+
+
+    const renderSwipe = () => {
+        dispatch(setView(swipeViewName));
+    }
 
     const [show, setShow] = useState(false);
     return (
@@ -51,8 +40,8 @@ export default function AfterLoginPage() {
             <div className={styles.Main}>
                 <div className={styles.FuncTab}>
                     <div className={styles.ProfileSide}>
-                            <Avatar alt="Remy Sharp" src={avatar} onClick={() => setShow(!show)} />
-                            <h4 className={styles.userName}>{name}</h4>
+                        <Avatar alt="Remy Sharp" src={avatar} onClick={() => setShow(!show)} />
+                        <h4 className={styles.userName}>{name}</h4>
                         <div className={styles.icons}>
                             <div className={styles.ButtonBackground}>
                                 {show && 
@@ -62,7 +51,7 @@ export default function AfterLoginPage() {
                                 }
                             </div>
                             <div className={styles.ButtonBackground}>
-                                <IconButton><BusinessCenterSvgIcon  sx={{color: pink[50], fontSize: 26 }}></BusinessCenterSvgIcon></IconButton>
+                                <IconButton><BusinessCenterSvgIcon sx={{ color: pink[50], fontSize: 26 }}></BusinessCenterSvgIcon></IconButton>
                             </div>
                         </div>
                     </div>
@@ -74,12 +63,12 @@ export default function AfterLoginPage() {
                     </div>
                 </div>
                 {
-                    show ? <div><SettingsCard/></div> : <><BodyWrapper className='main'/></>
-                }   
-              
+                    show ? <div><SettingsCard /></div> : <><BodyWrapper className='main' /></>
+                }
+
                 <div>
-                   
-                  
+
+
                 </div>
             </div>
         </>
