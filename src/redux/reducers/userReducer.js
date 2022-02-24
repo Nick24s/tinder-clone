@@ -30,14 +30,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          return {
             ...state, usersData: action.payload.data,
          };
-      case 'UPDATE_LOCATION':
-         return {
-            ...state,
-            usersData: state.contents.map(
-               (content, i) => content.ID === action.id ? { ...content, location: action.payload }
-                  : content
-            )
-         }
       case 'UPLOAD_IMAGE':
          return {
             ...state,
@@ -46,17 +38,66 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                   : content
             )
          }
-         case 'ADD_MATCH':
-            return {
-               ...state,
-                  // usersData : [console.log(action.payload)]
-                  // usersData : [[...state.usersData.map(user => {
-                     // if(user.ID === action.payload.loggedUserID)
-                  // })]
-               // usersData : [...state.usersData.map(user =>{ if( user.ID === action.payload.loggedUserID)) ]   
-               // return {...state, products: state.products.map(p => p.id === productId ? {...p, quantity:p.quantity+1} : p)}
-       
-            };
+      case 'UPDATE_DESCRIPTION':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, description: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_LOCATION':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, location: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_SCHOOL':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, school: action.payload }
+                  : user
+            )
+         }
+
+      case 'UPDATE_COMPANY':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, company: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_JOB_TITLE':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, jobTitle: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_GENDER':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, gender: action.payload }
+                  : user
+            )
+         }
+      case 'ADD_MATCH':
+         return {
+            ...state,
+            // usersData : [console.log(action.payload)]
+            // usersData : [[...state.usersData.map(user => {
+            // if(user.ID === action.payload.loggedUserID)
+            // })]
+            // usersData : [...state.usersData.map(user =>{ if( user.ID === action.payload.loggedUserID)) ]   
+            // return {...state, products: state.products.map(p => p.id === productId ? {...p, quantity:p.quantity+1} : p)}
+
+         };
 
       default: return state;
    }
