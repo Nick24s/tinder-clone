@@ -51,9 +51,6 @@ export function addMatchAction(loggedUserID , matchedUserID){
         type : 'ADD_MATCH',
         payload : {loggedUserID , matchedUserID}
     }
-<<<<<<< HEAD
-    
-=======
 }
 
 export function UpdateSchool(text, id){
@@ -85,5 +82,4 @@ export function UpdateGender(text, id){
         payload: text,
         id : id,
     }
->>>>>>> e73769945b28598e4273040bc589b00f432bfa22
 }

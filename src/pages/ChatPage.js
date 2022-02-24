@@ -19,7 +19,7 @@ export default function ChatPage() {
     const HandleSend = (e) => {
         e.preventDefault();
         console.log(input);
-       
+        return <p>{input}</p>
         setInput('');
     }
 
