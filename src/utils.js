@@ -57,14 +57,30 @@ export const getUserDataByID = (loggedUserID, users) => {
   return loggedUserData;
 }
 
-export const UpdateUserData = (loggedUserID, matchedUserID, newUsersData) => {
+export const AddToMatchData = (loggedUserID, matchedUserID, newUsersData) => {
 
   return newUsersData.map(user => (
     user.ID === loggedUserID
       ? { ...user, matches: [...user.matches, matchedUserID] }
       : user.ID === matchedUserID ? { ...user, liked: user.liked.filter(like => (like !== loggedUserID)), matches: [...user.matches, loggedUserID] } : user)
   )
+}
+// LIKE LOGIN (GOES IN EVERYUSER , NOT ONLY LOGGED) {...user , liked : [...user.liked , matchedUserID]}
+export const AddToLikedData = (loggedUserID, likedUserID, newUsersData) => {
 
+  return newUsersData.map(user => (
+    user.ID === loggedUserID
+      ? { ...user, liked: [...user.liked, likedUserID] }
+      :  user)
+  )
 }
 
 
+export const RemoveFromUserData = (loggedUserID, matchedUserID, newUsersData) => {
+
+  return newUsersData.map(user => (
+    user.ID === loggedUserID
+      ? {...user, matches: user.matches.filter(match => (match !== matchedUserID))}
+      : user.ID === matchedUserID ? {...user , liked :[...user.liked , loggedUserID] , matches : [...user.matches.filter(match => (match !== loggedUserID))] } : user)
+  )
+}

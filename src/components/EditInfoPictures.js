@@ -12,7 +12,6 @@ export default function EditInfoPictures(props) {
     const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
 
     const [uploadImageFlag, setUploadImageFlag] = useState(false)
-    // URL.createObjectURL()
 
 
     return (
@@ -31,7 +30,7 @@ export default function EditInfoPictures(props) {
                     </div>
                 ) : (
                     <div style={{float: "right" , marginTop : '120px'}}>
-                        <CancelIcon sx={{ color: pink[50] , fontSize: 31}}></CancelIcon>
+                        <CancelIcon sx={{ color: pink[500] , fontSize: 31}}></CancelIcon>
                     </div>
                 )}
         </div>

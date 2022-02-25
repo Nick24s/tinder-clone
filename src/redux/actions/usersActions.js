@@ -5,7 +5,6 @@ export function loadInitialData(data) {
     }
 }
 
-
 export function loginAction(id) {
     return {
         type: 'LOGIN',
@@ -20,7 +19,6 @@ export function registerAction(ID, email , pass , firstName , lastName ) {
     }
 }
 
-
 export function updateLocation(text , id) {
     return {
         type : 'UPDATE_LOCATION',
@@ -29,12 +27,11 @@ export function updateLocation(text , id) {
     }
 }
 
-export function uploadImage(text, id, index) {
+export function uploadImage(url, id) {
     return {
         type : 'UPLOAD_IMAGE',
-        payload: text,
+        payload: url,
         id : id,
-        index : index,
     }
 }
 
@@ -81,5 +78,21 @@ export function UpdateGender(text, id){
         type : 'UPDATE_GENDER',
         payload: text,
         id : id,
+    }
+}
+
+
+export function removeMatchAction(loggedUserId , matchedUserId){
+    return {
+        type : 'REMOVE_MATCH',
+        loggedUserId : loggedUserId ,
+             matchedUserId : matchedUserId
+    }
+}
+
+export function addLikedAction(loggedUserID , matchedUserID){
+    return {
+        type : 'ADD_LIKE',
+        payload : {loggedUserID , matchedUserID}
     }
 }

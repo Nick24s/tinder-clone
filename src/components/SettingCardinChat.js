@@ -4,7 +4,6 @@ import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineS
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import { getUserDataByID } from "../utils";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 export default function SettingsCardinChat(props) {
     const chosenChatID = useSelector(state => state.mainPage.chosenChatID)

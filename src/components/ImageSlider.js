@@ -26,8 +26,7 @@ const ImageSlider = (props) => {
         navStyle={2}
         navMargin={10}
         slideDuration={0.3}
-     
-       
+        style={{borderRadius:"10%"}}
       />
     </div>
   );

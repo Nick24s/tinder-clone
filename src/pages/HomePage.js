@@ -4,7 +4,6 @@ import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
 import BasicTabs from '../components/LogAndReg/LogAndRegController';
 import styles from './HomePage.module.css'
-import users from '../server/users.json'
 import { useDispatch } from 'react-redux';
 import {loadInitialData} from '../redux/actions/usersActions';
 
@@ -13,13 +12,13 @@ export default function HomePage() {
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
 
-
+  
   let usersData = require('../server/users.json')
 
-
-   useEffect(() => {
-    dispatch(loadInitialData(usersData))
-  }, [usersData])
+    useEffect(() => {
+      dispatch(loadInitialData(usersData))
+    }, [])
+  
 
   return (
     <>
@@ -48,7 +47,7 @@ export default function HomePage() {
 
         <div className={styles.centeredDiv}>
           <h1>Swipe Right®</h1>
-          <button className={styles.btnGrad} >Create account</button>
+          <button onClick={() => setShow(!show)} className={styles.btnGrad} >Create account</button>
         </div>
         {
           show ? <div className={styles.SignForms}><BasicTabs></BasicTabs></div> : null

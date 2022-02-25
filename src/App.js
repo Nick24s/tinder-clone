@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Routes , Route, useNavigate } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import DownloadPage from './pages/DownloadPage';
@@ -24,9 +25,7 @@ function App() {
    
 
   return (
-    
    <>
-      
    <Routes>
      <Route path='/' element={<HomePage></HomePage>}></Route>
      <Route path='/products' element={<ProductsPage></ProductsPage>}></Route>
@@ -37,16 +36,6 @@ function App() {
      <Route path='/main' element={<AfterLoginPage></AfterLoginPage>}></Route>
      <Route path='/editinfo' element={<EditInfoPage></EditInfoPage>}></Route>
      <Route path='/ChatPage' element={<ChatPage></ChatPage>}></Route>
-
-
-    
-     {/* <Route path='/main/chat' element={
-     <div style={{display : 'flex'}}>
-     
-     <SideMenuMachesMessages/>
-     <ChatPage></ChatPage>
-     </div>
-     }/> */}
    </Routes>
    </>
   );

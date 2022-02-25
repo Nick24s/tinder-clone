@@ -8,8 +8,8 @@ export default function BodyWrapper(props) {
 
     const viewName = useSelector(state => state.mainPage.viewName);
     const allUsers = useSelector(state => state.usersData.usersData);
-  
 
+  
     const choosenView = () => {
 
         switch (viewName) {
@@ -21,25 +21,22 @@ export default function BodyWrapper(props) {
         }
     }
 
-
     const renderChatView = () => {
         return (
             <ChatPage ></ChatPage>
         )
     }
-        
 
 
     const renderSwipeView = () => {
-       
-        
+
         return <>
             <div className={props.className}>
                 {allUsers.map(user => (
-                        <CommonTinderCard key={user.ID + user.userName} images={user.photos} user={user}  >
-                        </CommonTinderCard>
+                    <CommonTinderCard key={user.ID + user.userName} images={user.photos} user={user}  >
+                    </CommonTinderCard>
                 ))}
-                
+
             </div>
         </>
     }

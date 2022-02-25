@@ -23,6 +23,7 @@ export default function LoginForm() {
 
   const login = (userId) => {
     dispatch(loginAction(userId));
+    
   }
 
   const matchUserParams = (email, pass) => {

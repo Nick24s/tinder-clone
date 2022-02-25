@@ -7,7 +7,7 @@ import { IconButton } from '@mui/material';
 import './SwipeButtons.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserDataByID } from '../utils';
-import { addMatchAction } from '../redux/actions/usersActions';
+import { addLikedAction, addMatchAction } from '../redux/actions/usersActions';
 
 
 
@@ -19,19 +19,29 @@ export default function SwipeButtons(props) {
 
     const ClickedUserID = props.id;
     const onLikeClick = (e) => {
-        console.log(e);
         e.preventDefault()
-        console.log(ClickedUserID);
         let ClickedUserData = getUserDataByID(ClickedUserID, allUsers);
         let { liked = [] } = ClickedUserData;
+
+        let actionToDispatch = addLikedAction;
+
         liked.forEach(likeID => {
             if(likeID === loggedUserID){
+                actionToDispatch =  addMatchAction;
                 console.log('MATCH!'); // TODO MATCH MESSAGE SCREEN
-                dispatch(addMatchAction(loggedUserID , ClickedUserID))
+                // dispatch(addMatchAction(loggedUserID , ClickedUserID))
             }
         })
 
+        dispatch(actionToDispatch(loggedUserID , ClickedUserID))
         
+    }
+
+    const onDislikeClick = (e) => {
+        e.preventDefault();
+        let ClickedUserData = getUserDataByID(ClickedUserID, allUsers);
+        let { disliked = [] } = ClickedUserData;
+        // dispatch(addDislike)
     }
 
     return (
@@ -42,12 +52,12 @@ export default function SwipeButtons(props) {
                     <ReplayIcon fontSize='large'></ReplayIcon>
                 </IconButton>
                 <IconButton className='swipeButt_close'>
-                    <CloseIcon fontSize='large'></CloseIcon>
+                    <CloseIcon fontSize='large' onClick={(userID) => {onDislikeClick(userID)}}></CloseIcon>
                 </IconButton>
                 <IconButton className='swipeButt_star'>
                     <StarIcon fontSize='large'></StarIcon>
                 </IconButton>
-                <IconButton className='swipeButt_fav' onClick={(userID) => { onLikeClick(userID) }}>
+                <IconButton className='swipeButt_fav' onClick={(userID) => {onLikeClick(userID) }}>
                     <FavoriteIcon fontSize='large'></FavoriteIcon>
                 </IconButton>
                 <IconButton className='swipeButt_bolt'>

@@ -1,10 +1,10 @@
-import { UpdateUserData } from "../../utils";
+import { AddToLikedData, AddToMatchData, RemoveFromUserData } from "../../utils";
 
 const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
    usersData: [],
-   // registeredUsers : []
+   loadData : false
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -19,7 +19,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          return {
             ...state,
             logged: false,
-            loggedUser: '',
          };
       case 'REGISTER':
          return {
@@ -34,8 +33,8 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          return {
             ...state,
             usersData: state.usersData.map(
-               (content, i) => content.ID === action.id ? { ...content, location: action.payload }
-                  : content
+               (user) => user.ID === action.id ? { ...user, photos: action.payload}
+                  : user
             )
          }
       case 'ADD_MATCH':
@@ -43,7 +42,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          let newUsersData = [...state.usersData];
          return {
             ...state,
-            usersData: [...UpdateUserData(loggedUserID, matchedUserID, newUsersData)]
+            usersData: [...AddToMatchData(loggedUserID, matchedUserID, newUsersData)]
          }
 
       case 'UPDATE_DESCRIPTION':
@@ -96,7 +95,23 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             )
          }
 
+         case 'REMOVE_MATCH':
 
+            const newUsersDatas = [...state.usersData];
+            return {
+               ...state,
+               usersData: [...RemoveFromUserData(action.loggedUserId, action.matchedUserId, newUsersDatas)]
+            }
+
+            case 'ADD_LIKE':
+               // const {loggedUserId, matchedUserId } = action.payload;
+
+              const  newUsersData2 = [...state.usersData];
+               return {
+                  ...state,
+                  usersData: [...AddToLikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUsersData2)]
+               }
+   
       default: return state;
    }
 };

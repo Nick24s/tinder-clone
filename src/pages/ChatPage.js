@@ -7,10 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import setView from '../redux/actions/mainPageActions';
 import { swipeViewName } from '../GlobalConst';
 import { getUserDataByID } from '../utils';
+import { removeMatchAction } from '../redux/actions/usersActions';
 export default function ChatPage() {
-
     const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
     const allUsers = useSelector(state => state.usersData.usersData);
+    const loggedUserID = useSelector(state => state.usersData.loggedUser)
     let clickedUserData = getUserDataByID(chosenChatID, allUsers);
 
 
@@ -25,6 +26,14 @@ export default function ChatPage() {
 
     const dispatch = useDispatch();
     const closeChat = () => {
+        dispatch(setView(swipeViewName))
+    }
+
+
+    const HandleUnmatch = (e) => {
+        e.preventDefault()
+       
+        dispatch(removeMatchAction(loggedUserID , chosenChatID))
         dispatch(setView(swipeViewName))
     }
 
@@ -74,7 +83,7 @@ export default function ChatPage() {
             <div className={styles.side}>
                 <SettingsCardinChat ></SettingsCardinChat>
                 <div className={styles.buttonsWrapper}>
-                    <button className={styles.buttons}>UNMATCH</button>
+                    <button className={styles.buttons} id={chosenChatID} onClick={HandleUnmatch}>UNMATCH</button>
                     <button className={styles.buttons}>REPORT</button>
                 </div>
             </div>
