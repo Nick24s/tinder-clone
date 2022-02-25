@@ -2,18 +2,22 @@ import ImageSlider from "./ImageSlider";
 import styles from '../styles/settingsCardHolder.module.css'
 import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineSharp';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
-import { useState } from "react";
+import { getUserDataByID } from "../utils";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
-export default function SettingsCardinChat() {
-
-
+export default function SettingsCardinChat(props) {
+    const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
+    const allUsers = useSelector(state => state.usersData.usersData);   
+    let clickedUserData = getUserDataByID(chosenChatID , allUsers);
     return (
+      
         <div className={styles.settingsCardHolder}>
-            <ImageSlider images={["https://filmitena.com/img/Actor/Original/255_or.jpg", 'https://webnews.bg/uploads/images/73/2673/122673/orig.jpg?_=1446789235']}></ImageSlider>
+            <ImageSlider images={clickedUserData.photos}></ImageSlider>
             <div className={styles.inside}>
                 <div className={styles.info}>
-                    <p className={styles.p}>Nick</p>
-                    <p className={styles.p2}>24</p>
+                    <p className={styles.p}>{clickedUserData.username}</p>
+                    <p className={styles.p2}>{clickedUserData.age}</p>
                     <div style={{ marginTop: "22px", marginLeft: '2px' }}><CheckCircleOutlineSharpIcon></CheckCircleOutlineSharpIcon></div>
                 </div>
                 <div className={styles.secondLine}>
@@ -22,7 +26,7 @@ export default function SettingsCardinChat() {
                 </div>
             </div>
             <div className={styles.description}>
-                <span>some decription</span>
+                <span>{clickedUserData.description}</span>
             </div>
         </div>
     )

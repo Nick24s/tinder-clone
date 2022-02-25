@@ -18,7 +18,9 @@ export default function SwipeButtons(props) {
 
 
     const ClickedUserID = props.id;
-    const onLikeClick = () => {
+    const onLikeClick = (e) => {
+        console.log(e);
+        e.preventDefault()
         console.log(ClickedUserID);
         let ClickedUserData = getUserDataByID(ClickedUserID, allUsers);
         let { liked = [] } = ClickedUserData;

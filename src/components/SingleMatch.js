@@ -9,9 +9,9 @@ export default function SingleMatch({name, id, profilImg}){
     const dispatch = useDispatch();
 
     const handleChoosenChat = (e) => {
-        const ChoosenChatID = e.target.alt;
-        console.log(ChoosenChatID)
-        dispatch(setView(chatViewName , ChoosenChatID));
+        const chosenChatID = e.target.alt;
+        console.log(chosenChatID)
+        dispatch(setView(chatViewName , chosenChatID));
 }
 
     return (

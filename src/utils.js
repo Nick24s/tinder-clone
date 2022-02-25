@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 
 export const ValidateRegistrationFields = (email, firstName, lastName, password) => {
   if (validateNames(firstName, lastName) && validateEmail(email) && validatePass(password)) {
@@ -57,3 +56,15 @@ export const getUserDataByID = (loggedUserID, users) => {
 
   return loggedUserData;
 }
+
+export const UpdateUserData = (loggedUserID, matchedUserID, newUsersData) => {
+
+  return newUsersData.map(user => (
+    user.ID === loggedUserID
+      ? { ...user, matches: [...user.matches, matchedUserID] }
+      : user.ID === matchedUserID ? { ...user, liked: user.liked.filter(like => (like !== loggedUserID)), matches: [...user.matches, loggedUserID] } : user)
+  )
+
+}
+
+
