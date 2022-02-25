@@ -43,7 +43,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          let newUsersData = [...state.usersData];
          return {
             ...state,
-           usersData : [...UpdateUserData(loggedUserID, matchedUserID, newUsersData)]
+            usersData: [...UpdateUserData(loggedUserID, matchedUserID, newUsersData)]
          }
 
       case 'UPDATE_DESCRIPTION':
@@ -95,7 +95,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                   : user
             )
          }
-     
+
 
       default: return state;
    }

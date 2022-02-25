@@ -1,5 +1,4 @@
 import SimpleImageSlider from "react-simple-image-slider";
-import { propTypes } from "react-tinder-card";
 
 const ImageSlider = (props) => {
 
@@ -15,10 +14,11 @@ const ImageSlider = (props) => {
   return (
     <div >
       <SimpleImageSlider
+      style={{ borderTopRightRadius : '50px' , border : '1px solid red' }}
         width={380}
         height={550}
         images={mapImages(props.images)}
-        // images={images}
+        
         showBullets={false}
         showNavs={true}
         loop={false}
@@ -26,6 +26,8 @@ const ImageSlider = (props) => {
         navStyle={2}
         navMargin={10}
         slideDuration={0.3}
+     
+       
       />
     </div>
   );
