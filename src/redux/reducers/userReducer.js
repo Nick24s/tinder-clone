@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-
 const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
@@ -19,7 +17,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          return {
             ...state,
             logged: false,
-            loggedUser: '',
          };
       case 'REGISTER':
          return {
@@ -34,8 +31,8 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          return {
             ...state,
             usersData: state.usersData.map(
-               (content, i) => content.ID === action.id ? { ...content, location: action.payload }
-                  : content
+               (user) => user.ID === action.id ? { ...user, photos: action.payload}
+                  : user
             )
          }
       case 'UPDATE_DESCRIPTION':

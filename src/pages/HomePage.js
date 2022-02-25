@@ -48,7 +48,7 @@ export default function HomePage() {
 
         <div className={styles.centeredDiv}>
           <h1>Swipe Right®</h1>
-          <button className={styles.btnGrad} >Create account</button>
+          <button onClick={() => setShow(!show)} className={styles.btnGrad} >Create account</button>
         </div>
         {
           show ? <div className={styles.SignForms}><BasicTabs></BasicTabs></div> : null

@@ -29,12 +29,11 @@ export function updateLocation(text , id) {
     }
 }
 
-export function uploadImage(text, id, index) {
+export function uploadImage(url, id) {
     return {
         type : 'UPLOAD_IMAGE',
-        payload: text,
+        payload: url,
         id : id,
-        index : index,
     }
 }
 

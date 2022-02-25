@@ -10,29 +10,28 @@ import ListDividers from '../components/ListDividers';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeDescription, updateLocation, UpdateSchool, UpdateJobTitle, UpdateCompany, UpdateGender } from "../redux/actions/usersActions";
+import ImageUploader from './ImageUploader.js';
 
 export default function SettingsCard() {
 
   const dispatch = useDispatch();
   const userId = useSelector(state => state.usersData.loggedUser);
   const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
-
   const numberOfImageContainers = 9;
-
-  const [aboutYou, setAboutYou] = useState(user.description ? user.description : "");
+  const [aboutYou, setAboutYou] = useState(user.description);
   // const [passions, setPassions] = useState(user.passions);
   const [gender, setGender] = useState(user.gender);
   // const [orientation, setOrientation] = useState(user.sexualOrientation);
-  const [livingIn, setLivingIn] = useState(user.location ? user.location : "");
-  const [userImages, setUserImages] = useState([user.photos]);
-  const [jobTitle, setJobTitle] = useState(user.jobTitle ? user.jobTitle : "");
-  const [company, setCompany] = useState(user.company ? user.company : "");
-  const [school, setSchool] = useState(user.school ? user.school : "");
+  const [livingIn, setLivingIn] = useState(user.location);
+  const [userImages, setUserImages] = useState(user.photos);
+  const [jobTitle, setJobTitle] = useState(user.jobTitle);
+  const [company, setCompany] = useState(user.company);
+  const [school, setSchool] = useState(user.school);
 
   useEffect(() => {
     const imagesArraySet = setImagesArrLengthAndFill(user.photos, numberOfImageContainers);
     setUserImages(imagesArraySet)
-  }, []);
+  }, [user.photos]);
 
   const setImagesArrLengthAndFill = (imagesArr, maxSize) => {
     let resultArr = [...imagesArr]
@@ -42,6 +41,11 @@ export default function SettingsCard() {
       resultArr.fill('', imagesArr.length);
     }
     return resultArr;
+  }
+
+  const appendImg = (img) => {
+    const hahaha = user.photos 
+    setUserImages([...hahaha, img])
   }
 
   const handleAboutYouChange = (e) => {
@@ -101,6 +105,7 @@ export default function SettingsCard() {
 
 
   const [ReadOnlyOrEdit, isReadyOnly] = useState(true);
+  const [show, setShow] = useState(false);
 
   const renderReadOnlyMode = () => {
     return (
@@ -136,8 +141,7 @@ export default function SettingsCard() {
             userImages.map((container, i) => <EditInfoPictures key={i} image={container}></EditInfoPictures>)
           }
         </div>
-
-        <button className={styles.buttonStyle}>Add media</button>
+        <ImageUploader appendImg={(img) => appendImg(img)}></ImageUploader>
         <p className={styles.aboutP}>ABOUT YOU</p>
         <textarea onBlur={handleAboutYou} onChange={handleAboutYouChange} value={aboutYou} className={styles.AboutInputBox} placeholder="Add description"></textarea>
         <p className={styles.aboutP}>PASSIONS</p>
@@ -167,11 +171,10 @@ export default function SettingsCard() {
   }
 
   return (
-    <div className={styles.settingsCardHolder}>
-      <div className={styles.wrapper}>
-        {ReadOnlyOrEdit ? renderReadOnlyMode() : renderEditMode()}
+      <div className={styles.settingsCardHolder}>
+        <div className={styles.wrapper}>
+          {ReadOnlyOrEdit ? renderReadOnlyMode() : renderEditMode()}
+        </div>
       </div>
-
-    </div>
   )
 }
