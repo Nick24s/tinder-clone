@@ -8,7 +8,7 @@ const INITIAL_STATE = {
    firstLoadedData: false
 };
 
- const userReducers = (state = INITIAL_STATE, action) => {
+const userReducers = (state = INITIAL_STATE, action) => {
    switch (action.type) {
       case 'LOGIN':
          return {
@@ -104,7 +104,6 @@ const INITIAL_STATE = {
 
 
       case 'REMOVE_MATCH':
-
          const newUsersDatas = [...state.usersData];
          return {
             ...state,
@@ -118,12 +117,29 @@ const INITIAL_STATE = {
             usersData: [...AddToLikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUsersData2)]
          }
 
-         case 'ADD_DISLIKE':
-            const newUserSData= [...state.usersData];
+      case 'ADD_DISLIKE':
+         const newUserSData = [...state.usersData];
+         return {
+            ...state,
+            usersData: [...AddToDislikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUserSData)]
+         }
+
+         case 'UPDATE_PASSION':
             return {
                ...state,
-               usersData: [...AddToDislikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUserSData)]
+               usersData: state.usersData.map(
+                  (user) => user.ID === action.id ? { ...user, passions: action.payload }
+                     : user)
             }
+
+            
+      case 'DELETE_PASSION':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, passions: Array(0) }
+                  : user)
+         }
 
       default: return state;
    }
@@ -132,3 +148,9 @@ const INITIAL_STATE = {
 
 const userReducer = undoable(userReducers);
 export default userReducer;
+
+    
+
+   
+
+   

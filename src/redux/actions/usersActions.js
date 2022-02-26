@@ -103,6 +103,20 @@ export function addDislikedAction(loggedUserID , matchedUserID){
     }
 }
 
+export function addPassions(passions , userId){
+    return {
+        type : 'UPDATE_PASSION',
+        payload : passions,
+        id : userId
+    }
+}
+
+export function deletePassions(userId){
+    return {
+        type : 'DELETE_PASSION',
+        id : userId
+    }
+}
 export function firstLoadedData(){
     return {
         type : 'FIRST_LOADED_DATA'

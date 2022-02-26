@@ -11,8 +11,6 @@ const rootReducer = combineReducers({
     usersData: userReducer,
     mainPage : mainPageReducer,
     cardUser : cardPageReducer,
-    
-
 
 });
 const store = createStore(rootReducer ,

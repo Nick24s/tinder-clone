@@ -25,23 +25,29 @@ import { connect } from 'react-redux';
 
 function Advanced(props) {
 
-    const dispatch = useDispatch()
-    const db = useSelector(state => state.usersData.present.usersData)
+    const dispatch = useDispatch();
+    const loggedUserID = useSelector(state => state.usersData.present.loggedUser);
+    const userId = useSelector(state => state.usersData.present.loggedUser);
+    const allUsers = useSelector(state => state.usersData.present.usersData);
+    const loggedUserData = getUserDataByID(userId, allUsers);
+    const db = useSelector(state => state.usersData.present.usersData).filter(user => user.ID !== loggedUserData.ID &&
+                                                                     user.gender === loggedUserData.lookingFor &&
+                                                                     !user.matches.includes(loggedUserData.ID));
+    const [matches, setMatches] = useState(db);
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
     const [lastDirection, setLastDirection] = useState()
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex)
     const [cardInfoFlag, setCardInfo] = useState(true);
 
-    const allUsers = useSelector(state => state.usersData.present.usersData);
-    const loggedUserID = useSelector(state => state.usersData.present.loggedUser)
+   
 
     const childRefs = useMemo(
         () =>
-            Array(db.length)
+            Array(matches.length)
                 .fill(0)
                 .map((i) => React.createRef()),
-        [db]
+        [matches]
     )
 
     const updateCurrentIndex = (val) => {
@@ -49,7 +55,7 @@ function Advanced(props) {
         currentIndexRef.current = val
     }
 
-    const canGoBack = currentIndex < db.length - 1
+    const canGoBack = currentIndex < matches.length - 1
 
     const canSwipe = currentIndex >= 0
 
@@ -87,9 +93,9 @@ function Advanced(props) {
 
     }
 
-    const swipe = async (dir  ) => {
-        
-        if (canSwipe && currentIndex < db.length) {
+    const swipe = async (dir) => {
+        console.log(dir)
+        if (canSwipe && currentIndex < matches.length) {
             await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
         }
 
@@ -119,7 +125,7 @@ function Advanced(props) {
             
             <div className='cardContainer'>
 
-                {db.map((character, index) => (
+                {matches.map((character, index) => (
                     cardInfoFlag ? (<><TinderCard
                         ref={childRefs[index]}
                         className='swipe'

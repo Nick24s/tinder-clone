@@ -1,0 +1,22 @@
+.Passions{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.SumbitBtn{
+    margin: 10px;
+    background-color: chartreuse;
+    border: none;
+    border-radius: 50px;
+}
+
+
+.ClearBtn{
+    margin: 10px;
+    background-color: indianred;
+    border: none;
+    
+}

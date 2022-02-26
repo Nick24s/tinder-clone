@@ -11,6 +11,7 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeDescription, updateLocation, UpdateSchool, UpdateJobTitle, UpdateCompany, UpdateGender } from "../redux/actions/usersActions";
 import ImageUploader from './ImageUploader.js';
+import Passions from "./PassionsBox";
 
 export default function SettingsCard() {
 
@@ -145,8 +146,7 @@ export default function SettingsCard() {
         <p className={styles.aboutP}>ABOUT YOU</p>
         <textarea onBlur={handleAboutYou} onChange={handleAboutYouChange} value={aboutYou} className={styles.AboutInputBox} placeholder="Add description"></textarea>
         <p className={styles.aboutP}>PASSIONS</p>
-
-        {/* <div className={styles.clickableHolder}><p>Add Passions</p> </div> */}
+        <Passions/>
 
         <ListDividers primary='Add Passions' secondary={<ArrowForwardIosRoundedIcon></ArrowForwardIosRoundedIcon>}></ListDividers>
         <p className={styles.aboutP}>JOB TITLE</p>
