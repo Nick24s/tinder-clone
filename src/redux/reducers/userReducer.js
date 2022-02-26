@@ -4,7 +4,7 @@ const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
    usersData: [],
-   loadData : false
+   loadData: false
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -33,7 +33,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          return {
             ...state,
             usersData: state.usersData.map(
-               (user) => user.ID === action.id ? { ...user, photos: action.payload}
+               (user) => user.ID === action.id ? { ...user, photos: action.payload }
                   : user
             )
          }
@@ -95,23 +95,39 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             )
          }
 
-         case 'REMOVE_MATCH':
+      case 'REMOVE_MATCH':
 
-            const newUsersDatas = [...state.usersData];
-            return {
-               ...state,
-               usersData: [...RemoveFromUserData(action.loggedUserId, action.matchedUserId, newUsersDatas)]
-            }
+         const newUsersDatas = [...state.usersData];
+         return {
+            ...state,
+            usersData: [...RemoveFromUserData(action.loggedUserId, action.matchedUserId, newUsersDatas)]
+         }
 
-            case 'ADD_LIKE':
-               // const {loggedUserId, matchedUserId } = action.payload;
+      case 'ADD_LIKE':
+         // const {loggedUserId, matchedUserId } = action.payload;
 
-              const  newUsersData2 = [...state.usersData];
-               return {
-                  ...state,
-                  usersData: [...AddToLikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUsersData2)]
-               }
-   
+         const newUsersData2 = [...state.usersData];
+         return {
+            ...state,
+            usersData: [...AddToLikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUsersData2)]
+         }
+
+      case 'UPDATE_PASSION':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, passions: action.payload }
+                  : user)
+         }
+
+      case 'DELETE_PASSION':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, passions: Array(0) }
+                  : user)
+         }
+
       default: return state;
    }
 };

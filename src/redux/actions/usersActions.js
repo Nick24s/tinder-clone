@@ -96,3 +96,18 @@ export function addLikedAction(loggedUserID , matchedUserID){
         payload : {loggedUserID , matchedUserID}
     }
 }
+
+export function addPassions(passions , userId){
+    return {
+        type : 'UPDATE_PASSION',
+        payload : passions,
+        id : userId
+    }
+}
+
+export function deletePassions(userId){
+    return {
+        type : 'DELETE_PASSION',
+        id : userId
+    }
+}
