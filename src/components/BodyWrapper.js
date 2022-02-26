@@ -1,10 +1,10 @@
-import './TinderCards.css';
+
 import ChatPage from "../pages/ChatPage";
 import { useSelector } from 'react-redux';
 import { swipeViewName, chatViewName } from '../GlobalConst'
-import CommonTinderCard from "./TinderCard";
+import Advanced from './TinderCardTest';
 
-export default function BodyWrapper(props) {
+export default function BodyWrapper() {
 
     const viewName = useSelector(state => state.mainPage.viewName);
     const allUsers = useSelector(state => state.usersData.usersData);
@@ -29,15 +29,8 @@ export default function BodyWrapper(props) {
 
 
     const renderSwipeView = () => {
-
         return <>
-            <div className={props.className}>
-                {allUsers.map(user => (
-                    <CommonTinderCard key={user.ID + user.userName} images={user.photos} user={user}  >
-                    </CommonTinderCard>
-                ))}
-
-            </div>
+            <Advanced></Advanced>
         </>
     }
 
