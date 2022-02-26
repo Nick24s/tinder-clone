@@ -5,14 +5,15 @@ import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import { getUserDataByID } from "../utils";
 import { useSelector } from "react-redux";
 
-export default function SettingsCardinChat(props) {
+export default function SettingsCardinChat() {
     const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
     const allUsers = useSelector(state => state.usersData.usersData);   
     let clickedUserData = getUserDataByID(chosenChatID , allUsers);
+    
     return (
       
         <div className={styles.settingsCardHolder}>
-            <ImageSlider images={clickedUserData.photos}></ImageSlider>
+            <ImageSlider key={chosenChatID} images={clickedUserData.photos}></ImageSlider>
             <div className={styles.inside}>
                 <div className={styles.info}>
                     <p className={styles.p}>{clickedUserData.username}</p>

@@ -1,0 +1,58 @@
+.swipeButts {
+    /* background-color: rgba(0, 0, 0); */
+    position: fixed;
+    width: 370px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 5px 10px 5px;
+    transition: unset;
+    margin-top: 480px;
+}
+
+.TinderCards {
+    margin-left: 50rem;
+    padding-top: 120px;
+    position: absolute;
+}
+
+.swipeButt_rep{
+    color: rgb(252, 198, 74) !important;
+    transform: scale(1.4);
+}
+
+.swipeButt_rep:hover{
+    color: rgb(252, 198, 74) !important;
+    transform: scale(1.8);
+}
+
+.swipeButt_close{
+    color: #FE4556 !important;
+    transform: scale(1.4);
+    
+}
+
+.swipeButt_close:hover{
+    color: #FE4556 !important;
+    transform: scale(1.8);
+    
+}
+
+.swipeButt_star{
+    color: #47d1f0 !important;
+    transform: scale(1.4);
+}
+
+.swipeButt_fav{
+    color: #068867 !important;
+    transform: scale(1.4);
+}
+
+.swipeButt_fav:hover{
+    color: #068867 !important;
+    transform: scale(1.8);
+}
+
+.swipeButt_bolt{
+    color: #B13EF0 !important;
+    transform: scale(1.4);
+}
