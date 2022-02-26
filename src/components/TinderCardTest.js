@@ -16,19 +16,25 @@ import styles from "./TinderCardTest.module.css"
 import MoreInfoCard from "./MoreInfoCard.js"
 import setUser from '../redux/actions/cardPageActions';
 import './TinderCards.css';
-
+import { getUserDataByID } from '../utils';
+import { addDislikedAction, addLikedAction, addMatchAction } from '../redux/actions/usersActions';
+import { ActionCreators } from 'redux-undo';
+import { connect } from 'react-redux';
 
 
 
 function Advanced(props) {
 
     const dispatch = useDispatch()
-    const db = useSelector(state => state.usersData.usersData)
+    const db = useSelector(state => state.usersData.present.usersData)
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
     const [lastDirection, setLastDirection] = useState()
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex)
     const [cardInfoFlag, setCardInfo] = useState(true);
+
+    const allUsers = useSelector(state => state.usersData.present.usersData);
+    const loggedUserID = useSelector(state => state.usersData.present.loggedUser)
 
     const childRefs = useMemo(
         () =>
@@ -48,21 +54,45 @@ function Advanced(props) {
     const canSwipe = currentIndex >= 0
 
     // set last direction and decrease current index
-    const swiped = (direction, nameToDelete, index) => {
+    const swiped = (direction, nameToDelete, index , ClickedUserID) => {
         setLastDirection(direction)
         updateCurrentIndex(index - 1)
+        let ClickedUserData = getUserDataByID(ClickedUserID, allUsers);
+        let actionToDispatch;
+        if(direction === "right"){
+            actionToDispatch = addLikedAction;
+            let { liked = [] } = ClickedUserData;
+        liked.forEach(likeID => {
+            if(likeID === loggedUserID){
+                actionToDispatch =  addMatchAction;
+                console.log('MATCH!'); // TODO MATCH MESSAGE SCREEN
+            }
+        })
+        dispatch(actionToDispatch(loggedUserID , ClickedUserID))
+    
+        } else {
+            let loggedUserData = getUserDataByID(loggedUserID, allUsers);
+            let { disliked = [] } = loggedUserData;
+            if(!disliked.includes(ClickedUserID)){
+                actionToDispatch = addDislikedAction
+                dispatch(actionToDispatch(loggedUserID , ClickedUserID))
+            }
+            
+        }
+       
     }
 
     const outOfFrame = (name, idx, id) => {
-        console.log(name, idx, id)
         currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
+
     }
 
-    const swipe = async (dir) => {
-        console.log(dir)
+    const swipe = async (dir  ) => {
+        
         if (canSwipe && currentIndex < db.length) {
             await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
         }
+
     }
 
     // increase current index and show card
@@ -71,7 +101,12 @@ function Advanced(props) {
         const newIndex = currentIndex + 1
         updateCurrentIndex(newIndex)
         await childRefs[newIndex].current.restoreCard()
+     
+            // eslint-disable-next-line no-unused-expressions
+            dispatch(ActionCreators.undo())
+
     }
+    
 
     const saveUserInStore = (user) => {
         dispatch(setUser(user));
@@ -138,7 +173,7 @@ function Advanced(props) {
                             <IconButton className={styles.swipeButt_star}>
                                 <StarIcon></StarIcon>
                             </IconButton>
-                            <IconButton onClick={() => swipe('right')} className={styles.swipeButt_fav}>
+                            <IconButton onClick={() => swipe('right' )} className={styles.swipeButt_fav}>
                                 <FavoriteIcon></FavoriteIcon>
                             </IconButton>
                             <IconButton className={styles.swipeButt_bolt}>

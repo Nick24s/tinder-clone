@@ -49,7 +49,7 @@ export const getUserDataByID = (loggedUserID, users) => {
   let loggedUserData = {};
 
   users.forEach((user) => {
-    if (user.ID === loggedUserID) {
+    if (user.ID == loggedUserID) {
       loggedUserData = user;
     }
   })
@@ -71,6 +71,15 @@ export const AddToLikedData = (loggedUserID, likedUserID, newUsersData) => {
   return newUsersData.map(user => (
     user.ID === loggedUserID
       ? { ...user, liked: [...user.liked, likedUserID] }
+      :  user)
+  )
+}
+
+export const AddToDislikedData = (loggedUserID, dislikedUserID, newUsersData) => {
+
+  return newUsersData.map(user => (
+    user.ID === loggedUserID
+      ? { ...user, disliked: [...user.disliked, dislikedUserID] }
       :  user)
   )
 }

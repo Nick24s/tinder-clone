@@ -15,8 +15,8 @@ import ImageUploader from './ImageUploader.js';
 export default function SettingsCard() {
 
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.usersData.loggedUser);
-  const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
+  const userId = useSelector(state => state.usersData.present.loggedUser);
+  const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const numberOfImageContainers = 9;
   const [aboutYou, setAboutYou] = useState(user.description);
   // const [passions, setPassions] = useState(user.passions);

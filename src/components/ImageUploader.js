@@ -25,8 +25,8 @@ export default function ImageUploader(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const userId = useSelector(state => state.usersData.loggedUser);
-  const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
+  const userId = useSelector(state => state.usersData.present.loggedUser);
+  const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);

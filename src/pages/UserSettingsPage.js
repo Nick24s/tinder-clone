@@ -10,7 +10,7 @@ import UserSettings from '../components/UserSettings';
 
 function UserSettingsPage() {
 
-  const userId = useSelector(state => state.usersData.loggedUser);
+  const userId = useSelector(state => state.usersData.present.loggedUser);
 
   if (userId) {
     return (

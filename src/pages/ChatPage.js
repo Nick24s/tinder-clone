@@ -10,8 +10,8 @@ import { getUserDataByID } from '../utils';
 import { removeMatchAction } from '../redux/actions/usersActions';
 export default function ChatPage() {
     const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
-    const allUsers = useSelector(state => state.usersData.usersData);
-    const loggedUserID = useSelector(state => state.usersData.loggedUser)
+    const allUsers = useSelector(state => state.usersData.present.usersData);
+    const loggedUserID = useSelector(state => state.usersData.present.loggedUser)
     let clickedUserData = getUserDataByID(chosenChatID, allUsers);
 
 

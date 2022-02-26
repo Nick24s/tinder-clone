@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 
 export default function SettingsCardinChat() {
     const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
-    const allUsers = useSelector(state => state.usersData.usersData);   
+    const allUsers = useSelector(state => state.usersData.present.usersData);   
     let clickedUserData = getUserDataByID(chosenChatID , allUsers);
     
     return (

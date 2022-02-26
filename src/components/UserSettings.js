@@ -13,8 +13,8 @@ import { useEffect } from 'react';
 export default function UserSettings () {
 
 
-    const userId = useSelector(state => state.usersData.loggedUser);
-    const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
+    const userId = useSelector(state => state.usersData.present.loggedUser);
+    const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
 
     const dispatch = useDispatch();
 

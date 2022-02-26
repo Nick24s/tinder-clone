@@ -1,13 +1,14 @@
-import { AddToLikedData, AddToMatchData, RemoveFromUserData } from "../../utils";
+import { AddToDislikedData, AddToLikedData, AddToMatchData, RemoveFromUserData } from "../../utils";
+import undoable from 'redux-undo'
 
 const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
    usersData: [],
-   firstLoadedData : false
+   firstLoadedData: false
 };
 
-export const userReducer = (state = INITIAL_STATE, action) => {
+ const userReducers = (state = INITIAL_STATE, action) => {
    switch (action.type) {
       case 'LOGIN':
          return {
@@ -33,7 +34,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          return {
             ...state,
             usersData: state.usersData.map(
-               (user) => user.ID === action.id ? { ...user, photos: action.payload}
+               (user) => user.ID === action.id ? { ...user, photos: action.payload }
                   : user
             )
          }
@@ -95,30 +96,39 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             )
          }
 
-         case 'FIRST_LOADED_DATA':
-            return {
-               ...state, firstLoadedData : true
-            };
+      case 'FIRST_LOADED_DATA':
+         return {
+            ...state, firstLoadedData: true
+         };
 
-         
-         
-         case 'REMOVE_MATCH':
 
-            const newUsersDatas = [...state.usersData];
+
+      case 'REMOVE_MATCH':
+
+         const newUsersDatas = [...state.usersData];
+         return {
+            ...state,
+            usersData: [...RemoveFromUserData(action.loggedUserId, action.matchedUserId, newUsersDatas)]
+         }
+
+      case 'ADD_LIKE':
+         const newUsersData2 = [...state.usersData];
+         return {
+            ...state,
+            usersData: [...AddToLikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUsersData2)]
+         }
+
+         case 'ADD_DISLIKE':
+            const newUserSData= [...state.usersData];
             return {
                ...state,
-               usersData: [...RemoveFromUserData(action.loggedUserId, action.matchedUserId, newUsersDatas)]
+               usersData: [...AddToDislikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUserSData)]
             }
 
-            case 'ADD_LIKE':
-               // const {loggedUserId, matchedUserId } = action.payload;
+      default: return state;
+   }
 
-              const  newUsersData2 = [...state.usersData];
-               return {
-                  ...state,
-                  usersData: [...AddToLikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUsersData2)]
-               }
-   
-               default: return state;
-            }
 };
+
+const userReducer = undoable(userReducers);
+export default userReducer;

@@ -1,7 +1,7 @@
 
 import { createStore } from 'redux';
 import { combineReducers } from 'redux';
-import {userReducer } from './reducers/userReducer';
+import userReducer  from './reducers/userReducer';
 import {mainPageReducer} from './reducers/mainPageReducer';
 import {cardPageReducer } from './reducers/cardPageReducer';
 
