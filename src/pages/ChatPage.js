@@ -36,12 +36,12 @@ export default function ChatPage() {
         dispatch(removeMatchAction(loggedUserID , chosenChatID))
         dispatch(setView(swipeViewName))
     }
-
+    
     return (
         <div className={styles.firstParent}>
             <div className={styles.ChatHolder}>
                 <div className={styles.upperDiv}>
-                    <ImageAvatars className={styles.ChatScreen_image} src={clickedUserData.photos[0]}></ImageAvatars>
+                    <ImageAvatars id={clickedUserData.message} className={styles.ChatScreen_image} src={clickedUserData.photos[0]}></ImageAvatars>
                     <p className={styles.chatScreen_time}>You matched with {clickedUserData.username} on 10/25/2019</p>
                     <div className={styles.closeIcon} onClick={closeChat}>
                         <CancelOutlinedIcon></CancelOutlinedIcon>

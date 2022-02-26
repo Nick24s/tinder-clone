@@ -4,7 +4,7 @@ const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
    usersData: [],
-   loadData : false
+   firstLoadedData : false
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -95,6 +95,13 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             )
          }
 
+         case 'FIRST_LOADED_DATA':
+            return {
+               ...state, firstLoadedData : true
+            };
+
+         
+         
          case 'REMOVE_MATCH':
 
             const newUsersDatas = [...state.usersData];
@@ -112,6 +119,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                   usersData: [...AddToLikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUsersData2)]
                }
    
-      default: return state;
-   }
+               default: return state;
+            }
 };

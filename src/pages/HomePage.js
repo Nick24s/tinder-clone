@@ -4,8 +4,8 @@ import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
 import BasicTabs from '../components/LogAndReg/LogAndRegController';
 import styles from './HomePage.module.css'
-import { useDispatch } from 'react-redux';
-import {loadInitialData} from '../redux/actions/usersActions';
+import { useDispatch, useSelector } from 'react-redux';
+import {firstLoadedData, loadInitialData} from '../redux/actions/usersActions';
 
 export default function HomePage() {
 
@@ -15,9 +15,17 @@ export default function HomePage() {
   
   let usersData = require('../server/users.json')
 
-    useEffect(() => {
-      dispatch(loadInitialData(usersData))
-    }, [])
+  const firstLoadedDataState = useSelector(state => state.usersData.firstLoadedData)
+  if(!firstLoadedDataState){
+    dispatch(loadInitialData(usersData))
+    dispatch(firstLoadedData())
+
+  }
+
+    // useEffect(() => {
+    //   dispatch(loadInitialData(usersData))
+    //   dispatch(firstLoadedData())
+    // }, [])
   
 
   return (

@@ -96,3 +96,9 @@ export function addLikedAction(loggedUserID , matchedUserID){
         payload : {loggedUserID , matchedUserID}
     }
 }
+
+export function firstLoadedData(){
+    return {
+        type : 'FIRST_LOADED_DATA'
+    }
+}
