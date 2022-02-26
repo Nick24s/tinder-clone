@@ -45,8 +45,8 @@ export default function SettingsCard() {
   }
 
   const appendImg = (img) => {
-    const hahaha = user.photos 
-    setUserImages([...hahaha, img])
+    const photos = user.photos 
+    setUserImages([...photos, img])
   }
 
   const handleAboutYouChange = (e) => {

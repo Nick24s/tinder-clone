@@ -4,7 +4,7 @@ const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
    usersData: [],
-   loadData: false
+   firstLoadedData : false
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -95,7 +95,12 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             )
          }
 
-      case 'REMOVE_MATCH':
+         case 'FIRST_LOADED_DATA':
+            return {
+               ...state, firstLoadedData : true
+            };
+
+         case 'REMOVE_MATCH':
 
          const newUsersDatas = [...state.usersData];
          return {
@@ -127,7 +132,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                (user) => user.ID === action.id ? { ...user, passions: Array(0) }
                   : user)
          }
-
-      default: return state;
-   }
+   
+         default: return state;
+            }
 };

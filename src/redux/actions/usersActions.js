@@ -111,3 +111,8 @@ export function deletePassions(userId){
         id : userId
     }
 }
+export function firstLoadedData(){
+    return {
+        type : 'FIRST_LOADED_DATA'
+    }
+}
