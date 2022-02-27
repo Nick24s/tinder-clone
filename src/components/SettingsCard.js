@@ -162,8 +162,6 @@ export default function SettingsCard() {
           <option value="Man">Man</option>
           <option value="Women">Women</option>
         </select>
-        {/* <p className={styles.aboutP}>SEXUAL ORIENTATION</p>
-    <ListDividers primary='Straight' secondary={<ArrowForwardIosRoundedIcon></ArrowForwardIosRoundedIcon>}></ListDividers> */}
         <button className={styles.button2Style} onClick={() => isReadyOnly(!ReadOnlyOrEdit)}> Save</button>
 
       </div>

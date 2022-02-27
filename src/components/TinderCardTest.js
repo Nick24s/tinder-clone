@@ -20,11 +20,11 @@ import { getUserDataByID } from '../utils';
 import { addDislikedAction, addLikedAction, addMatchAction } from '../redux/actions/usersActions';
 import { ActionCreators } from 'redux-undo';
 import { connect } from 'react-redux';
+import MatchScreen from './MatchScreen';
 
 
 
 function Advanced(props) {
-
     const dispatch = useDispatch();
     const loggedUserID = useSelector(state => state.usersData.present.loggedUser);
     const userId = useSelector(state => state.usersData.present.loggedUser);
@@ -39,7 +39,8 @@ function Advanced(props) {
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex)
     const [cardInfoFlag, setCardInfo] = useState(true);
-
+    const [showMatchScreen , setMatchScreen] = useState(false);
+    const [ClickedUser , setClickedUser] = useState();
    
 
     const childRefs = useMemo(
@@ -61,6 +62,7 @@ function Advanced(props) {
 
     // set last direction and decrease current index
     const swiped = (direction, nameToDelete, index , ClickedUserID) => {
+       
         setLastDirection(direction)
         updateCurrentIndex(index - 1)
         let ClickedUserData = getUserDataByID(ClickedUserID, allUsers);
@@ -71,7 +73,11 @@ function Advanced(props) {
         liked.forEach(likeID => {
             if(likeID === loggedUserID){
                 actionToDispatch =  addMatchAction;
-                console.log('MATCH!'); // TODO MATCH MESSAGE SCREEN
+                console.log('MATCH!'); 
+                setClickedUser(ClickedUserID);
+                setMatchScreen(true);
+                // TODO MATCH MESSAGE SCREEN
+                
             }
         })
         dispatch(actionToDispatch(loggedUserID , ClickedUserID))
@@ -113,18 +119,20 @@ function Advanced(props) {
 
     }
     
-
     const saveUserInStore = (user) => {
         dispatch(setUser(user));
         setCardInfo(false);
     }
 
+    
 
     return (
+    <>
+    {showMatchScreen ? <div> <MatchScreen loggedUserID={loggedUserID} ClickedUser={ClickedUser}  showMatchScreen={showMatchScreen}  setMatchScreen={setMatchScreen}/> </div>  : null }
         <div className={styles.TinderCards}>
-            
+                
             <div className='cardContainer'>
-
+                   
                 {matches.map((character, index) => (
                     cardInfoFlag ? (<><TinderCard
                         ref={childRefs[index]}
@@ -193,6 +201,7 @@ function Advanced(props) {
                 ))}
             </div>
         </div>
+        </>
     )
 }
 

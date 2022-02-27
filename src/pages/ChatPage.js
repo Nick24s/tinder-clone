@@ -2,12 +2,15 @@ import ImageAvatars from '../components/ChatAvatar'
 import styles from '../styles/ChatPage.module.css'
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import SettingsCardinChat from '../components/SettingCardinChat';
-import { useState } from 'react';
+import { useState ,  Fragment , useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import setView from '../redux/actions/mainPageActions';
 import { swipeViewName } from '../GlobalConst';
 import { getUserDataByID } from '../utils';
 import { removeMatchAction } from '../redux/actions/usersActions';
+import { db , storage} from '../firebase' 
+import {addDoc} from '@firebase/firestore';
+
 export default function ChatPage() {
     const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
     const allUsers = useSelector(state => state.usersData.present.usersData);
@@ -36,6 +39,10 @@ export default function ChatPage() {
         dispatch(removeMatchAction(loggedUserID , chosenChatID))
         dispatch(setView(swipeViewName))
     }
+
+
+
+
     
     return (
         <div className={styles.firstParent}>

@@ -24,7 +24,7 @@ export default function AfterLoginPage() {
                     </div>
                 </div>
                 {
-                    show ? <div><SettingsCard /></div> : <><BodyWrapper className='main' /></>
+                    show ? <div><SettingsCard /></div> : <><BodyWrapper className='main' /> </>
                 }
 
                 <div>
