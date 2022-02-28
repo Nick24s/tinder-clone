@@ -48,7 +48,7 @@ export default function MoreInfoCard(props) {
                     <div key={user.age + user.username} className={styles.PassionsBox}>
                         <h3>Passions</h3>
                         <div className={styles.PassionsContainer}>
-                            {user.passions.map(passion => <Chip label={`${passion}`} variant="outlined" />)}
+                            {user.passions.map(passion => <Chip key={passion} label={`${passion}`} variant="outlined" />)}
                         </div>
                     </div>) : (<></>)}
                 <div onClick={props.onclick} className='BackBtn'>

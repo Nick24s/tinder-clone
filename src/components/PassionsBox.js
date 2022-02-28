@@ -61,9 +61,9 @@ export default function Passions(props) {
       >
         <Box sx={style}>
           <div className={styles.Passions}>
-            {allPassions.map((passion, index) => (<>
+            {allPassions.map((passion) => (<div key={passion}>
               <Chip sx={{ backgroundColor: pink[400], fontWeight: "600", fontSize: "15px" }} label={passion} onClick={() => handlePassionAdd(passion)}></Chip>
-            </>))}
+            </div>))}
 
           </div>
             <Button sx={{ margin: "0px 0px 0px 55px"}} onClick={submitPassions} variant="contained" color="secondary" endIcon={<SendIcon />}>
@@ -72,7 +72,7 @@ export default function Passions(props) {
             <Button sx={{ margin: "0px 0px 0px 55px"}} onClick={clearPassions} variant="outlined" color="secondary" endIcon={<DeleteIcon />}>
             Clear
             </Button>
-          <p>Your passion are: {pass.map((pass, i) => (i == 0) ? (pass) : (", " + pass))}</p>
+          <p>Your passion are: {pass.join(", ")}</p>
         </Box>
       </Modal>
     </div>

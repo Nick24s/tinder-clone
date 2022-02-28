@@ -14,7 +14,8 @@ export default function EditInfoPictures(props) {
     const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
     
     const onDeleteImg = () => {
-        if (props.index < user.photos.length){
+        console.log(user.photos.length);
+        if (props.index < user.photos.length && user.photos.length > 1){
             const newImgArr = user.photos.filter(img => img != imgUrl)
             dispatch(removeImage(newImgArr, userId))
         }

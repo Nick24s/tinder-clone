@@ -29,7 +29,7 @@ export default function BodyWrapper() {
 
     const renderSwipeView = () => {
         return <>
-            <Advanced></Advanced>
+            <Advanced key={"1dsds"}></Advanced>
         </>
     }
 

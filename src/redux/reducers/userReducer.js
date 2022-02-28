@@ -24,7 +24,7 @@ const userReducers = (state = INITIAL_STATE, action) => {
       case 'REGISTER':
          return {
             ...state,
-            usersData: [...state.usersData, action.payload]
+            usersData: [...state.usersData, action.payload.new]
          };
       case 'LOAD_INITIAL_DATA':
          return {
@@ -67,6 +67,14 @@ const userReducers = (state = INITIAL_STATE, action) => {
             ...state,
             usersData: state.usersData.map(
                (user) => user.ID === action.id ? { ...user, lookingFor: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_AGE':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, age: action.payload }
                   : user
             )
          }
@@ -138,15 +146,15 @@ const userReducers = (state = INITIAL_STATE, action) => {
             usersData: [...AddToDislikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUserSData)]
          }
 
-         case 'UPDATE_PASSION':
-            return {
-               ...state,
-               usersData: state.usersData.map(
-                  (user) => user.ID === action.id ? { ...user, passions: action.payload }
-                     : user)
-            }
+      case 'UPDATE_PASSION':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, passions: action.payload }
+                  : user)
+         }
 
-            
+
       case 'DELETE_PASSION':
          return {
             ...state,
@@ -163,8 +171,8 @@ const userReducers = (state = INITIAL_STATE, action) => {
 const userReducer = undoable(userReducers);
 export default userReducer;
 
-    
 
-   
 
-   
+
+
+

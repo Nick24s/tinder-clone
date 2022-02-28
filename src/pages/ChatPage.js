@@ -113,7 +113,7 @@ export default function ChatPage() {
         <div className={styles.firstParent}>
             <div className={styles.ChatHolder}>
                 <div className={styles.upperDiv}>
-                    <ImageAvatars id={clickedUserData.message} className={styles.ChatScreen_image} src={clickedUserData.photos[0]}></ImageAvatars>
+                    <ImageAvatars key={loggedUser + clickedUserData.ID} id={clickedUserData.message} className={styles.ChatScreen_image} src={clickedUserData.photos[0]}></ImageAvatars>
                     <p className={styles.chatScreen_time}>You matched with {clickedUserData.username} on 10/25/2019</p>
                     <div className={styles.closeIcon} onClick={closeChat}>
                         <CancelOutlinedIcon></CancelOutlinedIcon>
@@ -159,7 +159,7 @@ export default function ChatPage() {
             <div className={styles.side}>
                 <SettingsCardinChat ></SettingsCardinChat>
                 <div className={styles.buttonsWrapper}>
-                    <button className={styles.buttons} id={chosenChatID} onClick={HandleUnmatch}>UNMATCH</button>
+                    <button key={loggedUser + clickedUserData.ID} className={styles.buttons} id={chosenChatID} onClick={HandleUnmatch}>UNMATCH</button>
                     <button className={styles.buttons}>REPORT</button>
                 </div>
             </div>

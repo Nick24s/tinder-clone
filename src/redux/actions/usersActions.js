@@ -12,10 +12,11 @@ export function loginAction(id) {
     }
 }
 
-export function registerAction(ID, email , pass , firstName , lastName ) {
+export function registerAction(ID, email , pass , name, photos, username, gender, lookingFor, age, matches, liked, disliked, passions) {
     return {
         type : 'REGISTER',
-        payload: {ID, email , pass , firstName , lastName}
+        payload: {
+            new : {ID, email , pass , name,  photos, username, gender, lookingFor, age, matches, liked, disliked, passions}}
     }
 }
 
@@ -54,6 +55,14 @@ export function ChangeDescription(text, id) {
 export function ChangeLookingFor(text, id) {
     return {
         type : 'UPDATE_LOOKING_FOR',
+        payload: text,
+        id : id,
+    }
+}
+
+export function changeAge(text, id) {
+    return {
+        type : 'UPDATE_AGE',
         payload: text,
         id : id,
     }

@@ -185,14 +185,18 @@ function Advanced(props) {
         setCardInfo(true)
     }
 
+    // const changeMatchScreenFlag = () => {
+    //     setCardInfo(false)
+    // }
+
 
     return (
         <>
-            {showMatchScreen ? <div> <MatchScreen loggedUserID={loggedUserID} ClickedUser={ClickedUser} showMatchScreen={showMatchScreen} setMatchScreen={setMatchScreen} /> </div> : null}
-            <div className={styles.TinderCards}>
-                <div className='cardContainer'>
+        {showMatchScreen ? <div> <MatchScreen loggedUserID={loggedUserID} ClickedUser={ClickedUser}  showMatchScreen={showMatchScreen}  setMatchScreen={setMatchScreen}/> </div>  : null }
+            <div  className={styles.TinderCards}>
+                <div key={loggedUserID} className='cardContainer'> 
                     {matches.map((character, index) => (
-                        cardInfoFlag ? (<><TinderCard
+                        cardInfoFlag ? (<div key={character}><TinderCard
                             ref={childRefs[index]}
                             className='swipe'
                             key={character.name}
@@ -211,7 +215,7 @@ function Advanced(props) {
                                         <p>Recenly Active</p>
                                     </div>
                                     {character.jobTitle ? (<div className={styles.secondLine}>
-                                        <WorkIcon sx={{ color: "white" }} />
+                                        <WorkIcon sx={{color: "white"}}/>
                                         <p className={styles.secondlineP}>{character.jobTitle}</p>
                                     </div>) : (<></>)}
                                     <div className="PassionsBox">
@@ -240,22 +244,22 @@ function Advanced(props) {
                                 <IconButton className={styles.swipeButt_star}>
                                     <StarIcon></StarIcon>
                                 </IconButton>
-                                <IconButton onClick={() => swipe('right')} className={styles.swipeButt_fav}>
+                                <IconButton onClick={() => swipe('right' )} className={styles.swipeButt_fav}>
                                     <FavoriteIcon></FavoriteIcon>
                                 </IconButton>
                                 <IconButton className={styles.swipeButt_bolt}>
                                     <BoltIcon></BoltIcon>
                                 </IconButton>
-                            </div></>
-                        ) : (<>
-                            <MoreInfoCard onclick={() => changeCardInfoFlag()} />
-                        </>
+                            </div></div>
+                        ) : (<div key={character}>
+                            <MoreInfoCard onclick={()=>changeCardInfoFlag()}/>
+                        </div>
                         )
                     ))}
                 </div>
             </div>
-        </>
-    )
-}
-
-export default Advanced
+            </>
+        )
+    }
+    
+    export default Advanced
