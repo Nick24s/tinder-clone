@@ -44,7 +44,7 @@ export default function SettingsCardinChat() {
                     <div className={styles.PassionsBox}>
                         <h3>Passions</h3>
                         <div className={styles.PassionsContainer}>
-                            {clickedUserData.passions.map(passion => <Chip label={`${passion}`} variant="outlined" />)}
+                            {clickedUserData.passions.map(passion => <Chip key={passion} label={`${passion}`} variant="outlined" />)}
                         </div>
                     </div>) : (<></>)}
             </div>

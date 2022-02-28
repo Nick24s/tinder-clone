@@ -3,6 +3,7 @@ import img from '../img/ItsAMatchTinderText.png';
 import Avatar from '@mui/material/Avatar';
 import { useSelector } from 'react-redux';
 import { getUserDataByID } from '../utils';
+import { Link } from 'react-router-dom';
 export default function MatchScreen(props) {
 
     console.log(props);

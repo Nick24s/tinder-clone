@@ -25,7 +25,8 @@ export default function SignUp() {
   const register = (email, pass, firstName, lastName) => {
     let UUID = CreateUUID();
     
-    dispatch(registerAction(UUID, email, pass, firstName, lastName))
+    dispatch(registerAction(UUID, email, pass, firstName, ["https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"],
+     `${firstName + lastName}`, "", "", "", [], [], [], []))
     alert('registration success , now you can log in')
   }
 

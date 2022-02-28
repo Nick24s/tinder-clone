@@ -116,7 +116,7 @@ export default function SettingsCard() {
   const renderReadOnlyMode = () => {
     return (
       <>
-        <ImageSlider images={user.photos}></ImageSlider>
+        <ImageSlider key={user.id} images={user.photos}></ImageSlider>
         <div className={styles.inside}>
           <div className={styles.info}>
             <p className={styles.p}>{user.username}</p>
@@ -143,7 +143,7 @@ export default function SettingsCard() {
           <div className={styles.PassionsBox}>
             <h3>Passions</h3>
             <div className={styles.PassionsContainer}>
-              {user.passions.map(passion => <Chip label={`${passion}`} variant="outlined"/>)}
+              {user.passions.map(passion => <Chip key={passion + user.ID} label={`${passion}`} variant="outlined"/>)}
             </div>
           </div>) : (<></>)}
         </div>

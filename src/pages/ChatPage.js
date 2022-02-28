@@ -9,7 +9,7 @@ import { swipeViewName } from '../GlobalConst';
 import { getUserDataByID } from '../utils';
 import { removeMatchAction } from '../redux/actions/usersActions';
 import { db , storage} from '../firebase' 
-import {addDoc} from '@firebase/firestore';
+import {addDoc, getDoc, doc, Timestamp, setDoc, collection} from '@firebase/firestore';
 
 export default function ChatPage() {
     const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
@@ -30,7 +30,7 @@ export default function ChatPage() {
     // const [userGroups, setUserGroups] = useState([]);
     // const [messages, setMessages] = useState("");
     // const [currentMsgUserID, setCurrentMsgUserID] = useState("");
-    // const [groupID, setGroupID] = useState("");
+    const [groupID, setGroupID] = useState("");
     const [input, setInput] = useState('');
 
 
@@ -53,24 +53,57 @@ export default function ChatPage() {
         dispatch(removeMatchAction(loggedUserID , chosenChatID))
         dispatch(setView(swipeViewName))
     }
+
+    async function handleChosenUser (receiverID){
+        
+        const groupRef = doc(db, "groups", `${receiverID}${loggedUserID}`);
+        const docSnap = await getDoc(groupRef);
+        let grID = "";
+    
+        let data = docSnap.data();
+        grID = `${receiverID}${loggedUserID}`;
+        setGroupID(grID);
+        
+        if (!data) {
+            setDoc(doc(db, "groups", `${loggedUser.id}${receiverID}`), {
+                createdAt : Timestamp.fromDate(new Date()),
+                groupID : loggedUserID + receiverID,
+                createdBy : loggedUserID,
+                createdByUsername : loggedUser.username,
+                members : [loggedUserID, receiverID],
+                loggedUserImg : loggedUser.photos[0],
+                receiverImg : clickedUserData.photos[0],
+                name : clickedUserData.username,
+                recentMessage : "",
+                type : 1
+                
+            })
+            setGroupID(`${loggedUserID}${receiverID}`);
+            grID = `${loggedUserID}${receiverID}`;
+        }
+
+        const messagesRef = collection(db, "message", grID, "messages");
+        // getAllChats();
+        // liveUpdate(messagesRef);
+    }
     
     return (
         <div className={styles.firstParent}>
             <div className={styles.ChatHolder}>
                 <div className={styles.upperDiv}>
-                    <ImageAvatars id={clickedUserData.message} className={styles.ChatScreen_image} src={clickedUserData.photos[0]}></ImageAvatars>
+                    <ImageAvatars key={loggedUser + clickedUserData.ID} id={clickedUserData.message} className={styles.ChatScreen_image} src={clickedUserData.photos[0]}></ImageAvatars>
                     <p className={styles.chatScreen_time}>You matched with {clickedUserData.username} on 10/25/2019</p>
                     <div className={styles.closeIcon} onClick={closeChat}>
                         <CancelOutlinedIcon></CancelOutlinedIcon>
                     </div>
                 </div>
-                <div className={styles.actualChat}>
-
-                    <div >
+                <div key={loggedUser + clickedUserData.ID} className={styles.actualChat}>
+                    <div key={loggedUser + clickedUserData.ID}>
                         {(clickedUserData.messages).map(message => (
 
-                            <div key={clickedUserData.message} className={styles.ChatScreen_message}>
+                            <div key={message} className={styles.ChatScreen_message}>
                                 <ImageAvatars
+                                    key={loggedUser + clickedUserData.ID + message}
                                     className={styles.ChatScreen_image}
                                     alt={clickedUserData.name}
                                     src={clickedUserData.photos[0]}
@@ -100,7 +133,7 @@ export default function ChatPage() {
             <div className={styles.side}>
                 <SettingsCardinChat ></SettingsCardinChat>
                 <div className={styles.buttonsWrapper}>
-                    <button className={styles.buttons} id={chosenChatID} onClick={HandleUnmatch}>UNMATCH</button>
+                    <button key={loggedUser + clickedUserData.ID} className={styles.buttons} id={chosenChatID} onClick={HandleUnmatch}>UNMATCH</button>
                     <button className={styles.buttons}>REPORT</button>
                 </div>
             </div>

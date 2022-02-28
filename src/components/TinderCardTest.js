@@ -76,7 +76,7 @@ function Advanced(props) {
                 actionToDispatch =  addMatchAction;
                 console.log('MATCH!'); 
                 setClickedUser(ClickedUserID);
-                // setMatchScreen(true);
+                setMatchScreen(true);
                 // TODO MATCH MESSAGE SCREEN
                 
             }
@@ -129,14 +129,18 @@ function Advanced(props) {
         setCardInfo(true)
     }
 
+    // const changeMatchScreenFlag = () => {
+    //     setCardInfo(false)
+    // }
+
 
     return (
     <>
     {showMatchScreen ? <div> <MatchScreen loggedUserID={loggedUserID} ClickedUser={ClickedUser}  showMatchScreen={showMatchScreen}  setMatchScreen={setMatchScreen}/> </div>  : null }
-        <div className={styles.TinderCards}>
-            <div className='cardContainer'> 
+        <div  className={styles.TinderCards}>
+            <div key={loggedUserID} className='cardContainer'> 
                 {matches.map((character, index) => (
-                    cardInfoFlag ? (<><TinderCard
+                    cardInfoFlag ? (<div key={character}><TinderCard
                         ref={childRefs[index]}
                         className='swipe'
                         key={character.name}
@@ -190,10 +194,10 @@ function Advanced(props) {
                             <IconButton className={styles.swipeButt_bolt}>
                                 <BoltIcon></BoltIcon>
                             </IconButton>
-                        </div></>
-                    ) : (<>
+                        </div></div>
+                    ) : (<div key={character}>
                         <MoreInfoCard onclick={()=>changeCardInfoFlag()}/>
-                    </>
+                    </div>
                     )
                 ))}
             </div>
