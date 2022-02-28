@@ -38,6 +38,14 @@ const userReducers = (state = INITIAL_STATE, action) => {
                   : user
             )
          }
+      case 'REMOVE_IMAGE':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, photos: action.payload }
+                  : user
+            )
+         }
       case 'ADD_MATCH':
          const { loggedUserID, matchedUserID } = action.payload;
          let newUsersData = [...state.usersData];
@@ -51,6 +59,14 @@ const userReducers = (state = INITIAL_STATE, action) => {
             ...state,
             usersData: state.usersData.map(
                (user) => user.ID === action.id ? { ...user, description: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_LOOKING_FOR':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, lookingFor: action.payload }
                   : user
             )
          }
@@ -100,8 +116,6 @@ const userReducers = (state = INITIAL_STATE, action) => {
          return {
             ...state, firstLoadedData: true
          };
-
-
 
       case 'REMOVE_MATCH':
          const newUsersDatas = [...state.usersData];

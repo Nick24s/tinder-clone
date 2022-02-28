@@ -56,3 +56,15 @@
     color: #B13EF0 !important;
     transform: scale(1.4);
 }
+
+.secondLine {
+    margin-left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.secondlineP{
+    margin-top: -1px;
+    margin-left: 4px;
+    color: white;
+}

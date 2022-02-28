@@ -6,6 +6,7 @@ import Divider from '@mui/material/Divider';
 
 const style = {
   width: '100%',
+  height: "auto",
 //   maxWidth: 360,
   bgcolor: 'background.paper',
 };
@@ -15,7 +16,7 @@ export default function ListDividers(props) {
 
     <List sx={style } component="nav" aria-label="mailbox folders" >
       <ListItem button>
-        <ListItemText className='listItem' primary={props.primary} /><span className='span'>{props.secondary}</span> 
+        <ListItemText primary={props.primary} /><span className='span'>{props.secondary}</span> 
       </ListItem>
       <Divider />
     </List>

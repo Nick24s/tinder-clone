@@ -6,6 +6,7 @@
     margin-top: 2px;
     /* padding-left: 26rem; */
 }
+
 .inside {
     border: 1px solid rgb(233,234,239);
 }
@@ -14,6 +15,20 @@
     flex-wrap: wrap;
     background-color: white;
     
+}
+
+.PassionsBox {
+  margin-top: -10px;
+  margin-left: 10px;
+}
+
+.PassionsContainer{
+  display: flex;
+  gap: 5px;
+  width: 370px;
+  height: auto;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
 }
 
 #gender{

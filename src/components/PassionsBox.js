@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
@@ -7,14 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import Chip from '@mui/material/Chip';
 import { addPassions, deletePassions } from '../redux/actions/usersActions';
 import { pink } from '@mui/material/colors';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
-  height: 280,
+  width: 380,
+  height: "auto",
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -29,16 +31,18 @@ export default function Passions(props) {
   const userId = useSelector(state => state.usersData.present.loggedUser);
   const dispatch = useDispatch();
   let allPassions = require('../server/passions.json')
-  const [pass, setPass] = useState([]);
+  const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
+  const [pass, setPass] = useState(user.passions);
 
   const [progress, setProgress] = useState(0);
 
   const handlePassionAdd = (number) => {
-    setPass([...pass,number]);
+    setPass([...pass, number]);
   }
 
   const submitPassions = () => {
     dispatch(addPassions(pass, userId))
+    setOpen(false)
   }
 
   const clearPassions = () => {
@@ -56,15 +60,19 @@ export default function Passions(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-            <div className={styles.Passions}>
-                {allPassions.map((passion, index) => (<>
-                    <Chip sx={{backgroundColor: pink[400]}} label={passion} onClick={() => handlePassionAdd(passion)}></Chip>
-                </>))}
-                
-            </div>
-            <button className={styles.SumbitBtn} onClick={submitPassions}>Submit Passions</button>
-            <button className={styles.ClearBtn} onClick={clearPassions}>Clear</button>
-            <p>Your passion are: [{pass.map((pass, i) => (i == 0) ? (pass): (", " + pass))}]</p>
+          <div className={styles.Passions}>
+            {allPassions.map((passion, index) => (<>
+              <Chip sx={{ backgroundColor: pink[400], fontWeight: "600", fontSize: "15px" }} label={passion} onClick={() => handlePassionAdd(passion)}></Chip>
+            </>))}
+
+          </div>
+            <Button sx={{ margin: "0px 0px 0px 55px"}} onClick={submitPassions} variant="contained" color="secondary" endIcon={<SendIcon />}>
+            Submit
+          </Button>
+            <Button sx={{ margin: "0px 0px 0px 55px"}} onClick={clearPassions} variant="outlined" color="secondary" endIcon={<DeleteIcon />}>
+            Clear
+            </Button>
+          <p>Your passion are: {pass.map((pass, i) => (i == 0) ? (pass) : (", " + pass))}</p>
         </Box>
       </Modal>
     </div>

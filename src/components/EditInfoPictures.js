@@ -1,18 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { pink } from '@mui/material/colors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeImage } from '../redux/actions/usersActions';
 
 
 
 export default function EditInfoPictures(props) {
+    const dispatch = useDispatch()
     const imgUrl = props.image ? props.image : "https://www.tate.org.uk/art/images/work/L/L01/L01682_10.jpg";
     const userId = useSelector(state => state.usersData.present.loggedUser);
     const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
+    
+    const onDeleteImg = () => {
+        if (props.index < user.photos.length){
+            const newImgArr = user.photos.filter(img => img != imgUrl)
+            dispatch(removeImage(newImgArr, userId))
+        }
 
-    const [uploadImageFlag, setUploadImageFlag] = useState(false)
-
+        
+    }
 
     return (
         <div style={{backgroundImage: 'url(' + imgUrl + ')',
@@ -24,15 +32,9 @@ export default function EditInfoPictures(props) {
                     height : '150px' , 
                     margin : '7px'
                     }} >
-                {uploadImageFlag ? (
-                    <div style={{float: "right" , marginTop : '120px'}}>
-                        <AddCircleOutlinedIcon  sx={{ color: pink[500] , fontSize: 31}}></AddCircleOutlinedIcon>
-                    </div>
-                ) : (
-                    <div style={{float: "right" , marginTop : '120px'}}>
+                    <div onClick={onDeleteImg} style={{float: "right" , marginTop : '120px'}}>
                         <CancelIcon sx={{ color: pink[500] , fontSize: 31}}></CancelIcon>
                     </div>
-                )}
         </div>
     )
 }

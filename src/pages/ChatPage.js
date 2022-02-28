@@ -2,7 +2,7 @@ import ImageAvatars from '../components/ChatAvatar'
 import styles from '../styles/ChatPage.module.css'
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import SettingsCardinChat from '../components/SettingCardinChat';
-import { useState ,  Fragment , useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import setView from '../redux/actions/mainPageActions';
 import { swipeViewName } from '../GlobalConst';
@@ -15,14 +15,28 @@ export default function ChatPage() {
     const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
     const allUsers = useSelector(state => state.usersData.present.usersData);
     const loggedUserID = useSelector(state => state.usersData.present.loggedUser)
+    const loggedUser = allUsers.filter(user => user.ID === loggedUserID)[0];
     let clickedUserData = getUserDataByID(chosenChatID, allUsers);
 
 
+    // const [clickedUser, setClickedUser] = useState(false);
+    // const [show, setShow] = useState(false);
+    // const [receiver, setReceiver] = useState("");
+    // const [receiverImage, setReceiverImage] = useState("");
+    // const [inputStr, setInputStr] = useState('');
+    // const [showPicker, setShowPicker] = useState(false);
+    // const loggedUser = useSelector(state => state.userData);
+    // const users = useSelector(state => state.users.users).filter(user => user.id !== loggedUser.id);
+    // const [userGroups, setUserGroups] = useState([]);
+    // const [messages, setMessages] = useState("");
+    // const [currentMsgUserID, setCurrentMsgUserID] = useState("");
+    // const [groupID, setGroupID] = useState("");
     const [input, setInput] = useState('');
+
+
 
     const HandleSend = (e) => {
         e.preventDefault();
-        console.log(input);
         return <p>{input}</p>
         setInput('');
     }
@@ -39,10 +53,6 @@ export default function ChatPage() {
         dispatch(removeMatchAction(loggedUserID , chosenChatID))
         dispatch(setView(swipeViewName))
     }
-
-
-
-
     
     return (
         <div className={styles.firstParent}>
