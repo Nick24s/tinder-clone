@@ -7,13 +7,14 @@ import {getStorage } from 'firebase/storage';
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDfhxFSlSTf4qROb5g-YWMB4dHIxuiJ2G0",
-  authDomain: "chat-fc72b.firebaseapp.com",
-  projectId: "chat-fc72b",
-  storageBucket: "chat-fc72b.appspot.com",
-  messagingSenderId: "1054193157421",
-  appId: "1:1054193157421:web:de84778ff6104728853fa4",
-  measurementId: "G-2JGEZW56K5"
+  apiKey: "AIzaSyDCTjjgtAhYnsi2J_yTkcE4m92fr00RtKg",
+  authDomain: "friendlychat-f4617-342614.firebaseapp.com",
+  databaseURL: "https://friendlychat-f4617-342614-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "friendlychat-f4617-342614",
+  storageBucket: "friendlychat-f4617-342614.appspot.com",
+  messagingSenderId: "174672509050",
+  appId: "1:174672509050:web:720d4b100b6d5c7e7b23c3",
+  measurementId: "G-CD1RT6MG74"
 };
 
 // Initialize Firebase

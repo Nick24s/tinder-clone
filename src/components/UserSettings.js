@@ -45,7 +45,7 @@ export default function UserSettings () {
      
       {/* add arrow here */}
       <ListDividers primary='Looking for' secondary='Women'></ListDividers>
-      <RangeSlider></RangeSlider>
+      {/* <RangeSlider></RangeSlider> */}
       <div className='switchHolder'>
         <p>Only show people in this range</p>
         <ColorSwitches></ColorSwitches>
