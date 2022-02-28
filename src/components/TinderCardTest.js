@@ -2,7 +2,7 @@ import React, { useState, useMemo, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TinderCard from 'react-tinder-card'
 import ImageSlider from './ImageSlider'
-import { green, grey } from '@mui/material/colors';
+import { green, grey, pink } from '@mui/material/colors';
 import CircleIcon from '@mui/icons-material/Circle';
 import Chip from '@mui/material/Chip';
 import InfoIcon from '@mui/icons-material/Info';
@@ -17,6 +17,8 @@ import MoreInfoCard from "./MoreInfoCard.js"
 import setUser from '../redux/actions/cardPageActions';
 import './TinderCards.css';
 import { getUserDataByID } from '../utils';
+import WorkIcon from '@mui/icons-material/Work';
+
 
 
 
@@ -28,8 +30,8 @@ function Advanced(props) {
     const allUsers = useSelector(state => state.usersData.usersData);
     const loggedUserData = getUserDataByID(userId, allUsers);
     const db = useSelector(state => state.usersData.usersData).filter(user => user.ID !== loggedUserData.ID &&
-                                                                     user.gender === loggedUserData.lookingFor &&
-                                                                     !user.matches.includes(loggedUserData.ID));
+        user.gender === loggedUserData.lookingFor &&
+        !user.matches.includes(loggedUserData.ID));
     const [matches, setMatches] = useState(db);
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
     const [lastDirection, setLastDirection] = useState()
@@ -85,10 +87,14 @@ function Advanced(props) {
         setCardInfo(false);
     }
 
+    const changeCardInfoFlag = () => {
+        setCardInfo(true)
+    }
+
 
     return (
         <div className={styles.TinderCards}>
-            
+
             <div className='cardContainer'>
 
                 {matches.map((character, index) => (
@@ -99,8 +105,8 @@ function Advanced(props) {
                         onSwipe={(dir) => swiped(dir, character.name, index, character.ID)}
                         onCardLeftScreen={() => outOfFrame(character.name, index, character.ID)}
                     >
-                        <div>
-                            <ImageSlider  images={character.photos}></ImageSlider>
+                        <div key={character.name + character.ID}>
+                            <ImageSlider images={character.photos}></ImageSlider>
                             <div className="UserInfo">
                                 <div className="Name__AgeBox">
                                     <h3 className="CardName">{character.username}</h3>
@@ -110,24 +116,19 @@ function Advanced(props) {
                                     <CircleIcon sx={{ color: green['A200'], fontSize: 10 }}></CircleIcon>
                                     <p>Recenly Active</p>
                                 </div>
+                                {character.jobTitle ? (<div className={styles.secondLine}>
+                                    <WorkIcon sx={{color: "white"}}/>
+                                    <p className={styles.secondlineP}>{character.jobTitle}</p>
+                                </div>) : (<></>)}
                                 <div className="PassionsBox">
-                                    <Chip label="Netflix" size="small" sx={{
-                                        background: "linear-gradient(90deg, rgba(250,109,104,1) 0%, rgba(253,40,121,1) 100%)",
-                                        color: grey['A100'],
-                                        opacity: '0.8',
+                                    {character.passions.map((passion, i) => (<Chip key={passion} label={passion} size="small" sx={{
+                                        backgroundColor: pink['400'],
+                                        color: grey['50'],
+                                        opacity: '0.9',
                                         height: "30px",
                                         width: "65px",
                                         fontWeight: "500"
-                                    }} />
-
-                                    <Chip label="Netflix" size="small" sx={{
-                                        backgroundColor: grey['900'],
-                                        color: grey['A100'],
-                                        opacity: '0.8',
-                                        height: "30px",
-                                        width: "65px",
-                                        fontWeight: "500"
-                                    }} />
+                                    }} />))}
                                 </div>
                                 <div onClick={() => saveUserInStore(character)} className="InfoIcon">
                                     <InfoIcon sx={{ color: "white", fontSize: "28px" }}></InfoIcon>
@@ -135,7 +136,7 @@ function Advanced(props) {
                             </div>
                         </div>
                     </TinderCard>
-                    <div className={styles.swipeButts}>
+                        <div key={character.name + character.ID} className={styles.swipeButts}>
                             <IconButton onClick={() => goBack()} className={styles.swipeButt_rep}>
                                 <ReplayIcon ></ReplayIcon>
                             </IconButton>
@@ -151,10 +152,10 @@ function Advanced(props) {
                             <IconButton className={styles.swipeButt_bolt}>
                                 <BoltIcon></BoltIcon>
                             </IconButton>
-                    </div></> 
+                        </div></>
                     ) : (<>
-                        <MoreInfoCard/>
-                        </>
+                        <MoreInfoCard onclick={()=>changeCardInfoFlag()}/>
+                    </>
                     )
                 ))}
             </div>

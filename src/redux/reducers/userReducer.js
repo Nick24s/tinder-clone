@@ -4,7 +4,7 @@ const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
    usersData: [],
-   firstLoadedData : false
+   firstLoadedData: false
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -37,6 +37,14 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                   : user
             )
          }
+      case 'REMOVE_IMAGE':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, photos: action.payload }
+                  : user
+            )
+         }
       case 'ADD_MATCH':
          const { loggedUserID, matchedUserID } = action.payload;
          let newUsersData = [...state.usersData];
@@ -50,6 +58,14 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             ...state,
             usersData: state.usersData.map(
                (user) => user.ID === action.id ? { ...user, description: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_LOOKING_FOR':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, lookingFor: action.payload }
                   : user
             )
          }
@@ -95,12 +111,12 @@ export const userReducer = (state = INITIAL_STATE, action) => {
             )
          }
 
-         case 'FIRST_LOADED_DATA':
-            return {
-               ...state, firstLoadedData : true
-            };
+      case 'FIRST_LOADED_DATA':
+         return {
+            ...state, firstLoadedData: true
+         };
 
-         case 'REMOVE_MATCH':
+      case 'REMOVE_MATCH':
 
          const newUsersDatas = [...state.usersData];
          return {
@@ -132,7 +148,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
                (user) => user.ID === action.id ? { ...user, passions: Array(0) }
                   : user)
          }
-   
-         default: return state;
-            }
+
+      default: return state;
+   }
 };

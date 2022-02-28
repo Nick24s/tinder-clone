@@ -35,9 +35,25 @@ export function uploadImage(url, id) {
     }
 }
 
+export function removeImage(url, id) {
+    return {
+        type : 'REMOVE_IMAGE',
+        payload: url,
+        id : id,
+    }
+}
+
 export function ChangeDescription(text, id) {
     return {
         type : 'UPDATE_DESCRIPTION',
+        payload: text,
+        id : id,
+    }
+}
+
+export function ChangeLookingFor(text, id) {
+    return {
+        type : 'UPDATE_LOOKING_FOR',
         payload: text,
         id : id,
     }

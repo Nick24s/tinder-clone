@@ -11,9 +11,27 @@ UserSettingsPage {
     margin-left: 16px;
   }
 
+  .LookingFor {
+    display: flex;
+    justify-content: space-between;
+  }
+  .LookingFor > p {
+    padding-left: 16px;
+    font-weight: 400;
+    font-family: 'Roboto';
+  }
+  .LookingFor > select {
+    border: none;
+  }
+  .LookingFor > option {
+    border: none;
+  }
+  
+
   .distanceHolder{
     display: flex;
     justify-content: space-between;
+    padding-left: 5px;
   }
   
   .switchHolder2 {

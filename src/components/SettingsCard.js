@@ -2,6 +2,10 @@ import ImageSlider from "./ImageSlider";
 import styles from '../styles/settingsCardHolder.module.css'
 import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineSharp';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
+import DescriptionIcon from '@mui/icons-material/Description';
+import BusinessIcon from '@mui/icons-material/Business';
+import WorkIcon from '@mui/icons-material/Work';
+import Chip from '@mui/material/Chip';
 import { useEffect, useState } from "react";
 // import styles from '../styles/EditInfoPage.module.css';
 import EditInfoPictures from '../components/EditInfoPictures';
@@ -13,6 +17,7 @@ import { ChangeDescription, updateLocation, UpdateSchool, UpdateJobTitle, Update
 import ImageUploader from './ImageUploader.js';
 import Passions from "./PassionsBox";
 
+
 export default function SettingsCard() {
 
   const dispatch = useDispatch();
@@ -20,7 +25,7 @@ export default function SettingsCard() {
   const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
   const numberOfImageContainers = 9;
   const [aboutYou, setAboutYou] = useState(user.description);
-  // const [passions, setPassions] = useState(user.passions);
+  const [passions, setPassions] = useState(user.passions);
   const [gender, setGender] = useState(user.gender);
   // const [orientation, setOrientation] = useState(user.sexualOrientation);
   const [livingIn, setLivingIn] = useState(user.location);
@@ -118,10 +123,29 @@ export default function SettingsCard() {
             <p className={styles.p2}>{user.age}</p>
             <div style={{ marginTop: "22px", marginLeft: '2px' }}><CheckCircleOutlineSharpIcon></CheckCircleOutlineSharpIcon></div>
           </div>
+          {user.company ? (<div className={styles.secondLine}>
+            <BusinessIcon/>
+            <p className={styles.secondlineP}>{user.company}</p>
+          </div>) : (<></>)}
+          {user.jobTitle ? (<div className={styles.secondLine}>
+            <WorkIcon/>
+            <p className={styles.secondlineP}>{user.jobTitle}</p>
+          </div>) : (<></>)}
+          {user.school ? (<div className={styles.secondLine}>
+            <SchoolOutlinedIcon/>
+            <p className={styles.secondlineP}>{user.school}</p>
+          </div>) : (<></>)}
           <div className={styles.secondLine}>
-            <SchoolOutlinedIcon></SchoolOutlinedIcon>
+            <DescriptionIcon></DescriptionIcon>
             <p className={styles.secondlineP}>{user.description}</p>
           </div>
+          {user.passions.length !== 0 ? (
+          <div className={styles.PassionsBox}>
+            <h3>Passions</h3>
+            <div className={styles.PassionsContainer}>
+              {user.passions.map(passion => <Chip label={`${passion}`} variant="outlined"/>)}
+            </div>
+          </div>) : (<></>)}
         </div>
         <div className={styles.buttonHolder}>
           <button className={styles.btnGrad} onClick={() => isReadyOnly(!ReadOnlyOrEdit)}>Edit info</button>
@@ -139,16 +163,16 @@ export default function SettingsCard() {
         </div>
         <div className={styles.myPicsHolder}>
           {
-            userImages.map((container, i) => <EditInfoPictures key={i} image={container}></EditInfoPictures>)
+            userImages.map((container, i) => <EditInfoPictures key={i} index={i} image={container}></EditInfoPictures>)
           }
         </div>
-        <ImageUploader appendImg={(img) => appendImg(img)}></ImageUploader>
+        <ImageUploader key={user.id} appendImg={(img) => appendImg(img)}></ImageUploader>
         <p className={styles.aboutP}>ABOUT YOU</p>
         <textarea onBlur={handleAboutYou} onChange={handleAboutYouChange} value={aboutYou} className={styles.AboutInputBox} placeholder="Add description"></textarea>
         <p className={styles.aboutP}>PASSIONS</p>
-        <Passions/>
 
-        <ListDividers primary='Add Passions' secondary={<ArrowForwardIosRoundedIcon></ArrowForwardIosRoundedIcon>}></ListDividers>
+
+        <ListDividers primary={user.passions.map(passion => ` ${passion}`)} secondary={<Passions/>}></ListDividers>
         <p className={styles.aboutP}>JOB TITLE</p>
         <input type="text" onChange={handleJobTitleChange} onBlur={handleJobTitle} value={jobTitle} className={styles.inputBox} maxLength='40' placeholder='Add Job Title'></input>
         <p className={styles.aboutP}>COMPANY</p>
