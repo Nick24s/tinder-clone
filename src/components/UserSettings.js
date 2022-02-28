@@ -7,6 +7,8 @@ import RangeSlider from '../components/RangeSlider';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react';
 import { ChangeLookingFor } from '../redux/actions/usersActions';
+import setView from '../redux/actions/mainPageActions';
+import { swipeViewName } from '../GlobalConst';
 
 
 
@@ -21,6 +23,7 @@ export default function UserSettings() {
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' })
+    dispatch(setView(swipeViewName));
 
   }
 

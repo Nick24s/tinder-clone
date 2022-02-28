@@ -21,7 +21,10 @@ import WorkIcon from '@mui/icons-material/Work';
 import { addDislikedAction, addLikedAction, addMatchAction } from '../redux/actions/usersActions';
 import { ActionCreators } from 'redux-undo';
 import { connect } from 'react-redux';
+import { db as firebaseDB } from '../firebase'
 import MatchScreen from './MatchScreen';
+import { collection, doc, getFirestore, onSnapshot, orderBy, query, setDoc, Timestamp } from 'firebase/firestore';
+import setRoom from '../redux/actions/roomActions';
 
 
 
@@ -32,17 +35,18 @@ function Advanced(props) {
     const allUsers = useSelector(state => state.usersData.present.usersData);
     const loggedUserData = getUserDataByID(userId, allUsers);
     const db = useSelector(state => state.usersData.present.usersData).filter(user => user.ID !== loggedUserData.ID &&
-                                                                     user.gender === loggedUserData.lookingFor &&
-                                                                     !user.matches.includes(loggedUserData.ID));
+        user.gender === loggedUserData.lookingFor &&
+        !user.matches.includes(loggedUserData.ID));
     const [matches, setMatches] = useState(db);
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
     const [lastDirection, setLastDirection] = useState()
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex)
     const [cardInfoFlag, setCardInfo] = useState(true);
-    const [showMatchScreen , setMatchScreen] = useState(false);
-    const [ClickedUser , setClickedUser] = useState();
-   
+    const [showMatchScreen, setMatchScreen] = useState(false);
+    const [ClickedUser, setClickedUser] = useState();
+    const [userGroup, setUserGroup] = useState();
+    const firebaseDB = getFirestore();
 
     const childRefs = useMemo(
         () =>
@@ -59,40 +63,92 @@ function Advanced(props) {
 
     const canGoBack = currentIndex < matches.length - 1
 
-    const canSwipe = currentIndex >= 0
+    const canSwipe = currentIndex >= 0;
+
+    const getAllChats = async () => {
+        const grRef = collection(firebaseDB, "groups");
+        const queryObj = query(grRef, orderBy("createdAt"));
+        onSnapshot(queryObj, (querySnapshot) => {
+            const groupsArr = [];
+            querySnapshot.forEach((group) => {
+                groupsArr.unshift({ id: group.id, ...group.data() })
+            })
+            groupsArr.filter(group => group.id.includes(loggedUserID) && group.id.includes(ClickedUser))
+            // return groupsArr
+            console.log(groupsArr);
+            setUserGroup(groupsArr[0].id);
+        })
+    }
+
 
     // set last direction and decrease current index
-    const swiped = (direction, nameToDelete, index , ClickedUserID) => {
-       
+    const swiped = (direction, nameToDelete, index, ClickedUserID) => {
+
+
         setLastDirection(direction)
         updateCurrentIndex(index - 1)
         let ClickedUserData = getUserDataByID(ClickedUserID, allUsers);
         let actionToDispatch;
-        if(direction === "right"){
+        if (direction === "right") {
             actionToDispatch = addLikedAction;
             let { liked = [] } = ClickedUserData;
-        liked.forEach(likeID => {
-            if(likeID === loggedUserID){
-                actionToDispatch =  addMatchAction;
-                console.log('MATCH!'); 
-                setClickedUser(ClickedUserID);
-                // setMatchScreen(true);
-                // TODO MATCH MESSAGE SCREEN
-                
-            }
-        })
-        dispatch(actionToDispatch(loggedUserID , ClickedUserID))
-    
+            liked.forEach(likeID => {
+                if (likeID === loggedUserID) {
+                    actionToDispatch = addMatchAction;
+                    console.log('MATCH!');
+                    setClickedUser(ClickedUserID);
+                    // setMatchScreen(true);
+                    // TODO MATCH MESSAGE SCREEN
+
+
+                    const grRef = collection(firebaseDB, "groups");
+                    const queryObj = query(grRef, orderBy("createdAt"));
+                    let group = '';
+                    onSnapshot(queryObj, (querySnapshot) => {
+                        const groupsArr = [];
+
+                        querySnapshot.forEach((group) => {
+                            groupsArr.unshift({ id: group.id, ...group.data() })
+                        })
+                        groupsArr.filter(group => group.id.includes(loggedUserID) && group.id.includes(ClickedUser))
+                        console.log(groupsArr);
+
+
+                        group = groupsArr[0].id;
+                    })
+
+
+
+                    if (!group) {
+                        setDoc(doc(firebaseDB, "groups", `${loggedUserID}${ClickedUserID}`), {
+                            createdAt: Timestamp.fromDate(new Date()),
+                            groupID: loggedUserID + ClickedUserID,
+                            createdBy: loggedUserID,
+                            createdByUsername: loggedUserData.username,
+                            members: [loggedUserID, ClickedUserID],
+                            recentMessage: "",
+                            type: 1
+
+                        })
+                    }
+
+
+                    dispatch(setRoom([loggedUserID, ClickedUserID]))
+
+                }
+            })
+            dispatch(actionToDispatch(loggedUserID, ClickedUserID))
+
         } else {
             let loggedUserData = getUserDataByID(loggedUserID, allUsers);
             let { disliked = [] } = loggedUserData;
-            if(!disliked.includes(ClickedUserID)){
+            if (!disliked.includes(ClickedUserID)) {
                 actionToDispatch = addDislikedAction
-                dispatch(actionToDispatch(loggedUserID , ClickedUserID))
+                dispatch(actionToDispatch(loggedUserID, ClickedUserID))
             }
-            
+
         }
-       
+
     }
 
     const outOfFrame = (name, idx, id) => {
@@ -114,12 +170,12 @@ function Advanced(props) {
         const newIndex = currentIndex + 1
         updateCurrentIndex(newIndex)
         await childRefs[newIndex].current.restoreCard()
-     
-            // eslint-disable-next-line no-unused-expressions
-            dispatch(ActionCreators.undo())
+
+        // eslint-disable-next-line no-unused-expressions
+        dispatch(ActionCreators.undo())
 
     }
-    
+
     const saveUserInStore = (user) => {
         dispatch(setUser(user));
         setCardInfo(false);
@@ -131,73 +187,73 @@ function Advanced(props) {
 
 
     return (
-    <>
-    {showMatchScreen ? <div> <MatchScreen loggedUserID={loggedUserID} ClickedUser={ClickedUser}  showMatchScreen={showMatchScreen}  setMatchScreen={setMatchScreen}/> </div>  : null }
-        <div className={styles.TinderCards}>
-            <div className='cardContainer'> 
-                {matches.map((character, index) => (
-                    cardInfoFlag ? (<><TinderCard
-                        ref={childRefs[index]}
-                        className='swipe'
-                        key={character.name}
-                        onSwipe={(dir) => swiped(dir, character.name, index, character.ID)}
-                        onCardLeftScreen={() => outOfFrame(character.name, index, character.ID)}
-                    >
-                        <div key={character.name + character.ID}>
-                            <ImageSlider images={character.photos}></ImageSlider>
-                            <div className="UserInfo">
-                                <div className="Name__AgeBox">
-                                    <h3 className="CardName">{character.username}</h3>
-                                    <h3 className="AgeInfo">{character.age}</h3>
-                                </div>
-                                <div className="RecentlyActiveBox">
-                                    <CircleIcon sx={{ color: green['A200'], fontSize: 10 }}></CircleIcon>
-                                    <p>Recenly Active</p>
-                                </div>
-                                {character.jobTitle ? (<div className={styles.secondLine}>
-                                    <WorkIcon sx={{color: "white"}}/>
-                                    <p className={styles.secondlineP}>{character.jobTitle}</p>
-                                </div>) : (<></>)}
-                                <div className="PassionsBox">
-                                    {character.passions.map((passion, i) => (<Chip key={passion} label={passion} size="small" sx={{
-                                        backgroundColor: pink['400'],
-                                        color: grey['50'],
-                                        opacity: '0.9',
-                                        height: "30px",
-                                        width: "65px",
-                                        fontWeight: "500"
-                                    }} />))}
-                                </div>
-                                <div onClick={() => saveUserInStore(character)} className="InfoIcon">
-                                    <InfoIcon sx={{ color: "white", fontSize: "28px" }}></InfoIcon>
+        <>
+            {showMatchScreen ? <div> <MatchScreen loggedUserID={loggedUserID} ClickedUser={ClickedUser} showMatchScreen={showMatchScreen} setMatchScreen={setMatchScreen} /> </div> : null}
+            <div className={styles.TinderCards}>
+                <div className='cardContainer'>
+                    {matches.map((character, index) => (
+                        cardInfoFlag ? (<><TinderCard
+                            ref={childRefs[index]}
+                            className='swipe'
+                            key={character.name}
+                            onSwipe={(dir) => swiped(dir, character.name, index, character.ID)}
+                            onCardLeftScreen={() => outOfFrame(character.name, index, character.ID)}
+                        >
+                            <div key={character.name + character.ID}>
+                                <ImageSlider images={character.photos}></ImageSlider>
+                                <div className="UserInfo">
+                                    <div className="Name__AgeBox">
+                                        <h3 className="CardName">{character.username}</h3>
+                                        <h3 className="AgeInfo">{character.age}</h3>
+                                    </div>
+                                    <div className="RecentlyActiveBox">
+                                        <CircleIcon sx={{ color: green['A200'], fontSize: 10 }}></CircleIcon>
+                                        <p>Recenly Active</p>
+                                    </div>
+                                    {character.jobTitle ? (<div className={styles.secondLine}>
+                                        <WorkIcon sx={{ color: "white" }} />
+                                        <p className={styles.secondlineP}>{character.jobTitle}</p>
+                                    </div>) : (<></>)}
+                                    <div className="PassionsBox">
+                                        {character.passions.map((passion, i) => (<Chip key={passion} label={passion} size="small" sx={{
+                                            backgroundColor: pink['400'],
+                                            color: grey['50'],
+                                            opacity: '0.9',
+                                            height: "30px",
+                                            width: "65px",
+                                            fontWeight: "500"
+                                        }} />))}
+                                    </div>
+                                    <div onClick={() => saveUserInStore(character)} className="InfoIcon">
+                                        <InfoIcon sx={{ color: "white", fontSize: "28px" }}></InfoIcon>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </TinderCard>
-                        <div key={character.name + character.ID} className={styles.swipeButts}>
-                            <IconButton onClick={() => goBack()} className={styles.swipeButt_rep}>
-                                <ReplayIcon ></ReplayIcon>
-                            </IconButton>
-                            <IconButton onClick={() => swipe('left')} className={styles.swipeButt_close}>
-                                <CloseIcon ></CloseIcon>
-                            </IconButton>
-                            <IconButton className={styles.swipeButt_star}>
-                                <StarIcon></StarIcon>
-                            </IconButton>
-                            <IconButton onClick={() => swipe('right' )} className={styles.swipeButt_fav}>
-                                <FavoriteIcon></FavoriteIcon>
-                            </IconButton>
-                            <IconButton className={styles.swipeButt_bolt}>
-                                <BoltIcon></BoltIcon>
-                            </IconButton>
-                        </div></>
-                    ) : (<>
-                        <MoreInfoCard onclick={()=>changeCardInfoFlag()}/>
-                    </>
-                    )
-                ))}
+                        </TinderCard>
+                            <div key={character.name + character.ID} className={styles.swipeButts}>
+                                <IconButton onClick={() => goBack()} className={styles.swipeButt_rep}>
+                                    <ReplayIcon ></ReplayIcon>
+                                </IconButton>
+                                <IconButton onClick={() => swipe('left')} className={styles.swipeButt_close}>
+                                    <CloseIcon ></CloseIcon>
+                                </IconButton>
+                                <IconButton className={styles.swipeButt_star}>
+                                    <StarIcon></StarIcon>
+                                </IconButton>
+                                <IconButton onClick={() => swipe('right')} className={styles.swipeButt_fav}>
+                                    <FavoriteIcon></FavoriteIcon>
+                                </IconButton>
+                                <IconButton className={styles.swipeButt_bolt}>
+                                    <BoltIcon></BoltIcon>
+                                </IconButton>
+                            </div></>
+                        ) : (<>
+                            <MoreInfoCard onclick={() => changeCardInfoFlag()} />
+                        </>
+                        )
+                    ))}
+                </div>
             </div>
-        </div>
         </>
     )
 }

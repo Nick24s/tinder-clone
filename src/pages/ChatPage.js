@@ -8,52 +8,107 @@ import setView from '../redux/actions/mainPageActions';
 import { swipeViewName } from '../GlobalConst';
 import { getUserDataByID } from '../utils';
 import { removeMatchAction } from '../redux/actions/usersActions';
-import { db , storage} from '../firebase' 
-import {addDoc} from '@firebase/firestore';
-
+import { db, storage } from '../firebase'
+import { addDoc, collection, query, orderBy, onSnapshot, Timestamp, setDoc, doc, updateDoc } from '@firebase/firestore';
+import { v4 as uuidv4 } from 'uuid';
 export default function ChatPage() {
+
     const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
     const allUsers = useSelector(state => state.usersData.present.usersData);
     const loggedUserID = useSelector(state => state.usersData.present.loggedUser)
     const loggedUser = allUsers.filter(user => user.ID === loggedUserID)[0];
     let clickedUserData = getUserDataByID(chosenChatID, allUsers);
-
-
+    const dispatch = useDispatch();
     // const [clickedUser, setClickedUser] = useState(false);
     // const [show, setShow] = useState(false);
     // const [receiver, setReceiver] = useState("");
     // const [receiverImage, setReceiverImage] = useState("");
-    // const [inputStr, setInputStr] = useState('');
+    const [inputStr, setInputStr] = useState('');
     // const [showPicker, setShowPicker] = useState(false);
     // const loggedUser = useSelector(state => state.userData);
     // const users = useSelector(state => state.users.users).filter(user => user.id !== loggedUser.id);
-    // const [userGroups, setUserGroups] = useState([]);
-    // const [messages, setMessages] = useState("");
+    const [userGroups, setUserGroups] = useState([]);
+    const [messages, setMessages] = useState("");
     // const [currentMsgUserID, setCurrentMsgUserID] = useState("");
-    // const [groupID, setGroupID] = useState("");
+    const [groupID, setGroupID] = useState(loggedUserID + chosenChatID);
+    
+
     const [input, setInput] = useState('');
 
-
-
-    const HandleSend = (e) => {
-        e.preventDefault();
-        return <p>{input}</p>
-        setInput('');
-    }
-
-    const dispatch = useDispatch();
     const closeChat = () => {
         dispatch(setView(swipeViewName))
     }
-
-
     const HandleUnmatch = (e) => {
         e.preventDefault()
-       
-        dispatch(removeMatchAction(loggedUserID , chosenChatID))
+
+        dispatch(removeMatchAction(loggedUserID, chosenChatID))
         dispatch(setView(swipeViewName))
     }
+
+
+    const getAllChats = async () => {
+        const grRef = collection(db, "groups");
+        const queryObj = query(grRef, orderBy("createdAt"));
+        onSnapshot(queryObj, (querySnapshot) => {
+            const groupsArr = [];
+            querySnapshot.forEach((group) => {
+                groupsArr.unshift({ id: group.id, ...group.data() })
+            })
+            console.log(groupsArr)
+            groupsArr.map(group => {
+              if(group.id === `${chosenChatID}${loggedUserID}`){
+                setGroupID( `${chosenChatID}${loggedUserID}`);
+                  
+              }
+            })
+            setUserGroups(groupsArr);
+        })
+    }
+
+
+    useEffect(  function loadGroups() {
+        getAllChats();
+    },[])
+
     
+ 
+
+    async function handleSendMessage() {
+        setDoc(doc(db, "message", groupID, "messages", uuidv4()), {
+            messageText: inputStr,
+            sentBy: loggedUserID,
+            sentAt: Timestamp.fromDate(new Date())
+        });
+        const groupRef = doc(db, "groups", groupID);
+
+        await updateDoc(groupRef, {
+            recentMessage: inputStr
+        });
+
+        setInputStr('');
+        const messagesRef = collection(db, "message", groupID, "messages");
+        liveUpdate(messagesRef);
+
+    }
+    const liveUpdate = async (messagesRef) => {
+        const queryObj = query(messagesRef, orderBy("sentAt"));
+        onSnapshot(queryObj, (querySnapshot) => {
+            const msgArr = [];
+            querySnapshot.forEach((doc) => {
+                msgArr.push({ id: doc.id, ...doc.data() })
+            });
+            setMessages(msgArr);
+        });
+    }
+
+    const handleEnterPress = e => {
+        if (e.keyCode === 13) {
+            handleSendMessage();
+        }
+    };
+
+
+
     return (
         <div className={styles.firstParent}>
             <div className={styles.ChatHolder}>
@@ -66,23 +121,22 @@ export default function ChatPage() {
                 </div>
                 <div className={styles.actualChat}>
 
-                    <div >
-                        {(clickedUserData.messages).map(message => (
+                    <div className={styles.ChatScreen_message} >
+              
+                        {
+                            messages &&
+                            messages.map(msg => {
+                                
+                                if (msg.sentBy === loggedUserID) {
+                                    return (<div className={styles.ChatScreen_textUser} key={msg.id}>{msg.messageText}</div>)
+                                } else {
+                                    return (<div className={styles.ChatScreen_text} key={msg.id}>{msg.messageText}</div>)
+                                }
+                            }
 
-                            <div key={clickedUserData.message} className={styles.ChatScreen_message}>
-                                <ImageAvatars
-                                    className={styles.ChatScreen_image}
-                                    alt={clickedUserData.name}
-                                    src={clickedUserData.photos[0]}
-                                />
-                                <p className={styles.ChatScreen_text}>{message}</p>
-                            </div>
-
-
-                        ))}
-                           <div className={styles.ChatScreen_message}>
-                    <p className={styles.ChatScreen_textUser}>{input || 'testMessage'} </p>
-                </div>
+                            )
+                        }
+                        
                     </div>
 
 
@@ -91,8 +145,13 @@ export default function ChatPage() {
                 <div className={styles.sentMessageDiv}>
 
                     <form className={styles.chatScreen_input}>
-                        <input value={input} onChange={e => setInput(e.target.value.trim())} className={styles.chatScreen_inputField} type="text" placeholder='type a message...' />
-                        <button onClick={HandleSend} type='submit' className={styles.chatScreen_inputButton}>SEND</button>
+                        <input value={inputStr}
+                            onKeyDown={e => handleEnterPress(e)}
+                            onChange={e => setInputStr(e.target.value)}
+                            className={styles.chatScreen_inputField}
+                            type="text" placeholder='type a message...' />
+
+                        <button onClick={handleSendMessage} type="button" className={styles.chatScreen_inputButton}>SEND</button>
                     </form>
                 </div>
 
