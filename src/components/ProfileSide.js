@@ -13,8 +13,8 @@ import { pink } from '@mui/material/colors';
 export default function ProfileSide(props) {
 
 
-    const loggedUserID = useSelector(state => state.usersData.loggedUser);
-    const users = useSelector(state => state.usersData.usersData);
+    const loggedUserID = useSelector(state => state.usersData.present.loggedUser);
+    const users = useSelector(state => state.usersData.present.usersData);
 
     const dispatch = useDispatch();
     const renderSwipe = () => {

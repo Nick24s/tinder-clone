@@ -16,7 +16,7 @@ function App() {
 
  
   const navigate = useNavigate();
-  const logged = useSelector(state => state.usersData.logged)
+  const logged = useSelector(state => state.usersData.present.logged)
 
   
     useEffect(() => {

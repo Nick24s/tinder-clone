@@ -15,19 +15,14 @@ export default function HomePage() {
   
   let usersData = require('../server/users.json')
 
-  const firstLoadedDataState = useSelector(state => state.usersData.firstLoadedData)
+  const firstLoadedDataState = useSelector(state => state.usersData.present.firstLoadedData)
   if(!firstLoadedDataState){
     dispatch(loadInitialData(usersData))
     dispatch(firstLoadedData())
 
   }
 
-    // useEffect(() => {
-    //   dispatch(loadInitialData(usersData))
-    //   dispatch(firstLoadedData())
-    // }, [])
   
-
   return (
     <>
 

@@ -1,7 +1,6 @@
 import {useState} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import styles from './imageUploader.module.css'
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,8 +24,8 @@ export default function ImageUploader(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const userId = useSelector(state => state.usersData.loggedUser);
-  const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
+  const userId = useSelector(state => state.usersData.present.loggedUser);
+  const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);

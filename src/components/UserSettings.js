@@ -12,10 +12,8 @@ import { ChangeLookingFor } from '../redux/actions/usersActions';
 
 
 export default function UserSettings() {
-
-
-  const userId = useSelector(state => state.usersData.loggedUser);
-  const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
+  const userId = useSelector(state => state.usersData.present.loggedUser);
+  const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const [lookingFor, setLookingFor] = useState(user.lookingFor);
   const dispatch = useDispatch();
 

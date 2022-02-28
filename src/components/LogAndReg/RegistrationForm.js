@@ -20,11 +20,11 @@ export default function SignUp() {
  
 
   const dispatch = useDispatch();
-  const hardCodedUsers = useSelector(state => state.usersData.usersData);
+  const hardCodedUsers = useSelector(state => state.usersData.present.usersData);
 
   const register = (email, pass, firstName, lastName) => {
     let UUID = CreateUUID();
-    console.log(UUID);
+    
     dispatch(registerAction(UUID, email, pass, firstName, lastName))
     alert('registration success , now you can log in')
   }

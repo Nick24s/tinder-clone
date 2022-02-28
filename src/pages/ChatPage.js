@@ -8,12 +8,13 @@ import setView from '../redux/actions/mainPageActions';
 import { swipeViewName } from '../GlobalConst';
 import { getUserDataByID } from '../utils';
 import { removeMatchAction } from '../redux/actions/usersActions';
-
+import { db , storage} from '../firebase' 
+import {addDoc} from '@firebase/firestore';
 
 export default function ChatPage() {
-    const chosenChatID = useSelector(state => state.mainPage.chosenChatID);
-    const allUsers = useSelector(state => state.usersData.usersData);
-    const loggedUserID = useSelector(state => state.usersData.loggedUser);
+    const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
+    const allUsers = useSelector(state => state.usersData.present.usersData);
+    const loggedUserID = useSelector(state => state.usersData.present.loggedUser)
     const loggedUser = allUsers.filter(user => user.ID === loggedUserID)[0];
     let clickedUserData = getUserDataByID(chosenChatID, allUsers);
 
@@ -52,7 +53,6 @@ export default function ChatPage() {
         dispatch(removeMatchAction(loggedUserID , chosenChatID))
         dispatch(setView(swipeViewName))
     }
-
     
     return (
         <div className={styles.firstParent}>

@@ -1,4 +1,5 @@
-import { AddToLikedData, AddToMatchData, RemoveFromUserData } from "../../utils";
+import { AddToDislikedData, AddToLikedData, AddToMatchData, RemoveFromUserData } from "../../utils";
+import undoable from 'redux-undo'
 
 const INITIAL_STATE = {
    logged: false,
@@ -7,7 +8,7 @@ const INITIAL_STATE = {
    firstLoadedData: false
 };
 
-export const userReducer = (state = INITIAL_STATE, action) => {
+const userReducers = (state = INITIAL_STATE, action) => {
    switch (action.type) {
       case 'LOGIN':
          return {
@@ -117,7 +118,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          };
 
       case 'REMOVE_MATCH':
-
          const newUsersDatas = [...state.usersData];
          return {
             ...state,
@@ -125,22 +125,28 @@ export const userReducer = (state = INITIAL_STATE, action) => {
          }
 
       case 'ADD_LIKE':
-         // const {loggedUserId, matchedUserId } = action.payload;
-
          const newUsersData2 = [...state.usersData];
          return {
             ...state,
             usersData: [...AddToLikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUsersData2)]
          }
 
-      case 'UPDATE_PASSION':
+      case 'ADD_DISLIKE':
+         const newUserSData = [...state.usersData];
          return {
             ...state,
-            usersData: state.usersData.map(
-               (user) => user.ID === action.id ? { ...user, passions: action.payload }
-                  : user)
+            usersData: [...AddToDislikedData(action.payload.loggedUserID, action.payload.matchedUserID, newUserSData)]
          }
 
+         case 'UPDATE_PASSION':
+            return {
+               ...state,
+               usersData: state.usersData.map(
+                  (user) => user.ID === action.id ? { ...user, passions: action.payload }
+                     : user)
+            }
+
+            
       case 'DELETE_PASSION':
          return {
             ...state,
@@ -151,4 +157,14 @@ export const userReducer = (state = INITIAL_STATE, action) => {
 
       default: return state;
    }
+
 };
+
+const userReducer = undoable(userReducers);
+export default userReducer;
+
+    
+
+   
+
+   

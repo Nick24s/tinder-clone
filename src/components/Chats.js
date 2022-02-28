@@ -2,13 +2,12 @@
 import { useSelector } from 'react-redux';
 import { getUserDataByID } from '../utils';
 import ChatRow from './ChatRow'
-import styles from './Chats.module.css'
 
 export default function Chats() {
 
 
-    const loggedUserID = useSelector(state => state.usersData.loggedUser)
-    const allUsers = useSelector(state => state.usersData.usersData);
+    const loggedUserID = useSelector(state => state.usersData.present.loggedUser)
+    const allUsers = useSelector(state => state.usersData.present.usersData);
 
 
 

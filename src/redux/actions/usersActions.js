@@ -112,6 +112,12 @@ export function addLikedAction(loggedUserID , matchedUserID){
         payload : {loggedUserID , matchedUserID}
     }
 }
+export function addDislikedAction(loggedUserID , matchedUserID){
+    return {
+        type : 'ADD_DISLIKE',
+        payload : {loggedUserID , matchedUserID}
+    }
+}
 
 export function addPassions(passions , userId){
     return {

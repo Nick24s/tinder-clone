@@ -7,7 +7,6 @@ import Advanced from './TinderCardTest';
 export default function BodyWrapper() {
 
     const viewName = useSelector(state => state.mainPage.viewName);
-    const allUsers = useSelector(state => state.usersData.usersData);
 
   
     const choosenView = () => {

@@ -28,10 +28,10 @@ export default function Passions(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const userId = useSelector(state => state.usersData.loggedUser);
+  const userId = useSelector(state => state.usersData.present.loggedUser);
   const dispatch = useDispatch();
   let allPassions = require('../server/passions.json')
-  const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
+  const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const [pass, setPass] = useState(user.passions);
 
   const [progress, setProgress] = useState(0);

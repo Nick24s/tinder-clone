@@ -11,9 +11,9 @@ import Chip from '@mui/material/Chip';
 
 export default function SettingsCardinChat() {
     const chosenChatID = useSelector(state => state.mainPage.chosenChatID)
-    const allUsers = useSelector(state => state.usersData.usersData);
-    let clickedUserData = getUserDataByID(chosenChatID, allUsers);
-
+    const allUsers = useSelector(state => state.usersData.present.usersData);   
+    let clickedUserData = getUserDataByID(chosenChatID , allUsers);
+    
     return (
 
         <div className={styles.settingsCardHolder}>

@@ -17,9 +17,10 @@ const theme = createTheme();
 
 export default function LoginForm() {
   const dispatch = useDispatch();
-  const users = useSelector(state => state.usersData.usersData);
+  const users = useSelector(state => state.usersData.present.usersData);
   
-  // const registeredUsers = useSelector(state => state.usersData.registeredUsers);
+
+
   const login = (userId) => {
     dispatch(loginAction(userId));
   }

@@ -6,8 +6,8 @@ import { getUserDataByID } from "../utils";
 export default function Matches() {
 
 
-    const loggedUserID = useSelector(state => state.usersData.loggedUser)
-    const allUsers = useSelector(state => state.usersData.usersData);
+    const loggedUserID = useSelector(state => state.usersData.present.loggedUser)
+    const allUsers = useSelector(state => state.usersData.present.usersData);
 
 
 

@@ -10,8 +10,8 @@ import { removeImage } from '../redux/actions/usersActions';
 export default function EditInfoPictures(props) {
     const dispatch = useDispatch()
     const imgUrl = props.image ? props.image : "https://www.tate.org.uk/art/images/work/L/L01/L01682_10.jpg";
-    const userId = useSelector(state => state.usersData.loggedUser);
-    const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
+    const userId = useSelector(state => state.usersData.present.loggedUser);
+    const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
     
     const onDeleteImg = () => {
         if (props.index < user.photos.length){

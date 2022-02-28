@@ -21,8 +21,8 @@ import Passions from "./PassionsBox";
 export default function SettingsCard() {
 
   const dispatch = useDispatch();
-  const userId = useSelector(state => state.usersData.loggedUser);
-  const user = useSelector(state => (state.usersData.usersData).filter(user => user.ID === userId)[0]);
+  const userId = useSelector(state => state.usersData.present.loggedUser);
+  const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const numberOfImageContainers = 9;
   const [aboutYou, setAboutYou] = useState(user.description);
   const [passions, setPassions] = useState(user.passions);
@@ -186,8 +186,6 @@ export default function SettingsCard() {
           <option value="Man">Man</option>
           <option value="Women">Women</option>
         </select>
-        {/* <p className={styles.aboutP}>SEXUAL ORIENTATION</p>
-    <ListDividers primary='Straight' secondary={<ArrowForwardIosRoundedIcon></ArrowForwardIosRoundedIcon>}></ListDividers> */}
         <button className={styles.button2Style} onClick={() => isReadyOnly(!ReadOnlyOrEdit)}> Save</button>
 
       </div>
