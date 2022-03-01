@@ -1,5 +1,6 @@
 import SimpleImageSlider from "react-simple-image-slider";
 
+
 const ImageSlider = (props) => {
 
   function mapImages(images){
@@ -10,15 +11,15 @@ const ImageSlider = (props) => {
     }
     return pics
   }
+  
 
   return (
-    <div >
+    <div>
       <SimpleImageSlider
-      style={{ borderTopRightRadius : '50px' , border : '1px solid red' }}
+        style={{ borderTopRightRadius : '50px' , border : '1px solid red' }}
         width={380}
         height={550}
         images={mapImages(props.images)}
-        
         showBullets={false}
         showNavs={true}
         loop={false}

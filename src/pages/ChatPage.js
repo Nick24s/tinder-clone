@@ -82,14 +82,7 @@ export default function ChatPage() {
         })
     }
 
-
-    useEffect(  function loadGroups() {
-        getAllChats();
-    },[])
-
     
- 
-
     async function handleSendMessage() {
         setDoc(doc(db, "message", groupID, "messages", uuidv4()), {
             messageText: inputStr,

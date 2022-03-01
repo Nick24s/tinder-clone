@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react'
+import React, { useState, useMemo, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TinderCard from 'react-tinder-card'
 import ImageSlider from './ImageSlider'
@@ -25,6 +25,7 @@ import { db as firebaseDB } from '../firebase'
 import MatchScreen from './MatchScreen';
 import { collection, doc, getFirestore, onSnapshot, orderBy, query, setDoc, Timestamp } from 'firebase/firestore';
 import setRoom from '../redux/actions/roomActions';
+import { Message } from '@mui/icons-material';
 
 
 
@@ -35,11 +36,13 @@ function Advanced(props) {
     const allUsers = useSelector(state => state.usersData.present.usersData);
     const loggedUserData = getUserDataByID(userId, allUsers);
     const db = useSelector(state => state.usersData.present.usersData).filter(user => user.ID !== loggedUserData.ID &&
-        user.gender === loggedUserData.lookingFor &&
-        !user.matches.includes(loggedUserData.ID));
+                                                                                user.gender === loggedUserData.lookingFor &&
+                                                                                !user.matches.includes(loggedUserData.ID));
     const [matches, setMatches] = useState(db);
+    console.log(matches);
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
     const [lastDirection, setLastDirection] = useState()
+
     // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex)
     const [cardInfoFlag, setCardInfo] = useState(true);
@@ -53,13 +56,16 @@ function Advanced(props) {
             Array(matches.length)
                 .fill(0)
                 .map((i) => React.createRef()),
-        [matches]
+        []
     )
 
     const updateCurrentIndex = (val) => {
         setCurrentIndex(val)
         currentIndexRef.current = val
     }
+    // useEffect( async function loadGroups() {
+    //     getAllChats();
+    // },[])
 
     const canGoBack = currentIndex < matches.length - 1
 
@@ -96,6 +102,7 @@ function Advanced(props) {
                 if (likeID === loggedUserID) {
                     actionToDispatch = addMatchAction;
                     console.log('MATCH!');
+                    setMatches(matches.filter(user => user != ClickedUserData))
                     setClickedUser(ClickedUserID);
                     setMatchScreen(true);
                     // TODO MATCH MESSAGE SCREEN
@@ -111,9 +118,6 @@ function Advanced(props) {
                             groupsArr.unshift({ id: group.id, ...group.data() })
                         })
                         groupsArr.filter(group => group.id.includes(loggedUserID) && group.id.includes(ClickedUser))
-                        console.log(groupsArr);
-
-
                         group = groupsArr[0].id;
                     })
 
@@ -143,6 +147,7 @@ function Advanced(props) {
             let loggedUserData = getUserDataByID(loggedUserID, allUsers);
             let { disliked = [] } = loggedUserData;
             if (!disliked.includes(ClickedUserID)) {
+                setMatches(matches.filter(user => user != ClickedUserData))
                 actionToDispatch = addDislikedAction
                 dispatch(actionToDispatch(loggedUserID, ClickedUserID))
             }
@@ -170,14 +175,12 @@ function Advanced(props) {
         const newIndex = currentIndex + 1
         updateCurrentIndex(newIndex)
         await childRefs[newIndex].current.restoreCard()
-
         // eslint-disable-next-line no-unused-expressions
         dispatch(ActionCreators.undo())
 
     }
 
-    const saveUserInStore = (user) => {
-        dispatch(setUser(user));
+    const saveUserInStore = () => {
         setCardInfo(false);
     }
 
@@ -193,17 +196,16 @@ function Advanced(props) {
     return (
         <>
         {showMatchScreen ? <div> <MatchScreen loggedUserID={loggedUserID} ClickedUser={ClickedUser}  showMatchScreen={showMatchScreen}  setMatchScreen={setMatchScreen}/> </div>  : null }
-            <div  className={styles.TinderCards}>
-                <div key={loggedUserID} className='cardContainer'> 
+            {matches ? (<div  className={styles.TinderCards}>
+                <div className='cardContainer'> 
                     {matches.map((character, index) => (
                         cardInfoFlag ? (<div key={character}><TinderCard
                             ref={childRefs[index]}
                             className='swipe'
-                            key={character.name}
                             onSwipe={(dir) => swiped(dir, character.name, index, character.ID)}
                             onCardLeftScreen={() => outOfFrame(character.name, index, character.ID)}
                         >
-                            <div key={character.name + character.ID}>
+                            <div>
                                 <ImageSlider images={character.photos}></ImageSlider>
                                 <div className="UserInfo">
                                     <div className="Name__AgeBox">
@@ -228,13 +230,13 @@ function Advanced(props) {
                                             fontWeight: "500"
                                         }} />))}
                                     </div>
-                                    <div onClick={() => saveUserInStore(character)} className="InfoIcon">
+                                    <div onClick={() => saveUserInStore()} className="InfoIcon">
                                         <InfoIcon sx={{ color: "white", fontSize: "28px" }}></InfoIcon>
                                     </div>
                                 </div>
                             </div>
                         </TinderCard>
-                            <div key={character.name + character.ID} className={styles.swipeButts}>
+                            <div className={styles.swipeButts}>
                                 <IconButton onClick={() => goBack()} className={styles.swipeButt_rep}>
                                     <ReplayIcon ></ReplayIcon>
                                 </IconButton>
@@ -251,13 +253,13 @@ function Advanced(props) {
                                     <BoltIcon></BoltIcon>
                                 </IconButton>
                             </div></div>
-                        ) : (<div key={character}>
-                            <MoreInfoCard onclick={()=>changeCardInfoFlag()}/>
+                        ) : (< div  key={character}>
+                            <MoreInfoCard cardUser={matches[matches.length - 1]} onclick={()=>changeCardInfoFlag()}/>
                         </div>
                         )
                     ))}
                 </div>
-            </div>
+            </div>): null}
             </>
         )
     }

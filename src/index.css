@@ -20,3 +20,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.your-app > rsis-container {
+    border-radius: 20px !important;
+  }
+
+  .your-app > .rsis-image{
+     
+      background-size: contain !important;
+  
+}
+

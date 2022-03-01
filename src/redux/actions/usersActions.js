@@ -60,6 +60,30 @@ export function ChangeLookingFor(text, id) {
     }
 }
 
+export function ChangeEmail(text, id) {
+    return {
+        type : 'UPDATE_EMAIL',
+        payload: text,
+        id : id,
+    }
+}
+
+export function ChangePhone(text, id) {
+    return {
+        type : 'UPDATE_PHONE',
+        payload: text,
+        id : id,
+    }
+}
+
+export function ChangeUsername(text, id) {
+    return {
+        type : 'UPDATE_USERNAME',
+        payload: text,
+        id : id,
+    }
+}
+
 export function changeAge(text, id) {
     return {
         type : 'UPDATE_AGE',

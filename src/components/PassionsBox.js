@@ -33,11 +33,11 @@ export default function Passions(props) {
   let allPassions = require('../server/passions.json')
   const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const [pass, setPass] = useState(user.passions);
-
-  const [progress, setProgress] = useState(0);
-
-  const handlePassionAdd = (number) => {
-    setPass([...pass, number]);
+  const handlePassionAdd = (passion) => {
+    if (pass.length <= 4 && !pass.includes(passion)){
+        setPass([...pass, passion]);
+    }
+    
   }
 
   const submitPassions = () => {
@@ -72,7 +72,7 @@ export default function Passions(props) {
             <Button sx={{ margin: "0px 0px 0px 55px"}} onClick={clearPassions} variant="outlined" color="secondary" endIcon={<DeleteIcon />}>
             Clear
             </Button>
-          <p>Your passion are: {pass.join(", ")}</p>
+          <p>{`(${pass.length}/5)`} Your passion are: {pass.join(", ")}</p>
         </Box>
       </Modal>
     </div>

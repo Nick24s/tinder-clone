@@ -1,14 +1,11 @@
 import '../pages/UserSettingsPage.css';
 import ListDividers from '../components/ListDividers';
-import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
-import CustomizedSlider from '../components/Slider';
-import ColorSwitches from '../components/Switch';
-import RangeSlider from '../components/RangeSlider';
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react';
-import { ChangeLookingFor , changeAge } from '../redux/actions/usersActions';
+import { ChangeLookingFor , changeAge, ChangeEmail, ChangePhone, ChangeUsername } from '../redux/actions/usersActions';
 import setView from '../redux/actions/mainPageActions';
 import { swipeViewName } from '../GlobalConst';
+import { validateUsername, validateProfileEmail } from "../utils";
 
 
 
@@ -18,6 +15,12 @@ export default function UserSettings() {
   const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const [lookingFor, setLookingFor] = useState(user.lookingFor);
   const [age, setAge] = useState(user.age);
+  const [username, setUsername] = useState(user.username);
+  const [phone, setPhone] = useState(user.phone);
+  const [email, setEmail] = useState(user.email);
+  const [phoneValidator, setPhoneValidator] = useState(false);
+  const [usernameValidator, setUsernameValidator] = useState(false);
+  const [ EmailValidator, setEmailValidator] = useState(false);
   const dispatch = useDispatch();
 
 
@@ -46,6 +49,50 @@ export default function UserSettings() {
     }
   }
 
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value.trim());
+    if (e.target.value.trim() !== "" && !isNaN(e.target.value.trim())){
+      setPhoneValidator(false);
+    } else {
+      setPhoneValidator(true)
+    }
+    
+  }
+  const handlePhone = (e) => {
+    if (user.phone !== phone && !isNaN(phone)) {
+      dispatch(ChangePhone(e.target.value.trim(), user.ID))
+    }
+  }
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value.trim());
+    if (validateUsername(e.target.value.trim())) {
+      setUsernameValidator(false)
+    } else {
+      setUsernameValidator(true)
+    }
+  }
+  const handleUsername = (e) => {
+    if (user.username !== username && !username.includes(" ")) {
+      setUsernameValidator(false)
+      dispatch(ChangeUsername(e.target.value, user.ID))
+    }
+  }
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value.trim());
+    if (validateProfileEmail(e.target.value.trim())){
+      setEmailValidator(false);
+    } else {
+      setEmailValidator(true);
+    }
+
+  }
+  const handleEmail = (e) => {
+    if (user.email !== email && validateProfileEmail(email)) {
+      dispatch(ChangeEmail(e.target.value, user.ID))
+    }
+  }
+
 
   return (
     <div style={{ width: '24em', borderRight: "1px solid rgb(233,234,239) " }}>
@@ -56,11 +103,20 @@ export default function UserSettings() {
         </div>
       ) : (<></>)}
       <h3 className='h3'>Account settings</h3>
-      <ListDividers primary='Email' secondary={user.email}></ListDividers>
-      <ListDividers primary='Phone' secondary='359897791227'></ListDividers>
+      <div className='LookingFor'>
+        <p>Email</p>
+        <input className='InputFields' onChange={handleEmailChange} onBlur={handleEmail} value={email} type="text" maxLength='20' placeholder='Add email'></input>
+      </div>
+      {EmailValidator ? <h5 className='Warrning'>Wrong email format</h5> : null}
+      <div className='LookingFor'>
+        <p>Mobile number</p>
+        <input className='InputFields' onChange={handlePhoneChange} onBlur={handlePhone} value={phone} type="text" maxLength='15' placeholder='Add phone'></input>
+      </div>
+      {phoneValidator ? <h5 className='Warrning'>Number should contain only numbers</h5> : null}
+      
       <div className='LookingFor'>
         <p>*Age</p>
-        <input onBlur={handleAge} onChange={handleAgeChange} value={age} placeholder="Add age" type="number" id="age" name="age"
+        <input className='InputFieldAge' onBlur={handleAge} onChange={handleAgeChange} value={age} placeholder="Add age" type="number" id="age" name="age"
           min="1" max="150"></input>
       </div>
 
@@ -80,9 +136,12 @@ export default function UserSettings() {
       </div>
 
       <h3 className='h3'>Web profile</h3>
-      <ListDividers primary='Username' secondary={<ArrowForwardIosRoundedIcon></ArrowForwardIosRoundedIcon>}></ListDividers>
+        <div className='LookingFor'>
+          <p>Username</p>
+          <input className='InputFields' onChange={handleUsernameChange} onBlur={handleUsername} value={username} type="text" maxLength='20' placeholder='Add username'></input>
+        </div>
+        {usernameValidator ? <h5 className='Warrning'>Username should not contain spaces</h5> : null}
       <h3 className='h3'>Notifications</h3>
-      <ListDividers primary='Email' secondary={<ArrowForwardIosRoundedIcon></ArrowForwardIosRoundedIcon>}></ListDividers>
       <div className='logout'>
         <p onClick={handleLogout}>Logout</p>
       </div>

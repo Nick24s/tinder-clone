@@ -25,6 +25,7 @@ UserSettingsPage {
   .LookingFor {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
   .LookingFor > p {
     padding-left: 16px;
@@ -33,10 +34,35 @@ UserSettingsPage {
   }
   .LookingFor > select {
     border: none;
+    text-align: end;
+    margin-right: 10px;
+  }
+  .Warrning{
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: -4px;
+    padding: 8px;
+    text-align: center;
+    background-color: darkorange;
+    border-radius: 10px;
+    color: white;
+  }
+
+  .InputFieldAge {
+    text-align: center;
   }
   
   .LookingFor > input {
     border: none;
+    margin-right: 10px;
+  }
+
+  .InputFields {
+    width: 150px;
+    height: 35px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    text-align: end;
   }
   
 
