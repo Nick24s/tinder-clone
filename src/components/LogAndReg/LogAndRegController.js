@@ -48,20 +48,20 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider'  }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-          <Tab label="Login" {...a11yProps(0)}  />
+          <Tab label="Login" {...a11yProps(0)} />
           <Tab label="Sign Up" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-          <>
+        <>
           <LoginForm></LoginForm>
-          </>
+        </>
       </TabPanel>
       <TabPanel value={value} index={1} >
-          <div>
-        <SignUp></SignUp>
+        <div>
+          <SignUp></SignUp>
         </div>
       </TabPanel>
     </Box>

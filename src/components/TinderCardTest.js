@@ -97,7 +97,7 @@ function Advanced(props) {
                     actionToDispatch = addMatchAction;
                     console.log('MATCH!');
                     setClickedUser(ClickedUserID);
-                    // setMatchScreen(true);
+                    setMatchScreen(true);
                     // TODO MATCH MESSAGE SCREEN
 
 

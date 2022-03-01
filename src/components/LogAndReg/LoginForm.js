@@ -14,13 +14,10 @@ import { ValidateLoginFields } from '../../utils';
 
 const theme = createTheme();
 
-
 export default function LoginForm() {
   const dispatch = useDispatch();
   const users = useSelector(state => state.usersData.present.usersData);
   
-
-
   const login = (userId) => {
     dispatch(loginAction(userId));
   }
@@ -43,11 +40,7 @@ export default function LoginForm() {
     if(ValidateLoginFields(data.get('email'), data.get('password'))){
       matchUserParams(data.get('email'), data.get('password'));
     }
-
-
   };
-
-
 
   return (
     <ThemeProvider theme={theme}>

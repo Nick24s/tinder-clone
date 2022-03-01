@@ -1,5 +1,5 @@
 import ImageSlider from "./ImageSlider";
-import styles from '../styles/settingsCardHolder.module.css'
+import styles from '../styles/SettingsCardinChat.module.css'
 import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineSharp';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import { getUserDataByID } from "../utils";

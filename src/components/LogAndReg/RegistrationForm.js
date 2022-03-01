@@ -13,20 +13,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { registerAction } from '../../redux/actions/usersActions';
 import { ValidateRegistrationFields } from '../../utils';
 
-
 const theme = createTheme();
 
 export default function SignUp() {
- 
 
   const dispatch = useDispatch();
   const hardCodedUsers = useSelector(state => state.usersData.present.usersData);
 
   const register = (email, pass, firstName, lastName) => {
     let UUID = CreateUUID();
-    
+
     dispatch(registerAction(UUID, email, pass, firstName, ["https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png"],
-     `${firstName + lastName}`, "", "", "", [], [], [], []))
+      `${firstName + lastName}`, "", "", "", [], [], [], []))
     alert('registration success , now you can log in')
   }
 
@@ -42,7 +40,6 @@ export default function SignUp() {
     hardCodedUsers.map(user => {
       if (user.email === email && user.pass === pass) {
         userExist = true;
-
       }
     })
 

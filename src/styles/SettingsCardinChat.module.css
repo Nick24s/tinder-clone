@@ -9,8 +9,19 @@
 
 .inside {
     border: 1px solid rgb(233,234,239);
+    height: 202px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    
+}
+.inside::-webkit-scrollbar {
+  display: none;
 }
 
+.inside ::-moz-scrollbar {
+  display: none;
+}
 .info {
     display: flex;
     flex-wrap: wrap;

@@ -27,11 +27,28 @@ export default function ChatPage() {
     // const [showPicker, setShowPicker] = useState(false);
     // const loggedUser = useSelector(state => state.userData);
     // const users = useSelector(state => state.users.users).filter(user => user.id !== loggedUser.id);
+
     const [userGroups, setUserGroups] = useState([]);
     const [messages, setMessages] = useState("");
     // const [currentMsgUserID, setCurrentMsgUserID] = useState("");
     const [groupID, setGroupID] = useState(loggedUserID + chosenChatID);
     
+    const liveUpdate = async (messagesRef) => {
+        const queryObj = query(messagesRef, orderBy("sentAt"));
+        onSnapshot(queryObj, (querySnapshot) => {
+            const msgArr = [];
+            querySnapshot.forEach((doc) => {
+                msgArr.push({ id: doc.id, ...doc.data() })
+            });
+            setMessages(msgArr);
+        });
+    }
+
+    const messagesRef = collection(db, "message", groupID, "messages");
+    useEffect(() => {
+        liveUpdate(messagesRef);    
+
+    },[])
 
     const [input, setInput] = useState('');
 
@@ -90,16 +107,7 @@ export default function ChatPage() {
         liveUpdate(messagesRef);
 
     }
-    const liveUpdate = async (messagesRef) => {
-        const queryObj = query(messagesRef, orderBy("sentAt"));
-        onSnapshot(queryObj, (querySnapshot) => {
-            const msgArr = [];
-            querySnapshot.forEach((doc) => {
-                msgArr.push({ id: doc.id, ...doc.data() })
-            });
-            setMessages(msgArr);
-        });
-    }
+    
 
     const handleEnterPress = e => {
         if (e.keyCode === 13) {

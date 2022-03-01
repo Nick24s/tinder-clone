@@ -1,15 +1,19 @@
 import styles from '../styles/MatchScreen.module.css'
 import img from '../img/ItsAMatchTinderText.png';
 import Avatar from '@mui/material/Avatar';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserDataByID } from '../utils';
-import { Link } from 'react-router-dom';
+import setView from '../redux/actions/mainPageActions';
+import { chatViewName } from '../GlobalConst';
+
 export default function MatchScreen(props) {
 
+    const dispatch = useDispatch();
     console.log(props);
     const allUsers = useSelector(state => state.usersData.present.usersData);
     const loggedUserData = getUserDataByID((props.loggedUserID), allUsers);
     let ClickedUserData = getUserDataByID((props.ClickedUser), allUsers);
+    let ClickedUser = props.ClickedUser;
     return (
         <>
             <div className={styles.firstParent}>
@@ -17,16 +21,15 @@ export default function MatchScreen(props) {
                 <div className={styles.imgHolder}>
                     <img className={styles.img} src={img} alt="" />
                 </div>
-                {/* <Avatar alt={ClickedUserData.name} scr={ClickedUserData.photos[0]}></Avatar> */}
                 <div className={styles.pHolder}>
-                    <p>You and {ClickedUserData.name} have liked each other!</p>
+                    <p className={styles.p}>You and {ClickedUserData.name} have liked each other!</p>
                 </div>
                   <div className={styles.avatarHolder}>
                 <Avatar  alt={loggedUserData.name} src={loggedUserData.photos[0]} sx={{width : 100 , height : 100}}></Avatar>
                 <Avatar alt={ClickedUserData.name} src={ClickedUserData.photos[0]} sx={{width : 100 , height : 100}}></Avatar>
             </div>
             <div className={styles.buttonHolder}>
-            <button className={styles.button} >CONTINUE</button>
+            <button className={styles.button} onClick={() => {dispatch(setView(chatViewName , ClickedUser))}}>CONTINUE TO CHAT</button>
             </div>
             </div>
             </div>

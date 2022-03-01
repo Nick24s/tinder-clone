@@ -4,7 +4,7 @@ display: flex;
 align-items: flex-start;
 justify-content: end;
 padding-left: 24rem;
-
+overflow-y: hidden;
 
 }
 
@@ -56,9 +56,9 @@ padding-left: 24rem;
     width: 100px;
     height: 50px;
     display: flex;
-align-items: center;
-justify-content: center;
-border-width: 0;
+    align-items: center;
+    justify-content: center;
+    border-width: 0;
 
     
 }
@@ -74,9 +74,10 @@ border-width: 0;
 }
 .buttonsWrapper{
     border: 1px solid rgb(212,216,222);
-    /* border-bottom-width: 0px; */
     height: 80px;
-        margin-top: 47px;
+     position: fixed;
+    width: 380px;
+            bottom: 0;
 }
 
 .buttons {
@@ -89,6 +90,7 @@ border-width: 0;
 }
 .buttons:hover {
     background: linear-gradient(90deg, rgba(253,46,111,1) 8%, rgba(255,92,57,1) 100%);
+    color: white;
 
 }
 
@@ -112,6 +114,18 @@ border-width: 0;
     overflow: scroll;
     overflow-x: hidden;
 }
+/* Hide scrollbar for Chrome, Safari and Opera */
+.ChatScreen_message::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .Functionalities {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  
 
 chatScreen_time {
     padding: 20px;
