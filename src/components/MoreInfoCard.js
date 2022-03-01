@@ -11,44 +11,40 @@ import WorkIcon from '@mui/icons-material/Work';
 import Chip from '@mui/material/Chip';
 
 export default function MoreInfoCard(props) {
-    const user = useSelector(state => state.cardUser.user)[0];
-
-    const [profileUser, setProfileUser] = useState();
+    console.log(props.cardUser);
+    const [profileUser, setProfileUser] = useState(props.cardUser);
     
-    useEffect(()=>{
-        setProfileUser(user)
-    }, [profileUser])
 
     return (
         <div className='CardInfo'>
-            <ImageSlider key={user.age + user.username} images={user.photos}></ImageSlider>
+            <ImageSlider key={profileUser.age + profileUser.username} images={profileUser.photos}></ImageSlider>
             <div className={"Inside"}>
                 <div className={'Info'}>
-                    <p className={'p'}>{user.username}</p>
-                    <p className={'p2'}>{user.age}</p>
+                    <p className={'p'}>{profileUser.username}</p>
+                    <p className={'p2'}>{profileUser.age}</p>
                     <div style={{ marginTop: "22px", marginLeft: '2px' }}><CheckCircleOutlineSharpIcon></CheckCircleOutlineSharpIcon></div>
                 </div>
-                {user.company ? (<div className={styles.secondLine}>
+                {profileUser.company ? (<div className={styles.secondLine}>
                     <BusinessIcon />
-                    <p className={styles.secondlineP}>{user.company}</p>
+                    <p className={styles.secondlineP}>{profileUser.company}</p>
                 </div>) : (<></>)}
-                {user.jobTitle ? (<div className={styles.secondLine}>
+                {profileUser.jobTitle ? (<div className={styles.secondLine}>
                     <WorkIcon />
-                    <p className={styles.secondlineP}>{user.jobTitle}</p>
+                    <p className={styles.secondlineP}>{profileUser.jobTitle}</p>
                 </div>) : (<></>)}
-                {user.school ? (<div className={styles.secondLine}>
+                {profileUser.school ? (<div className={styles.secondLine}>
                     <SchoolOutlinedIcon />
-                    <p className={styles.secondlineP}>{user.school}</p>
+                    <p className={styles.secondlineP}>{profileUser.school}</p>
                 </div>) : (<></>)}
                 <div className={styles.secondLine}>
                     <DescriptionIcon></DescriptionIcon>
-                    <p className={styles.secondlineP}>{user.description}</p>
+                    <p className={styles.secondlineP}>{profileUser.description}</p>
                 </div>
-                {user.passions.length !== 0 ? (
-                    <div key={user.age + user.username} className={styles.PassionsBox}>
+                {profileUser.passions.length !== 0 ? (
+                    <div className={styles.PassionsBox}>
                         <h3>Passions</h3>
                         <div className={styles.PassionsContainer}>
-                            {user.passions.map(passion => <Chip key={passion} label={`${passion}`} variant="outlined" />)}
+                            {profileUser.passions.map(passion => <Chip key={passion} label={`${passion}`} variant="outlined" />)}
                         </div>
                     </div>) : (<></>)}
                 <div onClick={props.onclick} className='BackBtn'>

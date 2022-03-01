@@ -10,7 +10,6 @@ export default function AfterLoginPage() {
 
     const [show, setShow] = useState(false);
 
-
     return (
         <>
             <div className={styles.Main}>

@@ -23,6 +23,15 @@ const validateNames = (firstName, lastName) => {
   }
 }
 
+export const validateUsername = (username) => {
+  let usernameFormat = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+  if ((username.match(usernameFormat))) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 const validateEmail = (email) => {
   // eslint-disable-next-line no-useless-escape
   let emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -30,6 +39,16 @@ const validateEmail = (email) => {
     return true;
   } else {
     alert("You have entered an invalid email address!");
+    return false;
+  }
+}
+
+export const validateProfileEmail = (email) => {
+  // eslint-disable-next-line no-useless-escape
+  let emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  if (email.match(emailFormat)) {
+    return true;
+  } else {
     return false;
   }
 }

@@ -179,12 +179,13 @@ export default function SettingsCard() {
         <input type="text" onChange={handleCompanyChange} onBlur={handleCompany} value={company} className={styles.inputBox} maxLength='40' placeholder='Add Company'></input>
         <p className={styles.aboutP}>SCHOOL</p>
         <input type="text" onChange={handleSchoolChange} value={school} onBlur={handleSchool} className={styles.inputBox} maxLength='40' placeholder='Add School'></input>
-        <p className={styles.aboutP}>LIVING IN</p>
+        <p className={styles.aboutP}>*LIVING IN</p>
         <input onChange={handleLivingInChange} onBlur={locationUpdater} value={livingIn} type="text" className={styles.inputBox} maxLength='40' placeholder='Add location'></input>
-        <p className={styles.aboutP}>GENDER</p>
+        <p className={styles.aboutP}>*GENDER</p>
         <select onBlur={handleGender} onChange={handleGenderChange} value={gender} name="gender" id={styles.gender}>
           <option value="Man">Man</option>
-          <option value="Women">Women</option>
+          <option value="Woman">Woman</option>
+          <option value=""></option>
         </select>
         <button className={styles.button2Style} onClick={() => isReadyOnly(!ReadOnlyOrEdit)}> Save</button>
 

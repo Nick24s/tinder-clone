@@ -70,6 +70,30 @@ const userReducers = (state = INITIAL_STATE, action) => {
                   : user
             )
          }
+      case 'UPDATE_USERNAME':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, username: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_PHONE':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, phone: action.payload }
+                  : user
+            )
+         }
+      case 'UPDATE_EMAIL':
+         return {
+            ...state,
+            usersData: state.usersData.map(
+               (user) => user.ID === action.id ? { ...user, email: action.payload }
+                  : user
+            )
+         }
       case 'UPDATE_AGE':
          return {
             ...state,
