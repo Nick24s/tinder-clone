@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from '../pages/AfterLoginPage.module.css';
+import styles from '../styles/MainPage.module.css';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import BusinessCenterSvgIcon from '@mui/icons-material/BusinessCenter';
 import { IconButton } from '@mui/material';
@@ -12,11 +12,10 @@ import { pink } from '@mui/material/colors';
 
 export default function ProfileSide(props) {
 
-
     const loggedUserID = useSelector(state => state.usersData.present.loggedUser);
     const users = useSelector(state => state.usersData.present.usersData);
-
     const dispatch = useDispatch();
+
     const renderSwipe = () => {
         dispatch(setView(swipeViewName));
     }

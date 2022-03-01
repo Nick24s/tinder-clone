@@ -1,4 +1,4 @@
-import styles from './SingleMatch.module.css'
+import styles from '../styles/SingleMatch.module.css'
 import { Avatar } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import setView from '../redux/actions/mainPageActions';
@@ -7,15 +7,13 @@ import { chatViewName } from '../GlobalConst';
 export default function SingleMatch({name, id, profilImg}){
 
     const dispatch = useDispatch();
-
-    const handleChoosenChat = (e) => {
+    const handleChosenChat = (e) => {
         const chosenChatID = e.target.alt;
         console.log(chosenChatID)
         dispatch(setView(chatViewName , chosenChatID));
 }
-
     return (
-        <div className={styles.matches} onClick={handleChoosenChat}>
+        <div className={styles.matches} onClick={handleChosenChat}>
             <h4 className={styles.name}>{name}</h4>
             <Avatar 
                 variant="rounded"

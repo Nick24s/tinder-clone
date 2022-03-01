@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import styles from './PassionsBox.module.css'
+import styles from '../styles/PassionsBox.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import Chip from '@mui/material/Chip';
 import { addPassions, deletePassions } from '../redux/actions/usersActions';
@@ -34,10 +34,9 @@ export default function Passions(props) {
   const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const [pass, setPass] = useState(user.passions);
   const handlePassionAdd = (passion) => {
-    if (pass.length <= 4 && !pass.includes(passion)){
-        setPass([...pass, passion]);
+    if (pass.length <= 4 && !pass.includes(passion)) {
+      setPass([...pass, passion]);
     }
-    
   }
 
   const submitPassions = () => {
@@ -66,12 +65,12 @@ export default function Passions(props) {
             </div>))}
 
           </div>
-            <Button sx={{ margin: "0px 0px 0px 55px"}} onClick={submitPassions} variant="contained" color="secondary" endIcon={<SendIcon />}>
+          <Button sx={{ margin: "0px 0px 0px 55px" }} onClick={submitPassions} variant="contained" color="secondary" endIcon={<SendIcon />}>
             Submit
           </Button>
-            <Button sx={{ margin: "0px 0px 0px 55px"}} onClick={clearPassions} variant="outlined" color="secondary" endIcon={<DeleteIcon />}>
+          <Button sx={{ margin: "0px 0px 0px 55px" }} onClick={clearPassions} variant="outlined" color="secondary" endIcon={<DeleteIcon />}>
             Clear
-            </Button>
+          </Button>
           <p>{`(${pass.length}/5)`} Your passion are: {pass.join(", ")}</p>
         </Box>
       </Modal>

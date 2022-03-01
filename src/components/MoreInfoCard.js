@@ -2,8 +2,7 @@ import CheckCircleOutlineSharpIcon from '@mui/icons-material/CheckCircleOutlineS
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import ArrowDropDownCircleRoundedIcon from '@mui/icons-material/ArrowDropDownCircleRounded';
 import ImageSlider from './ImageSlider'
-import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from '../styles/settingsCardHolder.module.css'
 import DescriptionIcon from '@mui/icons-material/Description';
 import BusinessIcon from '@mui/icons-material/Business';
@@ -11,9 +10,7 @@ import WorkIcon from '@mui/icons-material/Work';
 import Chip from '@mui/material/Chip';
 
 export default function MoreInfoCard(props) {
-    console.log(props.cardUser);
-    const [profileUser, setProfileUser] = useState(props.cardUser);
-    
+    const [profileUser, setProfileUser] = useState(props.character);
 
     return (
         <div className='CardInfo'>

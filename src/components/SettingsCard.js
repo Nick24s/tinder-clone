@@ -7,16 +7,12 @@ import BusinessIcon from '@mui/icons-material/Business';
 import WorkIcon from '@mui/icons-material/Work';
 import Chip from '@mui/material/Chip';
 import { useEffect, useState } from "react";
-// import styles from '../styles/EditInfoPage.module.css';
 import EditInfoPictures from '../components/EditInfoPictures';
-import MultilineTextFields from '../components/MultilineTextFields'
 import ListDividers from '../components/ListDividers';
-import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import { useDispatch, useSelector } from 'react-redux';
 import { ChangeDescription, updateLocation, UpdateSchool, UpdateJobTitle, UpdateCompany, UpdateGender } from "../redux/actions/usersActions";
 import ImageUploader from './ImageUploader.js';
 import Passions from "./PassionsBox";
-
 
 export default function SettingsCard() {
 
@@ -25,9 +21,7 @@ export default function SettingsCard() {
   const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const numberOfImageContainers = 9;
   const [aboutYou, setAboutYou] = useState(user.description);
-  const [passions, setPassions] = useState(user.passions);
   const [gender, setGender] = useState(user.gender);
-  // const [orientation, setOrientation] = useState(user.sexualOrientation);
   const [livingIn, setLivingIn] = useState(user.location);
   const [userImages, setUserImages] = useState(user.photos);
   const [jobTitle, setJobTitle] = useState(user.jobTitle);
@@ -50,13 +44,14 @@ export default function SettingsCard() {
   }
 
   const appendImg = (img) => {
-    const photos = user.photos 
+    const photos = user.photos
     setUserImages([...photos, img])
   }
 
   const handleAboutYouChange = (e) => {
     setAboutYou(e.target.value);
   }
+
   const handleAboutYou = (e) => {
     if (user.aboutYou !== aboutYou) {
       dispatch(ChangeDescription(e.target.value, user.ID))
@@ -66,6 +61,7 @@ export default function SettingsCard() {
   const handleCompanyChange = (e) => {
     setCompany(e.target.value);
   }
+
   const handleCompany = (e) => {
     if (user.company !== company) {
       dispatch(UpdateCompany(e.target.value, user.ID))
@@ -75,14 +71,17 @@ export default function SettingsCard() {
   const handleJobTitleChange = (e) => {
     setJobTitle(e.target.value);
   }
+
   const handleJobTitle = (e) => {
     if (user.jobTitle !== jobTitle) {
       dispatch(UpdateJobTitle(e.target.value, user.ID))
     }
   }
+
   const handleSchoolChange = (e) => {
     setSchool(e.target.value);
   }
+
   const handleSchool = (e) => {
     if (user.school !== school) {
       dispatch(UpdateSchool(e.target.value, user.ID))
@@ -111,7 +110,6 @@ export default function SettingsCard() {
 
 
   const [ReadOnlyOrEdit, isReadyOnly] = useState(true);
-  const [show, setShow] = useState(false);
 
   const renderReadOnlyMode = () => {
     return (
@@ -124,15 +122,15 @@ export default function SettingsCard() {
             <div style={{ marginTop: "22px", marginLeft: '2px' }}><CheckCircleOutlineSharpIcon></CheckCircleOutlineSharpIcon></div>
           </div>
           {user.company ? (<div className={styles.secondLine}>
-            <BusinessIcon/>
+            <BusinessIcon />
             <p className={styles.secondlineP}>{user.company}</p>
           </div>) : (<></>)}
           {user.jobTitle ? (<div className={styles.secondLine}>
-            <WorkIcon/>
+            <WorkIcon />
             <p className={styles.secondlineP}>{user.jobTitle}</p>
           </div>) : (<></>)}
           {user.school ? (<div className={styles.secondLine}>
-            <SchoolOutlinedIcon/>
+            <SchoolOutlinedIcon />
             <p className={styles.secondlineP}>{user.school}</p>
           </div>) : (<></>)}
           <div className={styles.secondLine}>
@@ -140,12 +138,12 @@ export default function SettingsCard() {
             <p className={styles.secondlineP}>{user.description}</p>
           </div>
           {user.passions.length !== 0 ? (
-          <div className={styles.PassionsBox}>
-            <h3>Passions</h3>
-            <div className={styles.PassionsContainer}>
-              {user.passions.map(passion => <Chip key={passion + user.ID} label={`${passion}`} variant="outlined"/>)}
-            </div>
-          </div>) : (<></>)}
+            <div className={styles.PassionsBox}>
+              <h3>Passions</h3>
+              <div className={styles.PassionsContainer}>
+                {user.passions.map(passion => <Chip key={passion + user.ID} label={`${passion}`} variant="outlined" />)}
+              </div>
+            </div>) : (<></>)}
         </div>
         <div className={styles.buttonHolder}>
           <button className={styles.btnGrad} onClick={() => isReadyOnly(!ReadOnlyOrEdit)}>Edit info</button>
@@ -154,6 +152,7 @@ export default function SettingsCard() {
     )
 
   }
+
   const renderEditMode = () => {
     return (
       <div className={styles.EditInfoPage}>
@@ -170,9 +169,7 @@ export default function SettingsCard() {
         <p className={styles.aboutP}>ABOUT YOU</p>
         <textarea onBlur={handleAboutYou} onChange={handleAboutYouChange} value={aboutYou} className={styles.AboutInputBox} placeholder="Add description"></textarea>
         <p className={styles.aboutP}>PASSIONS</p>
-
-
-        <ListDividers primary={user.passions.map(passion => ` ${passion}`)} secondary={<Passions/>}></ListDividers>
+        <ListDividers primary={user.passions.map(passion => ` ${passion}`)} secondary={<Passions />}></ListDividers>
         <p className={styles.aboutP}>JOB TITLE</p>
         <input type="text" onChange={handleJobTitleChange} onBlur={handleJobTitle} value={jobTitle} className={styles.inputBox} maxLength='40' placeholder='Add Job Title'></input>
         <p className={styles.aboutP}>COMPANY</p>
@@ -188,16 +185,15 @@ export default function SettingsCard() {
           <option value=""></option>
         </select>
         <button className={styles.button2Style} onClick={() => isReadyOnly(!ReadOnlyOrEdit)}> Save</button>
-
       </div>
     )
   }
 
   return (
-      <div className={styles.settingsCardHolder}>
-        <div className={styles.wrapper}>
-          {ReadOnlyOrEdit ? renderReadOnlyMode() : renderEditMode()}
-        </div>
+    <div className={styles.settingsCardHolder}>
+      <div className={styles.wrapper}>
+        {ReadOnlyOrEdit ? renderReadOnlyMode() : renderEditMode()}
       </div>
+    </div>
   )
 }

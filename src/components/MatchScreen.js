@@ -9,7 +9,6 @@ import { chatViewName } from '../GlobalConst';
 export default function MatchScreen(props) {
 
     const dispatch = useDispatch();
-    console.log(props);
     const allUsers = useSelector(state => state.usersData.present.usersData);
     const loggedUserData = getUserDataByID((props.loggedUserID), allUsers);
     let ClickedUserData = getUserDataByID((props.ClickedUser), allUsers);

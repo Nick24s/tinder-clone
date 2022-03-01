@@ -8,8 +8,8 @@ import setView from '../redux/actions/mainPageActions';
 import { swipeViewName } from '../GlobalConst';
 import { getUserDataByID } from '../utils';
 import { removeMatchAction } from '../redux/actions/usersActions';
-import { db, storage } from '../firebase'
-import { addDoc, collection, query, orderBy, onSnapshot, Timestamp, setDoc, doc, updateDoc } from '@firebase/firestore';
+import { db } from '../firebase'
+import { collection, query, orderBy, onSnapshot, Timestamp, setDoc, doc, updateDoc } from '@firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 export default function ChatPage() {
 
@@ -19,20 +19,11 @@ export default function ChatPage() {
     const loggedUser = allUsers.filter(user => user.ID === loggedUserID)[0];
     let clickedUserData = getUserDataByID(chosenChatID, allUsers);
     const dispatch = useDispatch();
-    // const [clickedUser, setClickedUser] = useState(false);
-    // const [show, setShow] = useState(false);
-    // const [receiver, setReceiver] = useState("");
-    // const [receiverImage, setReceiverImage] = useState("");
     const [inputStr, setInputStr] = useState('');
-    // const [showPicker, setShowPicker] = useState(false);
-    // const loggedUser = useSelector(state => state.userData);
-    // const users = useSelector(state => state.users.users).filter(user => user.id !== loggedUser.id);
-
     const [userGroups, setUserGroups] = useState([]);
     const [messages, setMessages] = useState("");
-    // const [currentMsgUserID, setCurrentMsgUserID] = useState("");
     const [groupID, setGroupID] = useState(loggedUserID + chosenChatID);
-    
+
     const liveUpdate = async (messagesRef) => {
         const queryObj = query(messagesRef, orderBy("sentAt"));
         onSnapshot(queryObj, (querySnapshot) => {
@@ -46,22 +37,18 @@ export default function ChatPage() {
 
     const messagesRef = collection(db, "message", groupID, "messages");
     useEffect(() => {
-        liveUpdate(messagesRef);    
+        liveUpdate(messagesRef);
 
-    },[])
-
-    const [input, setInput] = useState('');
+    }, [])
 
     const closeChat = () => {
         dispatch(setView(swipeViewName))
     }
     const HandleUnmatch = (e) => {
         e.preventDefault()
-
         dispatch(removeMatchAction(loggedUserID, chosenChatID))
         dispatch(setView(swipeViewName))
     }
-
 
     const getAllChats = async () => {
         const grRef = collection(db, "groups");
@@ -73,16 +60,18 @@ export default function ChatPage() {
             })
             console.log(groupsArr)
             groupsArr.map(group => {
-              if(group.id === `${chosenChatID}${loggedUserID}`){
-                setGroupID( `${chosenChatID}${loggedUserID}`);
-                  
-              }
+                if (group.id === `${chosenChatID}${loggedUserID}`) {
+                    setGroupID(`${chosenChatID}${loggedUserID}`);
+                }
             })
             setUserGroups(groupsArr);
         })
     }
 
-    
+    useEffect(function loadGroups() {
+        getAllChats();
+    }, [])
+
     async function handleSendMessage() {
         setDoc(doc(db, "message", groupID, "messages", uuidv4()), {
             messageText: inputStr,
@@ -94,21 +83,17 @@ export default function ChatPage() {
         await updateDoc(groupRef, {
             recentMessage: inputStr
         });
-
         setInputStr('');
         const messagesRef = collection(db, "message", groupID, "messages");
         liveUpdate(messagesRef);
 
     }
-    
 
     const handleEnterPress = e => {
         if (e.keyCode === 13) {
             handleSendMessage();
         }
     };
-
-
 
     return (
         <div className={styles.firstParent}>
@@ -123,11 +108,11 @@ export default function ChatPage() {
                 <div className={styles.actualChat}>
 
                     <div className={styles.ChatScreen_message} >
-              
+
                         {
                             messages &&
                             messages.map(msg => {
-                                
+
                                 if (msg.sentBy === loggedUserID) {
                                     return (<div className={styles.ChatScreen_textUser} key={msg.id}>{msg.messageText}</div>)
                                 } else {
@@ -137,14 +122,10 @@ export default function ChatPage() {
 
                             )
                         }
-                        
+
                     </div>
-
-
-
                 </div>
                 <div className={styles.sentMessageDiv}>
-
                     <form className={styles.chatScreen_input}>
                         <input value={inputStr}
                             onKeyDown={e => handleEnterPress(e)}
@@ -155,7 +136,6 @@ export default function ChatPage() {
                         <button onClick={handleSendMessage} type="button" className={styles.chatScreen_inputButton}>SEND</button>
                     </form>
                 </div>
-
             </div>
             <div className={styles.side}>
                 <SettingsCardinChat ></SettingsCardinChat>

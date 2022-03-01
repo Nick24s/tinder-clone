@@ -2,7 +2,7 @@ import {useState} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import styles from './imageUploader.module.css'
+import styles from '../styles/imageUploader.module.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImage } from '../redux/actions/usersActions';
 
@@ -28,9 +28,6 @@ export default function ImageUploader(props) {
   const user = useSelector(state => (state.usersData.present.usersData).filter(user => user.ID === userId)[0]);
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
-  const [progress, setProgress] = useState(0);
-
-  
 
   const handleChange = (e) => {
       if (e.target.files[0]){

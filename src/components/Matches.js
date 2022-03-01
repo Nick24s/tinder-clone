@@ -1,15 +1,12 @@
 import SingleMatch from "./SingleMatch";
-import styles from './Matches.module.css'
+import styles from '../styles/Matches.module.css'
 import { useSelector } from "react-redux";
 import { getUserDataByID } from "../utils";
 
 export default function Matches() {
 
-
     const loggedUserID = useSelector(state => state.usersData.present.loggedUser)
     const allUsers = useSelector(state => state.usersData.present.usersData);
-
-
 
     let loggedUserData = getUserDataByID(loggedUserID, allUsers);
     const { matches = [] } = loggedUserData;
@@ -32,11 +29,9 @@ export default function Matches() {
         return result;
     }
 
-
     return (
 
         <div className={styles.matches}>
-
             {renderMatches()}
         </div>
     )

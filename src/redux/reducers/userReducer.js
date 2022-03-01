@@ -5,11 +5,14 @@ const INITIAL_STATE = {
    logged: false,
    loggedUser: '',
    usersData: [],
-   firstLoadedData: false
+   firstLoadedData: false,
+ 
 };
 
 const userReducers = (state = INITIAL_STATE, action) => {
    switch (action.type) {
+
+
       case 'LOGIN':
          return {
             ...state,
@@ -148,6 +151,7 @@ const userReducers = (state = INITIAL_STATE, action) => {
          return {
             ...state, firstLoadedData: true
          };
+
 
       case 'REMOVE_MATCH':
          const newUsersDatas = [...state.usersData];

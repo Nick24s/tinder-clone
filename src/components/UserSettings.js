@@ -1,14 +1,11 @@
-import '../pages/UserSettingsPage.css';
+import '../styles/UserSettingsPage.css';
 import ListDividers from '../components/ListDividers';
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from 'react';
-import { ChangeLookingFor , changeAge, ChangeEmail, ChangePhone, ChangeUsername } from '../redux/actions/usersActions';
+import { useState } from 'react';
+import { ChangeLookingFor, changeAge, ChangeEmail, ChangePhone, ChangeUsername } from '../redux/actions/usersActions';
 import setView from '../redux/actions/mainPageActions';
 import { swipeViewName } from '../GlobalConst';
 import { validateUsername, validateProfileEmail } from "../utils";
-
-
-
 
 export default function UserSettings() {
   const userId = useSelector(state => state.usersData.present.loggedUser);
@@ -20,15 +17,12 @@ export default function UserSettings() {
   const [email, setEmail] = useState(user.email);
   const [phoneValidator, setPhoneValidator] = useState(false);
   const [usernameValidator, setUsernameValidator] = useState(false);
-  const [ EmailValidator, setEmailValidator] = useState(false);
+  const [EmailValidator, setEmailValidator] = useState(false);
   const dispatch = useDispatch();
-
-
 
   const handleLogout = () => {
     dispatch({ type: 'LOGOUT' })
     dispatch(setView(swipeViewName));
-
   }
 
   const handleLookingForChange = (e) => {
@@ -51,12 +45,12 @@ export default function UserSettings() {
 
   const handlePhoneChange = (e) => {
     setPhone(e.target.value.trim());
-    if (e.target.value.trim() !== "" && !isNaN(e.target.value.trim())){
+    if (e.target.value.trim() !== "" && !isNaN(e.target.value.trim())) {
       setPhoneValidator(false);
     } else {
       setPhoneValidator(true)
     }
-    
+
   }
   const handlePhone = (e) => {
     if (user.phone !== phone && !isNaN(phone)) {
@@ -80,7 +74,7 @@ export default function UserSettings() {
   }
   const handleEmailChange = (e) => {
     setEmail(e.target.value.trim());
-    if (validateProfileEmail(e.target.value.trim())){
+    if (validateProfileEmail(e.target.value.trim())) {
       setEmailValidator(false);
     } else {
       setEmailValidator(true);
@@ -92,7 +86,6 @@ export default function UserSettings() {
       dispatch(ChangeEmail(e.target.value, user.ID))
     }
   }
-
 
   return (
     <div style={{ width: '24em', borderRight: "1px solid rgb(233,234,239) " }}>
@@ -113,19 +106,14 @@ export default function UserSettings() {
         <input className='InputFields' onChange={handlePhoneChange} onBlur={handlePhone} value={phone} type="text" maxLength='15' placeholder='Add phone'></input>
       </div>
       {phoneValidator ? <h5 className='Warrning'>Number should contain only numbers</h5> : null}
-      
+
       <div className='LookingFor'>
         <p>*Age</p>
         <input className='InputFieldAge' onBlur={handleAge} onChange={handleAgeChange} value={age} placeholder="Add age" type="number" id="age" name="age"
           min="1" max="150"></input>
       </div>
-
-
       <h3 className='h3'>Discovery settings</h3>
-      {/* add arrow here */}
       <ListDividers primary='*Location' secondary={user.location}></ListDividers>
-
-      {/* add arrow here */}
       <div className='LookingFor'>
         <p>*Looking For:</p>
         <select onBlur={handleLookingFor} onChange={handleLookingForChange} value={lookingFor ? lookingFor : ""} name="lookingFor" id="lookingFor">
@@ -134,19 +122,16 @@ export default function UserSettings() {
           <option value=""></option>
         </select>
       </div>
-
       <h3 className='h3'>Web profile</h3>
-        <div className='LookingFor'>
-          <p>Username</p>
-          <input className='InputFields' onChange={handleUsernameChange} onBlur={handleUsername} value={username} type="text" maxLength='20' placeholder='Add username'></input>
-        </div>
-        {usernameValidator ? <h5 className='Warrning'>Username should not contain spaces</h5> : null}
+      <div className='LookingFor'>
+        <p>Username</p>
+        <input className='InputFields' onChange={handleUsernameChange} onBlur={handleUsername} value={username} type="text" maxLength='20' placeholder='Add username'></input>
+      </div>
+      {usernameValidator ? <h5 className='Warrning'>Username should not contain spaces</h5> : null}
       <h3 className='h3'>Notifications</h3>
       <div className='logout'>
         <p onClick={handleLogout}>Logout</p>
       </div>
-
-
     </div>
   )
 }

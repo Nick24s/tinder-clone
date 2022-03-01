@@ -3,7 +3,7 @@ import { Routes , Route, useNavigate } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import DownloadPage from './pages/DownloadPage';
 import HomePage from './pages/HomePage';
-import AfterLoginPage from './pages/AfterLoginPage';
+import MainPage from './pages/MainPage';
 import ProductsPage from './pages/ProductsPage';
 import SafetyPage from './pages/SafetyPage';
 import SupportPage from './pages/SupportPage';
@@ -31,7 +31,7 @@ function App() {
      <Route path='/safety' element={<SafetyPage></SafetyPage>}></Route>
      <Route path='/support' element={<SupportPage></SupportPage>}></Route>
      <Route path='/download' element={<DownloadPage></DownloadPage>}></Route>
-     <Route path='/main' element={<AfterLoginPage></AfterLoginPage>}></Route>
+     <Route path='/main' element={<MainPage></MainPage>}></Route>
    </Routes>
    </>
   );

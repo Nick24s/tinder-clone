@@ -2,7 +2,7 @@
 import ChatPage from "../pages/ChatPage";
 import { useSelector } from 'react-redux';
 import { swipeViewName, chatViewName } from '../GlobalConst'
-import Advanced from './TinderCardTest';
+import SwipeCards from './SwipeCards';
 
 export default function BodyWrapper() {
 
@@ -29,7 +29,7 @@ export default function BodyWrapper() {
 
     const renderSwipeView = () => {
         return <>
-            <Advanced key={"1dsds"}></Advanced>
+            <SwipeCards></SwipeCards>
         </>
     }
 

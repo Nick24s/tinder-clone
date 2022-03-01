@@ -10,6 +10,5 @@ export default function ImageAvatars(props) {
         sx={{ width: 38, height: 38 }}
         key={props.message}
       />
-    // </Stack>
   );
 }

@@ -1,49 +1,43 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react'
+import React, { useState, useMemo, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TinderCard from 'react-tinder-card'
 import ImageSlider from './ImageSlider'
 import { green, grey, pink } from '@mui/material/colors';
 import CircleIcon from '@mui/icons-material/Circle';
 import Chip from '@mui/material/Chip';
-import InfoIcon from '@mui/icons-material/Info';
 import ReplayIcon from '@mui/icons-material/Replay';
 import CloseIcon from '@mui/icons-material/Close';
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import BoltIcon from '@mui/icons-material/Bolt';
 import { IconButton } from '@mui/material';
-import styles from "./TinderCardTest.module.css"
+import styles from "../styles/SwipeCards.module.css"
 import MoreInfoCard from "./MoreInfoCard.js"
-import setUser from '../redux/actions/cardPageActions';
-import './TinderCards.css';
+import '../styles/TinderCards.css';
 import { getUserDataByID } from '../utils';
 import WorkIcon from '@mui/icons-material/Work';
 import { addDislikedAction, addLikedAction, addMatchAction } from '../redux/actions/usersActions';
 import { ActionCreators } from 'redux-undo';
-import { connect } from 'react-redux';
-import { db as firebaseDB } from '../firebase'
 import MatchScreen from './MatchScreen';
 import { collection, doc, getFirestore, onSnapshot, orderBy, query, setDoc, Timestamp } from 'firebase/firestore';
 import setRoom from '../redux/actions/roomActions';
-import { Message } from '@mui/icons-material';
 
+function SwipeCards() {
 
-
-function Advanced(props) {
     const dispatch = useDispatch();
     const loggedUserID = useSelector(state => state.usersData.present.loggedUser);
     const userId = useSelector(state => state.usersData.present.loggedUser);
     const allUsers = useSelector(state => state.usersData.present.usersData);
     const loggedUserData = getUserDataByID(userId, allUsers);
-    const db = useSelector(state => state.usersData.present.usersData).filter(user => user.ID !== loggedUserData.ID &&
+    let db = useSelector(state => state.usersData.present.usersData).filter(user => user.ID !== loggedUserData.ID &&
                                                                                 user.gender === loggedUserData.lookingFor &&
                                                                                 !user.matches.includes(loggedUserData.ID));
+                                                  
+    db = db.filter(user => !loggedUserData.liked.includes(user.ID) && !loggedUserData.disliked.includes(user.ID))
     const [matches, setMatches] = useState(db);
     console.log(matches);
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
     const [lastDirection, setLastDirection] = useState()
-
-    // used for outOfFrame closure
     const currentIndexRef = useRef(currentIndex)
     const [cardInfoFlag, setCardInfo] = useState(true);
     const [showMatchScreen, setMatchScreen] = useState(false);
@@ -56,19 +50,14 @@ function Advanced(props) {
             Array(matches.length)
                 .fill(0)
                 .map((i) => React.createRef()),
-        []
-    )
+        [])
 
     const updateCurrentIndex = (val) => {
         setCurrentIndex(val)
         currentIndexRef.current = val
     }
-    // useEffect( async function loadGroups() {
-    //     getAllChats();
-    // },[])
 
     const canGoBack = currentIndex < matches.length - 1
-
     const canSwipe = currentIndex >= 0;
 
     const getAllChats = async () => {
@@ -80,19 +69,15 @@ function Advanced(props) {
                 groupsArr.unshift({ id: group.id, ...group.data() })
             })
             groupsArr.filter(group => group.id.includes(loggedUserID) && group.id.includes(ClickedUser))
-            // return groupsArr
-            console.log(groupsArr);
             setUserGroup(groupsArr[0].id);
         })
     }
 
 
-    // set last direction and decrease current index
     const swiped = (direction, nameToDelete, index, ClickedUserID) => {
 
-
-        setLastDirection(direction)
-        updateCurrentIndex(index - 1)
+        setLastDirection(direction);
+        updateCurrentIndex(index - 1);
         let ClickedUserData = getUserDataByID(ClickedUserID, allUsers);
         let actionToDispatch;
         if (direction === "right") {
@@ -104,10 +89,6 @@ function Advanced(props) {
                     console.log('MATCH!');
                     setMatches(matches.filter(user => user != ClickedUserData))
                     setClickedUser(ClickedUserID);
-                    setMatchScreen(true);
-                    // TODO MATCH MESSAGE SCREEN
-
-
                     const grRef = collection(firebaseDB, "groups");
                     const queryObj = query(grRef, orderBy("createdAt"));
                     let group = '';
@@ -121,8 +102,6 @@ function Advanced(props) {
                         group = groupsArr[0].id;
                     })
 
-
-
                     if (!group) {
                         setDoc(doc(firebaseDB, "groups", `${loggedUserID}${ClickedUserID}`), {
                             createdAt: Timestamp.fromDate(new Date()),
@@ -135,10 +114,7 @@ function Advanced(props) {
 
                         })
                     }
-
-
                     dispatch(setRoom([loggedUserID, ClickedUserID]))
-
                 }
             })
             dispatch(actionToDispatch(loggedUserID, ClickedUserID))
@@ -151,47 +127,35 @@ function Advanced(props) {
                 actionToDispatch = addDislikedAction
                 dispatch(actionToDispatch(loggedUserID, ClickedUserID))
             }
-
         }
-
     }
 
     const outOfFrame = (name, idx, id) => {
         currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
-
     }
 
     const swipe = async (dir) => {
-        console.log(dir)
         if (canSwipe && currentIndex < matches.length) {
-            await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
+            await childRefs[currentIndex].current.swipe(dir)
         }
-
     }
 
-    // increase current index and show card
     const goBack = async () => {
         if (!canGoBack) return
         const newIndex = currentIndex + 1
         updateCurrentIndex(newIndex)
         await childRefs[newIndex].current.restoreCard()
-        // eslint-disable-next-line no-unused-expressions
         dispatch(ActionCreators.undo())
 
     }
 
-    const saveUserInStore = () => {
-        setCardInfo(false);
-    }
+    // const saveUserInStore = (ClickedUserID) => {
+    //     setCardInfo(false);
+    // }
 
     const changeCardInfoFlag = () => {
         setCardInfo(true)
     }
-
-    // const changeMatchScreenFlag = () => {
-    //     setCardInfo(false)
-    // }
-
 
     return (
         <>
@@ -230,9 +194,7 @@ function Advanced(props) {
                                             fontWeight: "500"
                                         }} />))}
                                     </div>
-                                    <div onClick={() => saveUserInStore()} className="InfoIcon">
-                                        <InfoIcon sx={{ color: "white", fontSize: "28px" }}></InfoIcon>
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </TinderCard>
@@ -253,8 +215,8 @@ function Advanced(props) {
                                     <BoltIcon></BoltIcon>
                                 </IconButton>
                             </div></div>
-                        ) : (< div  key={character}>
-                            <MoreInfoCard cardUser={matches[matches.length - 1]} onclick={()=>changeCardInfoFlag()}/>
+                        ) : (< div>
+                            <MoreInfoCard character={character} onclick={()=>changeCardInfoFlag()}/>
                         </div>
                         )
                     ))}
@@ -264,4 +226,4 @@ function Advanced(props) {
         )
     }
     
-    export default Advanced
+    export default SwipeCards

@@ -1,6 +1,5 @@
 import SimpleImageSlider from "react-simple-image-slider";
 
-
 const ImageSlider = (props) => {
 
   function mapImages(images){
@@ -9,14 +8,14 @@ const ImageSlider = (props) => {
       pics.push({url: images[i]})
       
     }
-    return pics
+    return pics;
   }
   
 
   return (
     <div>
       <SimpleImageSlider
-        style={{ borderTopRightRadius : '50px' , border : '1px solid red' }}
+        style={{borderRadius:"10%"  }}
         width={380}
         height={550}
         images={mapImages(props.images)}
@@ -27,7 +26,6 @@ const ImageSlider = (props) => {
         navStyle={2}
         navMargin={10}
         slideDuration={0.3}
-        style={{borderRadius:"10%"}}
       />
     </div>
   );

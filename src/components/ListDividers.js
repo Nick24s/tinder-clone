@@ -7,7 +7,6 @@ import Divider from '@mui/material/Divider';
 const style = {
   width: '100%',
   height: "auto",
-//   maxWidth: 360,
   bgcolor: 'background.paper',
 };
 

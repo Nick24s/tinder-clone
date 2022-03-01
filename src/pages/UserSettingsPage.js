@@ -1,4 +1,4 @@
-import './UserSettingsPage.css';
+import '../styles/UserSettingsPage.css';
 import {  useSelector } from "react-redux";
 import UserSettings from '../components/UserSettings';
 

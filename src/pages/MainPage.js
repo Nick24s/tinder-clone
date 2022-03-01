@@ -1,4 +1,4 @@
-import styles from './AfterLoginPage.module.css';
+import styles from '../styles/MainPage.module.css';
 import BodyWrapper from '../components/BodyWrapper';
 import UserSettingsPage from './UserSettingsPage';
 import { useState } from 'react';
@@ -6,7 +6,7 @@ import SettingsCard from '../components/SettingsCard';
 import SideMenuMachesMessages from '../components/SideMenuMachesMessages';
 import ProfileSide from '../components/ProfileSide';
 
-export default function AfterLoginPage() {
+export default function MainPage() {
 
     const [show, setShow] = useState(false);
 
