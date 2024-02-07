@@ -14,7 +14,7 @@ export const ValidateLoginFields = (email, password) => {
 
 const validateNames = (firstName, lastName) => {
   let nameFormat = /^[a-zA-Z]+$/;
-  console.log(firstName + lastName);
+ 
   if ((firstName.match(nameFormat)) && (lastName.match(nameFormat))) {
     return true;
   } else {

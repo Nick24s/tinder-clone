@@ -58,7 +58,6 @@ export default function ChatPage() {
             querySnapshot.forEach((group) => {
                 groupsArr.unshift({ id: group.id, ...group.data() })
             })
-            console.log(groupsArr)
             groupsArr.map(group => {
                 if (group.id === `${chosenChatID}${loggedUserID}`) {
                     setGroupID(`${chosenChatID}${loggedUserID}`);
@@ -100,7 +99,7 @@ export default function ChatPage() {
             <div className={styles.ChatHolder}>
                 <div className={styles.upperDiv}>
                     <ImageAvatars key={loggedUser + clickedUserData.ID} id={clickedUserData.message} className={styles.ChatScreen_image} src={clickedUserData.photos[0]}></ImageAvatars>
-                    <p className={styles.chatScreen_time}>You matched with {clickedUserData.username} on 10/25/2019</p>
+                    <p className={styles.chatScreen_time}>You matched with {clickedUserData.username}</p>
                     <div className={styles.closeIcon} onClick={closeChat}>
                         <CancelOutlinedIcon></CancelOutlinedIcon>
                     </div>

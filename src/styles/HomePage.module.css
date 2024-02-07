@@ -1,6 +1,5 @@
 .HomePageStyle {
   text-align: center;
-  /* background-image: url("../../public/homePage-backgroundImage.webp"); */
   background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.6)) , url(../../public/homePage-backgroundImage.webp);
   width: 100%;
   height: 100vh;
@@ -8,7 +7,6 @@
   background-size: cover;
   background-repeat: no-repeat;
   box-shadow:inset 100px 100px 100px  100px rgba(0, 0, 0 , 0.5 )  ;
-  /* filter: grayscale(40%); */
 }
 
 
@@ -84,7 +82,7 @@
    }
 
    .btnGrad:hover {
-     /* background-position: right center; change the direction of the change here */
+ 
      color: #fff;
      text-decoration: none;
    }

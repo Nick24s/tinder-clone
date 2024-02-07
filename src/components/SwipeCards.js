@@ -35,7 +35,7 @@ function SwipeCards() {
                                                   
     db = db.filter(user => !loggedUserData.liked.includes(user.ID) && !loggedUserData.disliked.includes(user.ID))
     const [matches, setMatches] = useState(db);
-    console.log(matches);
+
     const [currentIndex, setCurrentIndex] = useState(db.length - 1)
     const [lastDirection, setLastDirection] = useState()
     const currentIndexRef = useRef(currentIndex)
@@ -86,7 +86,8 @@ function SwipeCards() {
             liked.forEach(likeID => {
                 if (likeID === loggedUserID) {
                     actionToDispatch = addMatchAction;
-                    console.log('MATCH!');
+                    // console.log('MATCH!');
+                    setMatchScreen(true);
                     setMatches(matches.filter(user => user != ClickedUserData))
                     setClickedUser(ClickedUserID);
                     const grRef = collection(firebaseDB, "groups");
@@ -149,9 +150,9 @@ function SwipeCards() {
 
     }
 
-    // const saveUserInStore = (ClickedUserID) => {
-    //     setCardInfo(false);
-    // }
+    const saveUserInStore = (ClickedUserID) => {
+        setCardInfo(false);
+    }
 
     const changeCardInfoFlag = () => {
         setCardInfo(true)
